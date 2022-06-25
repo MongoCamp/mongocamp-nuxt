@@ -1,4 +1,10 @@
 name: ci
+
+env:
+  MONGOCAMP_URL: http://localhost:3000
+  MONGOCAMP_ADMIN_USER: admin
+  MONGOCAMP_ADMIN_PASSWORD: password
+
 on:
   push:
     branches:
