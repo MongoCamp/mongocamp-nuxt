@@ -36,6 +36,6 @@ jobs:
       - name: Run Prepare
         run: pnpm dev:prepare
 
-      - name: Run Publish
-        run: pnpm publish
+#      - name: Run Publish
+#        run: pnpm publish
 
