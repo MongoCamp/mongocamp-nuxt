@@ -31,7 +31,7 @@
     "@nuxt/module-builder": "latest",
     "@openapitools/openapi-generator-cli": "^2.4.26",
     "@types/node": "^18.0.0",
-    "@unocss/nuxt": "^0.40.0",
+    "@unocss/nuxt": "^0.42.0",
     "defu": "^6.0.0",
     "eslint": "latest",
     "jiti": "^1.14.0",
