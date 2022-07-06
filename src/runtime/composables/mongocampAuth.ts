@@ -3,6 +3,7 @@ import type { Login, UserProfile } from '../api'
 import { useMongocampApi } from './mongocampApi'
 import { useMongocampToken } from './mongocampToken'
 import { useMongocampUser } from './mongocampUser'
+import { computed } from 'vue'
 
 export const useMongocampAuth = () => {
   const token = useMongocampToken()

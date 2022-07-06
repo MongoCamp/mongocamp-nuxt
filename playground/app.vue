@@ -6,10 +6,12 @@ import {
   useMongocampUrl,
   useMongocampUser,
 } from '#imports'
+import {useMongocampSearch} from "../src/runtime/composables/mongocampSearch";
 
 const url = useMongocampUrl()
 
-const { informationApi } = useMongocampApi()
+const { informationApi, documentApi } = useMongocampApi()
+const { createFindRequest } = useMongocampSearch()
 const { login, logout, isLoggedIn, userRoles, userGrants } = useMongocampAuth()
 const user = useMongocampUser()
 const router = useRouter()
@@ -22,13 +24,21 @@ const config = useRuntimeConfig()
 const actionLogin = async () => {
   try {
     await login(config.MONGOCAMP_ADMIN_USER, config.MONGOCAMP_ADMIN_PASSWORD)
-    router.push('auth')
+    router.push('/')
+    refreshRolesByFind()
+    refreshRolesByList()
 
     // router.push(`/${profile2.value.user}`)
   }
   catch (e) {
   }
 }
+
+const findRoles = createFindRequest('mc_roles')
+const { data: rolesByFind, refresh: refreshRolesByFind } = await useAsyncData('rolesByFind', () => documentApi.find(findRoles))
+
+const { data: rolesByList, refresh: refreshRolesByList } = await useAsyncData('rolesByList', () => documentApi.listDocuments({collectionName: 'mc_roles'}))
+
 
 const actionLogout = () => {
   logout()
@@ -47,6 +57,9 @@ const actionLogout = () => {
     <button class="ml-4 btn-red" @click="actionLogout">
       Logout
     </button>
+    <button class="btn-blue" @click="refreshRolesByFind">
+      refreshRoles
+    </button>
   </div>
   <h4>Version</h4>
   <div>
@@ -63,6 +76,16 @@ const actionLogout = () => {
   <h4>Grants</h4>
   <div v-if="user">
     {{ userGrants }}
+  </div>
+  <h4>findResults</h4>
+  <div v-if="rolesByFind">
+    <h5>{{ rolesByFind.length }} Roles</h5>
+    {{ rolesByFind }}
+  </div>
+  <h4>listResults</h4>
+  <div v-if="rolesByList">
+    <h5>{{ rolesByList.length }} Roles</h5>
+    {{ rolesByList }}
   </div>
 </template>
 
