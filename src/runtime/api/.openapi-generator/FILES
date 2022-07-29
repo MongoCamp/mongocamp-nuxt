@@ -1,4 +1,5 @@
 apis/AdminApi.ts
+apis/ApplicationApi.ts
 apis/AuthApi.ts
 apis/BucketApi.ts
 apis/CollectionApi.ts
@@ -7,6 +8,7 @@ apis/DocumentApi.ts
 apis/FileApi.ts
 apis/IndexApi.ts
 apis/InformationApi.ts
+apis/JobsApi.ts
 apis/index.ts
 index.ts
 models/BucketInformation.ts
@@ -21,12 +23,16 @@ models/IndexCreateResponse.ts
 models/IndexDropResponse.ts
 models/IndexOptionsRequest.ts
 models/InsertResponse.ts
+models/JobConfig.ts
+models/JobInformation.ts
 models/JsonResultBoolean.ts
 models/JsonResultString.ts
 models/JsonSchema.ts
 models/JsonSchemaDefinition.ts
 models/Login.ts
 models/LoginResult.ts
+models/Measurement.ts
+models/Metric.ts
 models/MongoAggregateRequest.ts
 models/MongoFindRequest.ts
 models/MongoIndex.ts

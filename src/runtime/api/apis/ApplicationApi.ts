@@ -15,39 +15,27 @@
 
 import * as runtime from '../runtime';
 import {
-    DatabaseInfo,
-    DatabaseInfoFromJSON,
-    DatabaseInfoToJSON,
     ErrorDescription,
     ErrorDescriptionFromJSON,
     ErrorDescriptionToJSON,
-    JsonResultBoolean,
-    JsonResultBooleanFromJSON,
-    JsonResultBooleanToJSON,
+    Metric,
+    MetricFromJSON,
+    MetricToJSON,
+    SettingsResponse,
+    SettingsResponseFromJSON,
+    SettingsResponseToJSON,
 } from '../models';
-
-export interface DeleteDatabaseRequest {
-    databaseName: string;
-}
-
-export interface GetDatabaseInfoRequest {
-    databaseName: string;
-}
-
-export interface ListCollectionsByDatabaseRequest {
-    databaseName: string;
-}
 
 /**
  * 
  */
-export class DatabaseApi extends runtime.BaseAPI {
+export class ApplicationApi extends runtime.BaseAPI {
 
     /**
-     * List of all Databases Infos
-     * List of Database Infos
+     * Returns the Metrics of events of the running MongoCamp Application.
+     * Event Metrics
      */
-    async databaseInfosRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<DatabaseInfo>>> {
+    async eventMetricsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Metric>>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -68,33 +56,29 @@ export class DatabaseApi extends runtime.BaseAPI {
             headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
         }
         const response = await this.request({
-            path: `/mongodb/databases/infos`,
+            path: `/system/monitoring/events`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DatabaseInfoFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MetricFromJSON));
     }
 
     /**
-     * List of all Databases Infos
-     * List of Database Infos
+     * Returns the Metrics of events of the running MongoCamp Application.
+     * Event Metrics
      */
-    async databaseInfos(initOverrides?: RequestInit): Promise<Array<DatabaseInfo>> {
-        const response = await this.databaseInfosRaw(initOverrides);
+    async eventMetrics(initOverrides?: RequestInit): Promise<Array<Metric>> {
+        const response = await this.eventMetricsRaw(initOverrides);
         return await response.value();
     }
 
     /**
-     * Delete given Database
-     * Delete Database
+     * Returns the JVM Metrics of the running MongoCamp Application
+     * JVM Metrics
      */
-    async deleteDatabaseRaw(requestParameters: DeleteDatabaseRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<JsonResultBoolean>> {
-        if (requestParameters.databaseName === null || requestParameters.databaseName === undefined) {
-            throw new runtime.RequiredError('databaseName','Required parameter requestParameters.databaseName was null or undefined when calling deleteDatabase.');
-        }
-
+    async jvmMetricsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Metric>>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -115,80 +99,29 @@ export class DatabaseApi extends runtime.BaseAPI {
             headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
         }
         const response = await this.request({
-            path: `/mongodb/databases/{databaseName}`.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters.databaseName))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => JsonResultBooleanFromJSON(jsonValue));
-    }
-
-    /**
-     * Delete given Database
-     * Delete Database
-     */
-    async deleteDatabase(requestParameters: DeleteDatabaseRequest, initOverrides?: RequestInit): Promise<JsonResultBoolean> {
-        const response = await this.deleteDatabaseRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * All Information about given Database
-     * Database Infos of selected Database
-     */
-    async getDatabaseInfoRaw(requestParameters: GetDatabaseInfoRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<DatabaseInfo>> {
-        if (requestParameters.databaseName === null || requestParameters.databaseName === undefined) {
-            throw new runtime.RequiredError('databaseName','Required parameter requestParameters.databaseName was null or undefined when calling getDatabaseInfo.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("httpAuth", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
-            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
-        }
-        const response = await this.request({
-            path: `/mongodb/databases/{databaseName}`.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters.databaseName))),
+            path: `/system/monitoring/jvm`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => DatabaseInfoFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MetricFromJSON));
     }
 
     /**
-     * All Information about given Database
-     * Database Infos of selected Database
+     * Returns the JVM Metrics of the running MongoCamp Application
+     * JVM Metrics
      */
-    async getDatabaseInfo(requestParameters: GetDatabaseInfoRequest, initOverrides?: RequestInit): Promise<DatabaseInfo> {
-        const response = await this.getDatabaseInfoRaw(requestParameters, initOverrides);
+    async jvmMetrics(initOverrides?: RequestInit): Promise<Array<Metric>> {
+        const response = await this.jvmMetricsRaw(initOverrides);
         return await response.value();
     }
 
     /**
-     * List of all Collections of the given database
-     * List of Collections
+     * Returns the MongoDB Metrics of the running MongoCamp Application
+     * MongoDb Metrics
      */
-    async listCollectionsByDatabaseRaw(requestParameters: ListCollectionsByDatabaseRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<string>>> {
-        if (requestParameters.databaseName === null || requestParameters.databaseName === undefined) {
-            throw new runtime.RequiredError('databaseName','Required parameter requestParameters.databaseName was null or undefined when calling listCollectionsByDatabase.');
-        }
-
+    async mongoDbMetricsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Metric>>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -209,29 +142,29 @@ export class DatabaseApi extends runtime.BaseAPI {
             headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
         }
         const response = await this.request({
-            path: `/mongodb/databases/{databaseName}/collections`.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters.databaseName))),
+            path: `/system/monitoring/mongodb`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MetricFromJSON));
     }
 
     /**
-     * List of all Collections of the given database
-     * List of Collections
+     * Returns the MongoDB Metrics of the running MongoCamp Application
+     * MongoDb Metrics
      */
-    async listCollectionsByDatabase(requestParameters: ListCollectionsByDatabaseRequest, initOverrides?: RequestInit): Promise<Array<string>> {
-        const response = await this.listCollectionsByDatabaseRaw(requestParameters, initOverrides);
+    async mongoDbMetrics(initOverrides?: RequestInit): Promise<Array<Metric>> {
+        const response = await this.mongoDbMetricsRaw(initOverrides);
         return await response.value();
     }
 
     /**
-     * List of all Databases
-     * List of Databases
+     * Returns the Settings of the running MongoCamp Application.
+     * System Settings
      */
-    async listDatabasesRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<string>>> {
+    async settingsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<SettingsResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -252,21 +185,64 @@ export class DatabaseApi extends runtime.BaseAPI {
             headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
         }
         const response = await this.request({
-            path: `/mongodb/databases`,
+            path: `/system/settings`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => SettingsResponseFromJSON(jsonValue));
     }
 
     /**
-     * List of all Databases
-     * List of Databases
+     * Returns the Settings of the running MongoCamp Application.
+     * System Settings
      */
-    async listDatabases(initOverrides?: RequestInit): Promise<Array<string>> {
-        const response = await this.listDatabasesRaw(initOverrides);
+    async settings(initOverrides?: RequestInit): Promise<SettingsResponse> {
+        const response = await this.settingsRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Returns the Metrics of the MongoCamp System
+     * System Metrics
+     */
+    async systemMetricsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Metric>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("httpAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/system/monitoring/system`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MetricFromJSON));
+    }
+
+    /**
+     * Returns the Metrics of the MongoCamp System
+     * System Metrics
+     */
+    async systemMetrics(initOverrides?: RequestInit): Promise<Array<Metric>> {
+        const response = await this.systemMetricsRaw(initOverrides);
         return await response.value();
     }
 

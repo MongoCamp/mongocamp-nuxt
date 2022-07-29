@@ -16,39 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface DeleteResponse
+ * @interface Measurement
  */
-export interface DeleteResponse {
+export interface Measurement {
     /**
      * 
-     * @type {boolean}
-     * @memberof DeleteResponse
+     * @type {string}
+     * @memberof Measurement
      */
-    wasAcknowledged: boolean;
+    statisticType: string;
     /**
      * 
      * @type {number}
-     * @memberof DeleteResponse
+     * @memberof Measurement
      */
-    deletedCount: number;
+    value: number;
 }
 
-export function DeleteResponseFromJSON(json: any): DeleteResponse {
-    return DeleteResponseFromJSONTyped(json, false);
+export function MeasurementFromJSON(json: any): Measurement {
+    return MeasurementFromJSONTyped(json, false);
 }
 
-export function DeleteResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): DeleteResponse {
+export function MeasurementFromJSONTyped(json: any, ignoreDiscriminator: boolean): Measurement {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'wasAcknowledged': json['wasAcknowledged'],
-        'deletedCount': json['deletedCount'],
+        'statisticType': json['statisticType'],
+        'value': json['value'],
     };
 }
 
-export function DeleteResponseToJSON(value?: DeleteResponse | null): any {
+export function MeasurementToJSON(value?: Measurement | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +57,8 @@ export function DeleteResponseToJSON(value?: DeleteResponse | null): any {
     }
     return {
         
-        'wasAcknowledged': value.wasAcknowledged,
-        'deletedCount': value.deletedCount,
+        'statisticType': value.statisticType,
+        'value': value.value,
     };
 }
 

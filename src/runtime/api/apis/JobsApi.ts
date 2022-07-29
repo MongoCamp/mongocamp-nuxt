@@ -18,95 +18,55 @@ import {
     ErrorDescription,
     ErrorDescriptionFromJSON,
     ErrorDescriptionToJSON,
+    JobConfig,
+    JobConfigFromJSON,
+    JobConfigToJSON,
+    JobInformation,
+    JobInformationFromJSON,
+    JobInformationToJSON,
     JsonResultBoolean,
     JsonResultBooleanFromJSON,
     JsonResultBooleanToJSON,
-    JsonResultString,
-    JsonResultStringFromJSON,
-    JsonResultStringToJSON,
-    Login,
-    LoginFromJSON,
-    LoginToJSON,
-    LoginResult,
-    LoginResultFromJSON,
-    LoginResultToJSON,
-    PasswordUpdateRequest,
-    PasswordUpdateRequestFromJSON,
-    PasswordUpdateRequestToJSON,
-    UserProfile,
-    UserProfileFromJSON,
-    UserProfileToJSON,
 } from '../models';
 
-export interface GenerateNewApiKeyRequest {
-    userid?: string;
+export interface DeleteJobRequest {
+    jobGroup: string;
+    jobName: string;
 }
 
-export interface LoginRequest {
-    login: Login;
+export interface ExecuteJobRequest {
+    jobGroup: string;
+    jobName: string;
 }
 
-export interface UpdatePasswordRequest {
-    passwordUpdateRequest: PasswordUpdateRequest;
+export interface RegisterJobRequest {
+    jobConfig: JobConfig;
+}
+
+export interface UpdateJobRequest {
+    jobGroup: string;
+    jobName: string;
+    jobConfig: JobConfig;
 }
 
 /**
  * 
  */
-export class AuthApi extends runtime.BaseAPI {
+export class JobsApi extends runtime.BaseAPI {
 
     /**
-     * Generate new ApiKey of logged in User
-     * Update ApiKey
+     * Delete Job and reload all Job Information
+     * Delete Job
      */
-    async generateNewApiKeyRaw(requestParameters: GenerateNewApiKeyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<JsonResultString>> {
-        const queryParameters: any = {};
-
-        if (requestParameters.userid !== undefined) {
-            queryParameters['userid'] = requestParameters.userid;
+    async deleteJobRaw(requestParameters: DeleteJobRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<JsonResultBoolean>> {
+        if (requestParameters.jobGroup === null || requestParameters.jobGroup === undefined) {
+            throw new runtime.RequiredError('jobGroup','Required parameter requestParameters.jobGroup was null or undefined when calling deleteJob.');
         }
 
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+        if (requestParameters.jobName === null || requestParameters.jobName === undefined) {
+            throw new runtime.RequiredError('jobName','Required parameter requestParameters.jobName was null or undefined when calling deleteJob.');
         }
 
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("httpAuth", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
-            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
-        }
-        const response = await this.request({
-            path: `/auth/profile/apikey`,
-            method: 'PATCH',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => JsonResultStringFromJSON(jsonValue));
-    }
-
-    /**
-     * Generate new ApiKey of logged in User
-     * Update ApiKey
-     */
-    async generateNewApiKey(requestParameters: GenerateNewApiKeyRequest = {}, initOverrides?: RequestInit): Promise<JsonResultString> {
-        const response = await this.generateNewApiKeyRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Check a given Login for is authenticated
-     * Check Authentication
-     */
-    async isAuthenticatedRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<JsonResultBoolean>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -127,128 +87,7 @@ export class AuthApi extends runtime.BaseAPI {
             headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
         }
         const response = await this.request({
-            path: `/auth/authenticated`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => JsonResultBooleanFromJSON(jsonValue));
-    }
-
-    /**
-     * Check a given Login for is authenticated
-     * Check Authentication
-     */
-    async isAuthenticated(initOverrides?: RequestInit): Promise<JsonResultBoolean> {
-        const response = await this.isAuthenticatedRaw(initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Login for one user and return Login Information
-     * Login User
-     */
-    async loginRaw(requestParameters: LoginRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<LoginResult>> {
-        if (requestParameters.login === null || requestParameters.login === undefined) {
-            throw new runtime.RequiredError('login','Required parameter requestParameters.login was null or undefined when calling login.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        const response = await this.request({
-            path: `/auth/login`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: LoginToJSON(requestParameters.login),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => LoginResultFromJSON(jsonValue));
-    }
-
-    /**
-     * Login for one user and return Login Information
-     * Login User
-     */
-    async login(requestParameters: LoginRequest, initOverrides?: RequestInit): Promise<LoginResult> {
-        const response = await this.loginRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Logout by bearer Token
-     * Logout User
-     */
-    async logoutRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<JsonResultBoolean>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("httpAuth", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
-            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
-        }
-        const response = await this.request({
-            path: `/auth/logout`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => JsonResultBooleanFromJSON(jsonValue));
-    }
-
-    /**
-     * Logout by bearer Token
-     * Logout User
-     */
-    async logout(initOverrides?: RequestInit): Promise<JsonResultBoolean> {
-        const response = await this.logoutRaw(initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Logout by bearer Token
-     * Logout User
-     */
-    async logoutByDeleteRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<JsonResultBoolean>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("httpAuth", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
-            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
-        }
-        const response = await this.request({
-            path: `/auth/logout`,
+            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters.jobGroup))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters.jobName))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -258,19 +97,27 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
-     * Logout by bearer Token
-     * Logout User
+     * Delete Job and reload all Job Information
+     * Delete Job
      */
-    async logoutByDelete(initOverrides?: RequestInit): Promise<JsonResultBoolean> {
-        const response = await this.logoutByDeleteRaw(initOverrides);
+    async deleteJob(requestParameters: DeleteJobRequest, initOverrides?: RequestInit): Promise<JsonResultBoolean> {
+        const response = await this.deleteJobRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Refresh Token and return Login Information
-     * Refresh User
+     * Execute scheduled Job manually
+     * Execute Job
      */
-    async refreshTokenRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<LoginResult>> {
+    async executeJobRaw(requestParameters: ExecuteJobRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<JsonResultBoolean>> {
+        if (requestParameters.jobGroup === null || requestParameters.jobGroup === undefined) {
+            throw new runtime.RequiredError('jobGroup','Required parameter requestParameters.jobGroup was null or undefined when calling executeJob.');
+        }
+
+        if (requestParameters.jobName === null || requestParameters.jobName === undefined) {
+            throw new runtime.RequiredError('jobName','Required parameter requestParameters.jobName was null or undefined when calling executeJob.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -291,31 +138,117 @@ export class AuthApi extends runtime.BaseAPI {
             headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
         }
         const response = await this.request({
-            path: `/auth/token/refresh`,
+            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters.jobGroup))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters.jobName))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => JsonResultBooleanFromJSON(jsonValue));
+    }
+
+    /**
+     * Execute scheduled Job manually
+     * Execute Job
+     */
+    async executeJob(requestParameters: ExecuteJobRequest, initOverrides?: RequestInit): Promise<JsonResultBoolean> {
+        const response = await this.executeJobRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Returns the List of all registered Jobs with full information
+     * Registered Jobs
+     */
+    async jobsListRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<JobInformation>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("httpAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/system/jobs`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => LoginResultFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(JobInformationFromJSON));
     }
 
     /**
-     * Refresh Token and return Login Information
-     * Refresh User
+     * Returns the List of all registered Jobs with full information
+     * Registered Jobs
      */
-    async refreshToken(initOverrides?: RequestInit): Promise<LoginResult> {
-        const response = await this.refreshTokenRaw(initOverrides);
+    async jobsList(initOverrides?: RequestInit): Promise<Array<JobInformation>> {
+        const response = await this.jobsListRaw(initOverrides);
         return await response.value();
     }
 
     /**
-     * Change Password of logged in User
-     * Update Password
+     * Returns the List of possible job classes
+     * Possible Jobs
      */
-    async updatePasswordRaw(requestParameters: UpdatePasswordRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<JsonResultBoolean>> {
-        if (requestParameters.passwordUpdateRequest === null || requestParameters.passwordUpdateRequest === undefined) {
-            throw new runtime.RequiredError('passwordUpdateRequest','Required parameter requestParameters.passwordUpdateRequest was null or undefined when calling updatePassword.');
+    async possibleJobsListRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<string>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("httpAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/system/jobs/classes`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * Returns the List of possible job classes
+     * Possible Jobs
+     */
+    async possibleJobsList(initOverrides?: RequestInit): Promise<Array<string>> {
+        const response = await this.possibleJobsListRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Register an Job and return the JobInformation with next schedule information
+     * Register Job
+     */
+    async registerJobRaw(requestParameters: RegisterJobRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<JobInformation>> {
+        if (requestParameters.jobConfig === null || requestParameters.jobConfig === undefined) {
+            throw new runtime.RequiredError('jobConfig','Required parameter requestParameters.jobConfig was null or undefined when calling registerJob.');
         }
 
         const queryParameters: any = {};
@@ -340,33 +273,47 @@ export class AuthApi extends runtime.BaseAPI {
             headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
         }
         const response = await this.request({
-            path: `/auth/profile/password`,
-            method: 'PATCH',
+            path: `/system/jobs`,
+            method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: PasswordUpdateRequestToJSON(requestParameters.passwordUpdateRequest),
+            body: JobConfigToJSON(requestParameters.jobConfig),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => JsonResultBooleanFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => JobInformationFromJSON(jsonValue));
     }
 
     /**
-     * Change Password of logged in User
-     * Update Password
+     * Register an Job and return the JobInformation with next schedule information
+     * Register Job
      */
-    async updatePassword(requestParameters: UpdatePasswordRequest, initOverrides?: RequestInit): Promise<JsonResultBoolean> {
-        const response = await this.updatePasswordRaw(requestParameters, initOverrides);
+    async registerJob(requestParameters: RegisterJobRequest, initOverrides?: RequestInit): Promise<JobInformation> {
+        const response = await this.registerJobRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Return the User Profile of loggedin user
-     * User Profile
+     * Add Job and get JobInformation back
+     * Update Job
      */
-    async userProfileRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<UserProfile>> {
+    async updateJobRaw(requestParameters: UpdateJobRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<JobInformation>> {
+        if (requestParameters.jobGroup === null || requestParameters.jobGroup === undefined) {
+            throw new runtime.RequiredError('jobGroup','Required parameter requestParameters.jobGroup was null or undefined when calling updateJob.');
+        }
+
+        if (requestParameters.jobName === null || requestParameters.jobName === undefined) {
+            throw new runtime.RequiredError('jobName','Required parameter requestParameters.jobName was null or undefined when calling updateJob.');
+        }
+
+        if (requestParameters.jobConfig === null || requestParameters.jobConfig === undefined) {
+            throw new runtime.RequiredError('jobConfig','Required parameter requestParameters.jobConfig was null or undefined when calling updateJob.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
@@ -384,21 +331,22 @@ export class AuthApi extends runtime.BaseAPI {
             headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
         }
         const response = await this.request({
-            path: `/auth/profile`,
-            method: 'GET',
+            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters.jobGroup))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters.jobName))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
+            body: JobConfigToJSON(requestParameters.jobConfig),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserProfileFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => JobInformationFromJSON(jsonValue));
     }
 
     /**
-     * Return the User Profile of loggedin user
-     * User Profile
+     * Add Job and get JobInformation back
+     * Update Job
      */
-    async userProfile(initOverrides?: RequestInit): Promise<UserProfile> {
-        const response = await this.userProfileRaw(initOverrides);
+    async updateJob(requestParameters: UpdateJobRequest, initOverrides?: RequestInit): Promise<JobInformation> {
+        const response = await this.updateJobRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
