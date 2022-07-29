@@ -1,5 +1,6 @@
 import {
   AdminApi,
+  ApplicationApi,
   AuthApi,
   BucketApi,
   CollectionApi,
@@ -9,6 +10,7 @@ import {
   FileApi,
   IndexApi,
   InformationApi,
+  JobsApi,
 } from '../api'
 
 import { useMongocampUrl } from './mongocampUrl'
@@ -21,6 +23,7 @@ export const useMongocampApi = () => {
   const configuration = new Configuration({ basePath: url, accessToken: token.value })
 
   const adminApi = new AdminApi(configuration)
+  const applicationApi = new ApplicationApi(configuration)
   const authApi = new AuthApi(configuration)
   const bucketApi = new BucketApi(configuration)
   const collectionApi = new CollectionApi(configuration)
@@ -29,9 +32,11 @@ export const useMongocampApi = () => {
   const fileApi = new FileApi(configuration)
   const indexApi = new IndexApi(configuration)
   const informationApi = new InformationApi(configuration)
+  const jobApi = new JobsApi(configuration)
 
   return {
     adminApi,
+    applicationApi,
     authApi,
     bucketApi,
     collectionApi,
@@ -40,5 +45,6 @@ export const useMongocampApi = () => {
     fileApi,
     indexApi,
     informationApi,
+    jobApi,
   }
 }
