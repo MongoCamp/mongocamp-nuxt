@@ -24,7 +24,7 @@
     "api-codegen": "openapi-generator-cli generate -i http://localhost:3000/docs/docs.yaml -g typescript-fetch -o src/runtime/api --additional-properties=typescriptThreePlus=true,supportsES6=true"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.25.2",
+    "@antfu/eslint-config": "^0.26.2",
     "@iconify-json/mdi": "^1.1.29",
     "@nuxt/kit": "^3.0.0-rc.6",
     "@nuxt/module-builder": "latest",
