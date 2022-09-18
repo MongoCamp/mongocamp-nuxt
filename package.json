@@ -1,6 +1,6 @@
 {
   "name": "@mongocamp/nuxt-server",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -24,16 +24,15 @@
     "api-codegen": "openapi-generator-cli generate -i http://localhost:3000/docs/docs.yaml -g typescript-fetch -o src/runtime/api --additional-properties=typescriptThreePlus=true,supportsES6=true"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.25.2",
-    "@iconify-json/mdi": "^1.1.29",
-    "@nuxt/kit": "^3.0.0-rc.6",
+    "@antfu/eslint-config": "^0.26.3",
+    "@iconify-json/mdi": "^1.1.33",
+    "@nuxt/kit": "^3.0.0-rc.10",
     "@nuxt/module-builder": "latest",
-    "@openapitools/openapi-generator-cli": "^2.4.26",
-    "@types/node": "^18.6.2",
-    "@unocss/nuxt": "^0.45.1",
+    "@openapitools/openapi-generator-cli": "^2.5.2",
+    "@types/node": "^16.11.48",
+    "@unocss/nuxt": "^0.45.21",
     "defu": "^6.0.0",
-    "eslint": "latest",
-    "jiti": "^1.14.0",
-    "nuxt": "^3.0.0-rc.6"
+    "jiti": "^1.15.0",
+    "nuxt": "^3.0.0-rc.10"
   }
 }

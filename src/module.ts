@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import { fileURLToPath } from 'url'
-import { addPlugin, defineNuxtModule } from '@nuxt/kit'
+import {addImportsDir, addPlugin, defineNuxtModule} from '@nuxt/kit'
 import defu from 'defu'
 
 export interface ModuleOptions {
@@ -32,8 +32,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     addPlugin(resolve(runtimeDir, 'plugin'))
 
-    nuxt.hook('autoImports:dirs', (dirs) => {
-      dirs.push(resolve(runtimeDir, 'composables'))
-    })
+    addImportsDir(resolve(runtimeDir, 'composables'))
+
   },
 })
