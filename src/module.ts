@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import { fileURLToPath } from 'url'
 import {addImportsDir, addPlugin, defineNuxtModule} from '@nuxt/kit'
 import defu from 'defu'
+import consola from 'consola'
 
 export interface ModuleOptions {
   url?: string
@@ -16,7 +17,7 @@ export default defineNuxtModule<ModuleOptions>({
 
   setup(options, nuxt) {
     if (!options.url || options.url.length === 0)
-      throw new Error('Missing Mongocamp Base Url')
+      consola.error('Missing Mongocamp Base Url !')
 
     if (!options.paginationSize || options.paginationSize < 10)
       options.paginationSize = 500
