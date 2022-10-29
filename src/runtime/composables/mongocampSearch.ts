@@ -6,7 +6,7 @@ import {useRuntimeConfig} from "#app";
 export const useMongocampSearch = () => {
   const config = useRuntimeConfig()
 
-  const createFindRequest = (collection: string, searchParameter: MongoFindRequest = createSearchParameter(), rows = config.mongocamp?.paginationSize, actualPage = 1) => {
+  const createFindRequest = (collection: string, searchParameter: MongoFindRequest = createSearchParameter(), rows:number = config.mongocamp?.paginationSize, actualPage:number = 1) => {
     const result = <FindRequest>{ collectionName: collection, mongoFindRequest: searchParameter, rowsPerPage: rows, page: actualPage } as FindRequest
     return result
   }
