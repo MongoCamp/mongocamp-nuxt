@@ -1,7 +1,7 @@
-import { resolve } from 'path'
-import { fileURLToPath } from 'url'
+import {resolve} from 'path'
+import {fileURLToPath} from 'url'
 import {addImportsDir, addPlugin, defineNuxtModule} from '@nuxt/kit'
-import defu from 'defu'
+import { defu } from 'defu'
 import consola from 'consola'
 
 export interface ModuleOptions {
