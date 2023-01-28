@@ -1,8 +1,7 @@
-import {resolve} from 'path'
-import {fileURLToPath} from 'url'
-import {addImportsDir, addPlugin, defineNuxtModule} from '@nuxt/kit'
+import {addImportsDir, addPlugin, createResolver, defineNuxtModule} from '@nuxt/kit'
 import { defu } from 'defu'
 import consola from 'consola'
+import {name, version} from '../package.json'
 
 export interface ModuleOptions {
   url?: string
@@ -11,11 +10,15 @@ export interface ModuleOptions {
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'nuxt-mongocamp-server',
+    name,
+    version,
     configKey: 'mongocamp',
+    compatibility: {
+      nuxt: '^3.0.0',
+    },
   },
 
-  async setup(options, nuxt) {
+  setup(options, nuxt) {
     if (!options.url || options.url.length === 0)
       consola.error('Missing Mongocamp Base Url !')
 
@@ -29,8 +32,10 @@ export default defineNuxtModule<ModuleOptions>({
       },
     )
 
-    const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
-    nuxt.options.build.transpile.push(runtimeDir)
+    const { resolve } = createResolver(import.meta.url)
+    addPlugin(resolve('./runtime/plugin'))
+
+    const runtimeDir = resolve('./runtime')
 
     addPlugin(resolve(runtimeDir, 'plugin'))
     addImportsDir(resolve(runtimeDir, 'composables'))

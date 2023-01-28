@@ -1,6 +1,6 @@
 {
   "name": "@sfxcode/nuxt-mongocamp-server",
-  "version": "0.7.4",
+  "version": "0.8.0",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -24,7 +24,7 @@
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
     "lint:show": "eslint ./src/runtime",
     "lint:fix": "eslint --fix ./src/runtime",
-    "api-codegen": "openapi-generator-cli generate -i http://localhost:3000/docs/docs.yaml -g typescript-fetch -o src/runtime/api --additional-properties=typescriptThreePlus=true,supportsES6=true"
+    "api-codegen": "openapi-generator-cli generate -i http://173.249.2.248:30103/docs/docs.yaml -g typescript-fetch -o src/runtime/api --additional-properties=typescriptThreePlus=true,supportsES6=true"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.1",
