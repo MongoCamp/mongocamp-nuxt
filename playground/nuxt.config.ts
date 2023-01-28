@@ -8,9 +8,13 @@ export default defineNuxtConfig({
   mongocamp: {
     url: process.env.MONGOCAMP_URL,
   },
-  publicRuntimeConfig: {
-    MONGOCAMP_ADMIN_USER: process.env.MONGOCAMP_ADMIN_USER,
-    MONGOCAMP_ADMIN_PASSWORD: process.env.MONGOCAMP_ADMIN_PASSWORD,
+  runtimeConfig: {
+    // Private config that is only available on the server
+
+    // Config within public will be also exposed to the client
+    public: {
+      MONGOCAMP_ADMIN_USER: process.env.MONGOCAMP_ADMIN_USER,
+      MONGOCAMP_ADMIN_PASSWORD: process.env.MONGOCAMP_ADMIN_PASSWORD,    }
   },
   unocss: {
     uno: true,
