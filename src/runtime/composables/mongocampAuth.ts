@@ -3,10 +3,12 @@ import type {Login, UserProfile} from '../api'
 import {useMongocampApi} from './mongocampApi'
 import {useMongocampStorage} from './mongocampStorage'
 import {computed} from 'vue'
+import {useMongocampUser} from "./mongocampUser";
 
 export const useMongocampAuth = () => {
   const state = useMongocampStorage()
   const {authApi} = useMongocampApi()
+  const user = useMongocampUser()
 
 
   const login = async (loginId: string, loginPassword: string): Promise<UserProfile> => {
@@ -15,6 +17,7 @@ export const useMongocampAuth = () => {
     const result = await authApi.login({login})
     state.value.token = (result.authToken)
     state.value.profile = result.userProfile
+    user.value = result.userProfile
     return result.userProfile
   }
 
@@ -22,6 +25,7 @@ export const useMongocampAuth = () => {
     state.value.token = ''
     const profile:UserProfile = {user: '', isAdmin: false}
     state.value.profile = profile
+    user.value = profile
   }
 
   const isLoggedIn = computed(() => state.value?.token?.length > 0)
