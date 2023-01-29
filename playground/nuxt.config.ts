@@ -1,6 +1,7 @@
 import NuxtMongocamp from '..'
 
 export default defineNuxtConfig({
+  ssr:true,
   modules: [
     NuxtMongocamp,
     '@unocss/nuxt',

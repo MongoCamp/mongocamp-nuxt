@@ -1,10 +1,10 @@
 import {addImportsDir, addPlugin, createResolver, defineNuxtModule} from '@nuxt/kit'
-import { defu } from 'defu'
+import {defu} from 'defu'
 import consola from 'consola'
 import {name, version} from '../package.json'
 
 export interface ModuleOptions {
-  url?: string
+  url: string
   paginationSize?: number
 }
 
@@ -28,16 +28,12 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.runtimeConfig.public.mongocamp = defu(nuxt.options.runtimeConfig.public.mongocamp,
       {
         url: options.url,
-        paginationSize: options.paginationSize
+        paginationSize: options.paginationSize,
       },
     )
 
-    const { resolve } = createResolver(import.meta.url)
-    addPlugin(resolve('./runtime/plugin'))
-
+    const {resolve} = createResolver(import.meta.url)
     const runtimeDir = resolve('./runtime')
-
-    addPlugin(resolve(runtimeDir, 'plugin'))
     addImportsDir(resolve(runtimeDir, 'composables'))
 
     consola.info('mongocamp-nuxt available')
