@@ -1,7 +1,8 @@
-import {addImportsDir, addPlugin, createResolver, defineNuxtModule} from '@nuxt/kit'
+import {addImportsDir, createResolver, defineNuxtModule} from '@nuxt/kit'
 import {defu} from 'defu'
 import consola from 'consola'
 import {name, version} from '../package.json'
+
 
 export interface ModuleOptions {
   url: string
