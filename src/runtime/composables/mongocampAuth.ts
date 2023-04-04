@@ -1,20 +1,19 @@
-import type {Login, UserProfile} from '../api'
+import { computed } from 'vue'
+import type { Login, UserProfile } from '../api'
 
-import {useMongocampApi} from './mongocampApi'
-import {useMongocampStorage} from './mongocampStorage'
-import {computed} from 'vue'
-import {useMongocampUser} from "./mongocampUser";
+import { useMongocampApi } from './mongocampApi'
+import { useMongocampStorage } from './mongocampStorage'
+import { useMongocampUser } from './mongocampUser'
 
-export const useMongocampAuth = () => {
+export function useMongocampAuth() {
   const state = useMongocampStorage()
-  const {authApi} = useMongocampApi()
+  const { authApi } = useMongocampApi()
   const user = useMongocampUser()
-
 
   const login = async (loginId: string, loginPassword: string): Promise<UserProfile> => {
     logout()
-    const login: Login = {userId: loginId, password: loginPassword}
-    const result = await authApi.login({login})
+    const login: Login = { userId: loginId, password: loginPassword }
+    const result = await authApi.login({ login })
     state.value.token = (result.authToken)
     state.value.profile = result.userProfile
     user.value = result.userProfile
@@ -23,7 +22,7 @@ export const useMongocampAuth = () => {
 
   const logout = (): void => {
     state.value.token = ''
-    const profile:UserProfile = {user: '', isAdmin: false}
+    const profile: UserProfile = { user: '', isAdmin: false }
     state.value.profile = profile
     user.value = profile
   }
@@ -34,5 +33,5 @@ export const useMongocampAuth = () => {
 
   const userGrants = computed(() => state.value.profile.grants ?? [])
 
-  return {login, logout, isLoggedIn, userRoles, userGrants}
+  return { login, logout, isLoggedIn, userRoles, userGrants }
 }

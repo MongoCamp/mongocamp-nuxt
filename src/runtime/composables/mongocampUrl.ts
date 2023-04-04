@@ -1,6 +1,6 @@
 import { useRuntimeConfig } from '#app'
 
-export const useMongocampUrl = (): string => {
+export function useMongocampUrl(): string {
   const config = useRuntimeConfig()
   return config.mongocamp?.url
 }

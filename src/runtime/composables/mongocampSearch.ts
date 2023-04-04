@@ -1,19 +1,18 @@
-import type {FindRequest} from '../api'
+import type { FindRequest, MongoFindRequest } from '../api'
 
-import {MongoFindRequest} from "../api";
-import {useRuntimeConfig} from "#app";
+import { useRuntimeConfig } from '#app'
 
-export const useMongocampSearch = () => {
+export function useMongocampSearch() {
   const config = useRuntimeConfig()
 
-  const createFindRequest = (collection: string, searchParameter: MongoFindRequest = createSearchParameter(), rows:number = config.mongocamp?.paginationSize, actualPage:number = 1) => {
+  const createFindRequest = (collection: string, searchParameter: MongoFindRequest = createSearchParameter(), rows: number = config.mongocamp?.paginationSize, actualPage = 1) => {
     const result = <FindRequest>{ collectionName: collection, mongoFindRequest: searchParameter, rowsPerPage: rows, page: actualPage } as FindRequest
     return result
   }
 
   const createSearchParameter = (filter: object = {}, sort: object = {}, projection: object = {}) => {
-    return <MongoFindRequest>{ filter: filter, sort: sort, projection:projection}
+    return <MongoFindRequest>{ filter, sort, projection }
   }
 
-  return {createFindRequest, createSearchParameter  }
+  return { createFindRequest, createSearchParameter }
 }

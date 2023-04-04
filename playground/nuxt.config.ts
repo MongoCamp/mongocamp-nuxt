@@ -1,7 +1,7 @@
 import NuxtMongocamp from '..'
 
 export default defineNuxtConfig({
-  ssr:true,
+  ssr: true,
   modules: [
     NuxtMongocamp,
     '@unocss/nuxt',
@@ -15,7 +15,8 @@ export default defineNuxtConfig({
     // Config within public will be also exposed to the client
     public: {
       MONGOCAMP_ADMIN_USER: process.env.MONGOCAMP_ADMIN_USER,
-      MONGOCAMP_ADMIN_PASSWORD: process.env.MONGOCAMP_ADMIN_PASSWORD,    }
+      MONGOCAMP_ADMIN_PASSWORD: process.env.MONGOCAMP_ADMIN_PASSWORD,
+    },
   },
   unocss: {
     uno: true,

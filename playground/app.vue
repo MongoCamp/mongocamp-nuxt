@@ -1,32 +1,30 @@
 <script setup lang='ts'>
-
-
 const url = useMongocampUrl()
 
-const {informationApi} = useMongocampApi()
-const {login, logout, isLoggedIn, userRoles, userGrants} = useMongocampAuth()
+const { informationApi } = useMongocampApi()
+const { login, logout, isLoggedIn, userRoles, userGrants } = useMongocampAuth()
 const state = useMongocampStorage()
 
-const {data: version, refresh: reloadVersion} = await useLazyAsyncData('version', () => informationApi.version())
+const { data: version, refresh: reloadVersion } = await useLazyAsyncData('version', () => informationApi.version())
 
 const config = useRuntimeConfig()
 
-const actionLogin = async () => {
+async function actionLogin() {
   try {
     await login(config.MONGOCAMP_ADMIN_USER, config.MONGOCAMP_ADMIN_PASSWORD)
-  } catch (e) {
+  }
+  catch (e) {
   }
 }
 
 onMounted(() => {
-    reloadVersion()
-  }
+  reloadVersion()
+},
 )
 
-const actionLogout = () => {
+function actionLogout() {
   logout()
 }
-
 </script>
 
 <template>
@@ -34,14 +32,14 @@ const actionLogout = () => {
   <h3>{{ url }}</h3>
   <h3>MongoCampVersion</h3>
   <div class="text-xl">
-    {{ version}}
+    {{ version }}
   </div>
   <h3>Status</h3>
   <div class="text-xl">
     logged in: {{ isLoggedIn }}
   </div>
   <h3>Token</h3>
-  <textarea v-model="state.token" rows="8" cols="100"/>
+  <textarea v-model="state.token" rows="8" cols="100" />
   <div>
     <button class="btn-green" @click="actionLogin">
       Login
@@ -60,6 +58,4 @@ const actionLogout = () => {
   <div>
     {{ userGrants }}
   </div>
-
 </template>
-

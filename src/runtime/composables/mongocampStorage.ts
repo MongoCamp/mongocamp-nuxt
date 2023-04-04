@@ -1,8 +1,8 @@
-import {useSessionStorage} from "@vueuse/core";
-import {UserProfile} from "../api";
+import { useSessionStorage } from '@vueuse/core'
+import type { UserProfile } from '../api'
 
-export const useMongocampStorage = () => {
-  const profile:UserProfile = {user: '', isAdmin: false}
-  const state = useSessionStorage('mongocamp', {token:'',  profile:profile})
+export function useMongocampStorage() {
+  const profile: UserProfile = { user: '', isAdmin: false }
+  const state = useSessionStorage('mongocamp', { token: '', profile })
   return state
 }

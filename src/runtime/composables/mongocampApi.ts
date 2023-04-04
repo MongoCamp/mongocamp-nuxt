@@ -13,13 +13,10 @@ import {
   JobsApi,
 } from '../api'
 
-import { useLocalStorage } from '@vueuse/core'
-
-
 import { useMongocampUrl } from './mongocampUrl'
 import { useMongocampStorage } from './mongocampStorage'
 
-export const useMongocampApi = () => {
+export function useMongocampApi() {
   const url = useMongocampUrl()
   const token = useMongocampStorage()
 
