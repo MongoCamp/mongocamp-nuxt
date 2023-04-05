@@ -1,11 +1,16 @@
 <script setup lang='ts'>
 const url = useMongocampUrl()
 
-const { informationApi } = useMongocampApi()
-const { login, logout, isLoggedIn, userRoles, userGrants } = useMongocampAuth()
+const { informationApi, documentApi } = useMongocampApi()
+const { findAll, findByField } = useMongocampSearch()
+
+const { login, logout, isLoggedIn, userGrants } = useMongocampAuth()
 const state = useMongocampStorage()
 
 const { data: version, refresh: reloadVersion } = await useLazyAsyncData('version', () => informationApi.version())
+
+const { data: roles, refresh: reloadRoles } = await useLazyAsyncData('roles', () => findAll('mc_roles', 1, undefined, ['name', '_id']))
+const { data: adminRole, refresh: reloadRole } = await useLazyAsyncData('adminRole', () => documentApi.listDocuments({ collectionName: 'mc_roles', filter: 'name: admin*', page: 1, rowsPerPage: 500 }))
 
 const config = useRuntimeConfig()
 
@@ -19,8 +24,14 @@ async function actionLogin() {
 
 onMounted(() => {
   reloadVersion()
+  actionReload()
 },
 )
+
+function actionReload() {
+  reloadRoles()
+  reloadRole()
+}
 
 function actionLogout() {
   logout()
@@ -50,12 +61,21 @@ function actionLogout() {
   </div>
 
   <h4>User {{ state.profile.user }}</h4>
+  <h4>Grants</h4>
+  <pre>
+    {{ userGrants }}
+  </pre>
   <h4>Roles</h4>
   <div>
-    {{ userRoles }}
+    <button class="btn-blue" @click="actionReload">
+      Reload Roles
+    </button>
   </div>
-  <h4>Grants</h4>
-  <div>
-    {{ userGrants }}
-  </div>
+  <pre>
+    {{ roles }}
+  </pre>
+  <h4>Admin Role</h4>
+  <pre>
+    {{ adminRole }}
+  </pre>
 </template>

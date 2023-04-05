@@ -21,7 +21,6 @@ export function useMongocampApi() {
   const token = useMongocampStorage()
 
   const configuration = new Configuration({ basePath: url, accessToken: token.value.token })
-  // const configuration = new Configuration({ basePath: url, username:'tom@sfxcode.com', password:'hallo' })
 
   const adminApi = new AdminApi(configuration)
   const applicationApi = new ApplicationApi(configuration)
