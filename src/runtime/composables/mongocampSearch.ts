@@ -1,5 +1,6 @@
 import type { FindRequest, MongoFindRequest } from '../api'
 
+import { useMongocampApi } from './mongocampApi'
 import { useRuntimeConfig } from '#app'
 
 export function useMongocampSearch() {
