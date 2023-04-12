@@ -10,13 +10,13 @@ import {
   FileApi,
   IndexApi,
   InformationApi,
-  JobsApi,
+  JobsApi
 } from '../api'
 
 import { useMongocampUrl } from './mongocampUrl'
 import { useMongocampStorage } from './mongocampStorage'
 
-export function useMongocampApi() {
+export function useMongocampApi () {
   const url = useMongocampUrl()
   const token = useMongocampStorage()
 
@@ -45,6 +45,6 @@ export function useMongocampApi() {
     fileApi,
     indexApi,
     informationApi,
-    jobApi,
+    jobApi
   }
 }

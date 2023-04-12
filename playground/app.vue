@@ -14,68 +14,69 @@ const { data: adminRole, refresh: reloadRole } = await useLazyAsyncData('adminRo
 
 const config = useRuntimeConfig()
 
-async function actionLogin() {
+async function actionLogin () {
   try {
-    await login(config.MONGOCAMP_ADMIN_USER, config.MONGOCAMP_ADMIN_PASSWORD)
-  }
-  catch (e) {
+    await login(config.public.MONGOCAMP_ADMIN_USER, config.public.MONGOCAMP_ADMIN_PASSWORD)
+  } catch (e) {
   }
 }
 
 onMounted(() => {
   reloadVersion()
   actionReload()
-},
+}
 )
 
-function actionReload() {
+function actionReload () {
   reloadRoles()
   reloadRole()
 }
 
-function actionLogout() {
+function actionLogout () {
   logout()
 }
 </script>
 
 <template>
-  <h2>MongoCamp Playground</h2>
-  <h3>{{ url }}</h3>
-  <h3>MongoCampVersion</h3>
-  <div class="text-xl">
-    {{ version }}
-  </div>
-  <h3>Status</h3>
-  <div class="text-xl">
-    logged in: {{ isLoggedIn }}
-  </div>
-  <h3>Token</h3>
-  <textarea v-model="state.token" rows="8" cols="100" />
   <div>
-    <button class="btn-green" @click="actionLogin">
-      Login
-    </button>
-    <button class="ml-4 btn-red" @click="actionLogout">
-      Logout
-    </button>
-  </div>
+    <h2>MongoCamp Playground</h2>
+    <h3>{{ url }}</h3>
+    <h3>MongoCampVersion</h3>
+    <div class="text-xl">
+      {{ version }}
+    </div>
+    <h3>Status</h3>
+    <div class="text-xl">
+      logged in: {{ isLoggedIn }}
+    </div>
+    <h3>Token</h3>
+    <textarea v-model="state.token" rows="8" cols="100" />
+    <div>
+      <button class="btn-green" @click="actionLogin">
+        Login
+      </button>
+      <button class="ml-4 btn-red" @click="actionLogout">
+        Logout
+      </button>
+    </div>
 
-  <h4>User {{ state.profile.user }}</h4>
-  <h4>Grants</h4>
-  <pre>
+    <h4>User {{ state.profile.user }}</h4>
+    <h4>Grants</h4>
+    <pre>
     {{ userGrants }}
   </pre>
-  <h4>Roles</h4>
-  <div>
-    <button class="btn-blue" @click="actionReload">
-      Reload Roles
-    </button>
-  </div>
-  <pre>
+    <h4>Roles</h4>
+    <div>
+      <button class="btn-blue" @click="actionReload">
+        Reload Roles
+      </button>
+    </div>
+    <pre>
     {{ roles }}
   </pre>
-  <h4>Admin Role</h4>
-  <pre>
+    <h4>Admin Role</h4>
+    <pre>
     {{ adminRole }}
   </pre>
+  </div>
 </template>

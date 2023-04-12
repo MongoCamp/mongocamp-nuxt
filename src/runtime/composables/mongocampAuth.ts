@@ -5,7 +5,7 @@ import { useMongocampApi } from './mongocampApi'
 import { useMongocampStorage } from './mongocampStorage'
 import { useMongocampUser } from './mongocampUser'
 
-export function useMongocampAuth() {
+export function useMongocampAuth () {
   const state = useMongocampStorage()
   const { authApi } = useMongocampApi()
   const user = useMongocampUser()
