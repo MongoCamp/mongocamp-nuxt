@@ -1,6 +1,6 @@
 {
   "name": "@sfxcode/nuxt-mongocamp-server",
-  "version": "0.8.8",
+  "version": "0.9.0",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -24,21 +24,21 @@
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
     "lint:show": "eslint ./src/runtime",
     "lint:fix": "eslint --fix ./src/runtime",
-    "api-codegen": "openapi-generator-cli generate -i https://showcase.mongocamp.dev/docs/docs.yaml -g typescript-fetch -o src/runtime/api --additional-properties=typescriptThreePlus=true,supportsES6=true"
+    "api-codegen": "openapi-generator-cli generate -i http://173.249.2.248:30103/docs/docs.yaml -g typescript-fetch -o src/runtime/api --additional-properties=typescriptThreePlus=true,supportsES6=true"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.3.3",
+    "@nuxt/kit": "^3.4.1",
     "@vueuse/nuxt": "^9.13.0"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.50",
     "@nuxtjs/eslint-config-typescript": "12.0.0",
-    "@nuxt/module-builder": "^0.2.1",
-    "@openapitools/openapi-generator-cli": "^2.5.2",
+    "@nuxt/module-builder": "^0.3.0",
+    "@openapitools/openapi-generator-cli": "^2.6.0",
     "@types/node": "^18.15.11",
     "@unocss/nuxt": "^0.51.4",
     "defu": "^6.1.2",
     "jiti": "^1.18.2",
-    "nuxt": "^3.3.3"
+    "nuxt": "^3.4.1"
   }
 }
