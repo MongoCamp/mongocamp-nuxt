@@ -32,8 +32,6 @@ models/JsonValueBoolean.ts
 models/JsonValueString.ts
 models/Login.ts
 models/LoginResult.ts
-models/Measurement.ts
-models/Metric.ts
 models/MongoAggregateRequest.ts
 models/MongoCampConfiguration.ts
 models/MongoFindRequest.ts

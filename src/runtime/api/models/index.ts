@@ -21,8 +21,6 @@ export * from './JsonValueBoolean';
 export * from './JsonValueString';
 export * from './Login';
 export * from './LoginResult';
-export * from './Measurement';
-export * from './Metric';
 export * from './MongoAggregateRequest';
 export * from './MongoCampConfiguration';
 export * from './MongoFindRequest';
