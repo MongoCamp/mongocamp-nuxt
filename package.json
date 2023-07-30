@@ -1,6 +1,6 @@
 {
   "name": "@sfxcode/nuxt-mongocamp-server",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -12,7 +12,7 @@
   "main": "dist2/module.cjs",
   "types": "./dist/types.d.ts",
   "files": [
-    "dist2"
+    "dist"
   ],
   "build": {
     "failOnWarn": false

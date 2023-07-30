@@ -13,19 +13,22 @@ node_modules
 **/.yarn/cache
 **/.yarn/*state*
 
+**/.vitepress/cache
+
+
 # Generated dirs
-dist2
+dist
 
 # Nuxt
 .nuxt
 .output
 .vercel_build_output
 .build-*
-playground/.env
+.env
 .netlify
 
 # Env
-playground/.env
+.env
 
 # Testing
 reports
