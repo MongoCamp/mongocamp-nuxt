@@ -1,41 +1,30 @@
-name: ci
-
-env:
-  MONGOCAMP_URL: http://localhost:3000
-  MONGOCAMP_ADMIN_USER: admin
-  MONGOCAMP_ADMIN_PASSWORD: password
+name: Deploy
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.2
+        uses: pnpm/action-setup@v2.2.4
         with:
-          version: 7.3.0
+          version: latest
 
-      - name: Set node version to 16
+      - name: Set node version to 18
         uses: actions/setup-node@v3
         with:
-          node-version: 16
-          cache: pnpm
-
-      - run: npm i -g corepack
+          node-version: 18
+          cache: 'pnpm'
 
       - run: pnpm install
 
-      - name: Run Prepare
-        run: pnpm dev:prepare
+      - run: pnpm dev:prepare
 
-#      - name: Run Publish
-#        run: pnpm publish
+      - run: pnpm dev:build
 
