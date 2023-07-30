@@ -1,6 +1,6 @@
 {
   "name": "@sfxcode/nuxt-mongocamp-server",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -9,7 +9,7 @@
       "require": "./dist/module.cjs"
     }
   },
-  "main": "dist/module.cjs",
+  "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
   "files": [
     "dist"
@@ -18,10 +18,11 @@
     "failOnWarn": false
   },
   "scripts": {
-    "prepack": "nuxt-module-build --stub",
-    "dev": "nuxi dev --port 3333 playground",
+    "prepack": "nuxt-module-build",
+    "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "dev:start": "node playground/.output/server/index.mjs",
     "lint:show": "eslint ./src/runtime",
     "lint:fix": "eslint --fix ./src/runtime",
     "api-codegen": "openapi-generator-cli generate -i http://173.249.2.248:30103/docs/docs.yaml -g typescript-fetch -o src/runtime/api --additional-properties=typescriptThreePlus=true,supportsES6=true"
