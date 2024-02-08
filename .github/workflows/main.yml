@@ -9,20 +9,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.4
+      - uses: actions/checkout@v4
         with:
-          version: latest
-
-      - name: Set node version to 18
-        uses: actions/setup-node@v3
+          fetch-depth: 0
+      - run: corepack enable
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'pnpm'
+          node-version: 20
+          cache: "pnpm"
 
-      - run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
       - run: pnpm dev:prepare
 
