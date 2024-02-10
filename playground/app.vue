@@ -4,7 +4,7 @@ const url = useMongocampUrl()
 const { informationApi, documentApi } = useMongocampApi()
 const { findAll, findByField } = useMongocampSearch()
 
-const { login, logout, isLoggedIn, userGrants } = useMongocampAuth()
+const { login, logout, isLoggedIn, userGrants, isAuthenticated } = useMongocampAuth()
 const state = useMongocampStorage()
 
 const { data: version, refresh: reloadVersion } = await useLazyAsyncData('version', () => informationApi.version())
@@ -23,7 +23,6 @@ async function actionLogin () {
 
 onMounted(() => {
   reloadVersion()
-  actionReload()
 }
 )
 

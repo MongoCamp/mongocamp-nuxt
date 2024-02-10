@@ -7,7 +7,9 @@ export default defineNuxtConfig({
     '@unocss/nuxt'
   ],
   mongocamp: {
-    url: process.env.MONGOCAMP_URL
+    url: process.env.MONGOCAMP_URL,
+    refreshToken: false,
+    tokenRefreshIntervall: 10000
   },
   runtimeConfig: {
     // Private config that is only available on the server
