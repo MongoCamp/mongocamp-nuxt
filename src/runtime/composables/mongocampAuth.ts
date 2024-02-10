@@ -37,5 +37,5 @@ export function useMongocampAuth () {
 
   const userGrants = computed(() => state.value.profile.grants ?? [])
 
-  return { login, logout, isLoggedIn, userRoles, userGrants }
+  return { login, logout, isAuthenticated, isLoggedIn, userRoles, userGrants }
 }
