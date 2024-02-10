@@ -1,6 +1,6 @@
 {
   "name": "@sfxcode/nuxt-mongocamp-server",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -36,7 +36,7 @@
     "@nuxt/module-builder": "^0.5.5",
     "@nuxtjs/eslint-config-typescript": "12.1.0",
     "@openapitools/openapi-generator-cli": "^2.9.0",
-    "@types/node": "^20.11.16",
+    "@types/node": "^20.11.17",
     "@unocss/nuxt": "^0.58.5",
     "defu": "^6.1.4",
     "jiti": "^1.21.0",

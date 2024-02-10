@@ -10,6 +10,10 @@ export function useMongocampAuth () {
   const { authApi } = useMongocampApi()
   const user = useMongocampUser()
 
+  async function isAuthenticated () {
+    return await authApi.isAuthenticated()
+  }
+
   const login = async (loginId: string, loginPassword: string): Promise<UserProfile> => {
     logout()
     const login: Login = { userId: loginId, password: loginPassword }
