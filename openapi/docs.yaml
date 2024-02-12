@@ -1,0 +1,5375 @@
+openapi: 3.1.0
+info:
+  title: mongocamp-library
+  version: 1.5.9
+paths:
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login User
+      description: Login for one user and return Login Information
+      operationId: login
+      requestBody:
+        description: Login Information for your Users
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+            example:
+              userId: myUser
+              password: privatePassword
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResult'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+  /auth/logout:
+    post:
+      tags:
+      - Auth
+      summary: Logout User
+      description: Logout by bearer Token
+      operationId: logout
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+      - httpAuth: []
+    delete:
+      tags:
+      - Auth
+      summary: Logout User
+      description: Logout by bearer Token
+      operationId: logoutByDelete
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+      - httpAuth: []
+  /auth/token/refresh:
+    get:
+      tags:
+      - Auth
+      summary: Refresh User
+      description: Refresh Token and return Login Information
+      operationId: refreshToken
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResult'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /auth/profile/password:
+    patch:
+      tags:
+      - Auth
+      summary: Update Password
+      description: Change Password of logged in User
+      operationId: updatePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordUpdateRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /auth/profile/apikey:
+    patch:
+      tags:
+      - Auth
+      summary: Update ApiKey
+      description: Generate new ApiKey of logged in User
+      operationId: generateNewApiKey
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_String'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /auth/profile:
+    get:
+      tags:
+      - Auth
+      summary: User Profile
+      description: Return the User Profile of loggedin user
+      operationId: userProfile
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /auth/authenticated:
+    get:
+      tags:
+      - Auth
+      summary: Check Authentication
+      description: Check a given Login for is authenticated
+      operationId: isAuthenticated
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /admin/users:
+    get:
+      tags:
+      - Admin
+      summary: List Users
+      description: List all Users or filtered
+      operationId: listUsers
+      parameters:
+      - name: filter
+        in: query
+        description: filter after userId by contains
+        required: false
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      responses:
+        '200':
+          description: ''
+          headers:
+            x-pagination-count-rows:
+              description: count all elements
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 200
+            x-pagination-rows-per-page:
+              description: Count elements per page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 20
+            x-pagination-current-page:
+              description: Current page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 1
+            x-pagination-count-pages:
+              description: Count pages
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 10
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserProfile'
+        '400':
+          description: 'Invalid value for: query parameter filter, Invalid value for:
+            query parameter rowsPerPage, Invalid value for: query parameter page'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    put:
+      tags:
+      - Admin
+      summary: Add User
+      description: Add a new User
+      operationId: addUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInformation'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /admin/users/{userId}/apikey:
+    patch:
+      tags:
+      - Admin
+      summary: Update ApiKey
+      description: Generate an new APIkey for the user
+      operationId: gnerateNewApiKeyForUser
+      parameters:
+      - name: userId
+        in: path
+        description: UserId to Update
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_String'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /admin/users/{userId}/password:
+    patch:
+      tags:
+      - Admin
+      summary: Update Password
+      description: Change Password of User
+      operationId: updatePasswordForUser
+      parameters:
+      - name: userId
+        in: path
+        description: UserId to Update
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordUpdateRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /admin/users/{userId}/roles:
+    patch:
+      tags:
+      - Admin
+      summary: Update User Roles
+      description: Update Roles of User
+      operationId: updateRolesForUser
+      parameters:
+      - name: userId
+        in: path
+        description: UserId to Update
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /admin/users/{userId}:
+    get:
+      tags:
+      - Admin
+      summary: UserProfile for userId
+      description: Get UserProfile for user
+      operationId: getUser
+      parameters:
+      - name: userId
+        in: path
+        description: UserId to search
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    delete:
+      tags:
+      - Admin
+      summary: Delete User
+      description: Delete User
+      operationId: deleteUser
+      parameters:
+      - name: userId
+        in: path
+        description: UserId to Delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /admin/roles:
+    get:
+      tags:
+      - Admin
+      summary: List Roles
+      description: List all Roles or filtered
+      operationId: listRoles
+      parameters:
+      - name: filter
+        in: query
+        description: filter after userId by contains
+        required: false
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      responses:
+        '200':
+          description: ''
+          headers:
+            x-pagination-count-rows:
+              description: count all elements
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 200
+            x-pagination-rows-per-page:
+              description: Count elements per page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 20
+            x-pagination-current-page:
+              description: Current page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 1
+            x-pagination-count-pages:
+              description: Count pages
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 10
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+        '400':
+          description: 'Invalid value for: query parameter filter, Invalid value for:
+            query parameter rowsPerPage, Invalid value for: query parameter page'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    put:
+      tags:
+      - Admin
+      summary: Add Role
+      description: Add a new Role
+      operationId: addRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /admin/roles/{roleName}:
+    get:
+      tags:
+      - Admin
+      summary: Get Role
+      description: Get Role by RoleKey
+      operationId: getRole
+      parameters:
+      - name: roleName
+        in: path
+        description: RoleKey to search
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    delete:
+      tags:
+      - Admin
+      summary: Delete Role
+      description: Delete Role
+      operationId: deleteRole
+      parameters:
+      - name: roleName
+        in: path
+        description: RoleKey
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    patch:
+      tags:
+      - Admin
+      summary: Update Role
+      description: Update Role
+      operationId: updateRole
+      parameters:
+      - name: roleName
+        in: path
+        description: RoleKey
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoleRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/buckets/{bucketName}/files:
+    get:
+      tags:
+      - File
+      summary: Files in Bucket
+      description: Get Files paginated from given Bucket
+      operationId: listFiles
+      parameters:
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: MongoDB Filter Query by Default all filter
+        required: false
+        schema:
+          type: string
+        example: {}
+      - name: sort
+        in: query
+        description: MongoDB sorting
+        required: false
+        schema:
+          type: string
+        example: {}
+      - name: projection
+        in: query
+        description: MongoDB projection
+        required: false
+        schema:
+          type: string
+        example: {}
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      responses:
+        '200':
+          description: ''
+          headers:
+            x-pagination-count-rows:
+              description: count all elements
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 200
+            x-pagination-rows-per-page:
+              description: Count elements per page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 20
+            x-pagination-current-page:
+              description: Current page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 1
+            x-pagination-count-pages:
+              description: Count pages
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 10
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileInformation'
+        '400':
+          description: 'Invalid value for: query parameter filter, Invalid value for:
+            query parameter sort, Invalid value for: query parameter projection, Invalid
+            value for: query parameter rowsPerPage, Invalid value for: query parameter
+            page'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    put:
+      tags:
+      - File
+      summary: Insert File
+      description: Insert one File in given Bucket
+      operationId: insertFile
+      parameters:
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fileName
+        in: query
+        description: override filename of uploaded file
+        required: false
+        schema:
+          type: string
+      requestBody:
+        description: Request um neue Einträge mittels einer Datei anzulegen
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUploadForm'
+            example: 'Part(file,FileRange(/tmp/prefix7840090514016931836suffix,None),Map(filename
+              -> prefix7840090514016931836suffix),List(Content-Type: application/octet-stream))'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsertResponse'
+        '400':
+          description: 'Invalid value for: body, Invalid value for: query parameter
+            fileName'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    post:
+      tags:
+      - File
+      summary: Files in Bucket
+      description: Alternative to GET Route for more complex queries and URL max.
+        Length
+      operationId: findFiles
+      parameters:
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MongoFindRequest'
+            example:
+              filter:
+                filename: myfile.json
+                uploadDate:
+                  $gte: '2022-03-15T00:00:00.000Z'
+              sort:
+                uploadDate: -1
+              projection: {}
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers:
+            x-pagination-count-rows:
+              description: count all elements
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 200
+            x-pagination-rows-per-page:
+              description: Count elements per page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 20
+            x-pagination-current-page:
+              description: Current page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 1
+            x-pagination-count-pages:
+              description: Count pages
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 10
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileInformation'
+        '400':
+          description: 'Invalid value for: body, Invalid value for: query parameter
+            rowsPerPage, Invalid value for: query parameter page'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/buckets/{bucketName}/files/{fileId}:
+    get:
+      tags:
+      - File
+      summary: FileInformation from Bucket
+      description: Get one FileInformation from given Bucket
+      operationId: getFileInformation
+      parameters:
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: path
+        description: fileId to read
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileInformation'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    delete:
+      tags:
+      - File
+      summary: Delete File from Bucket
+      description: Delete one File from given Bucket
+      operationId: deleteFile
+      parameters:
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: path
+        description: fileId to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    patch:
+      tags:
+      - File
+      summary: Update FileInformation in Bucket
+      description: Replace MetaData and potential update FileName
+      operationId: updateFileInformation
+      parameters:
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: path
+        description: fileId to update
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFileInformationRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/buckets/{bucketName}/files/{fileId}/file:
+    get:
+      tags:
+      - File
+      summary: File from Bucket
+      description: Get File from given Bucket
+      operationId: getFile
+      parameters:
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: path
+        description: FileId to read
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Length:
+              required: true
+              schema:
+                type: integer
+                format: int64
+            Content-Disposition:
+              required: true
+              schema:
+                type: string
+            Content-Type:
+              required: true
+              schema:
+                type: string
+            cache-control:
+              required: true
+              schema:
+                type: string
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/buckets:
+    get:
+      tags:
+      - Bucket
+      summary: List of Buckets
+      description: List of all Buckets of the default database
+      operationId: listBuckets
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/buckets/{bucketName}:
+    get:
+      tags:
+      - Bucket
+      summary: Bucket Information
+      description: All Information about a single Bucket
+      operationId: getBucket
+      parameters:
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketInformation'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    delete:
+      tags:
+      - Bucket
+      summary: Delete Bucket
+      description: Delete a given Bucket
+      operationId: deleteBucket
+      parameters:
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/buckets/{bucketName}/clear:
+    delete:
+      tags:
+      - Bucket
+      summary: Clear Bucket
+      description: Delete all Files in Bucket
+      operationId: clearBucket
+      parameters:
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections:
+    get:
+      tags:
+      - Collection
+      summary: List of Collections
+      description: List of all Collections of the default database
+      operationId: listCollections
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}:
+    get:
+      tags:
+      - Collection
+      summary: Collection Information
+      description: All Information about a single Collection
+      operationId: getCollectionInformation
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: includeDetails
+        in: query
+        description: Include all details for the Collection
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionStatus'
+        '400':
+          description: 'Invalid value for: query parameter includeDetails'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    delete:
+      tags:
+      - Collection
+      summary: Delete Collection
+      description: Delete a given Collection
+      operationId: deleteCollection
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/fields:
+    get:
+      tags:
+      - Collection
+      summary: Collection Fields
+      description: List the Fields in a given collection
+      operationId: getCollectionFields
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: sample size
+        in: query
+        description: Use sample size greater 0 (e.g. 1000) for better performance
+          on big collections
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 1000
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: 'Invalid value for: query parameter sample size'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/schema:
+    get:
+      tags:
+      - Collection
+      summary: Collection Fields
+      description: List the Fields in a given collection
+      operationId: getJsonSchema
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: sampleSize
+        in: query
+        description: Use sample size greater 0 (e.g. 5000) for better performance
+          on big collections
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 5000
+      - name: deepth
+        in: query
+        description: How deep should the objects extracted
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+        '400':
+          description: 'Invalid value for: query parameter sampleSize, Invalid value
+            for: query parameter deepth'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/schema/analysis:
+    get:
+      tags:
+      - Collection
+      summary: Collection Fields
+      description: List the Fields in a given collection
+      operationId: getSchemaAnalysis
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: sampleSize
+        in: query
+        description: Use sample size greater 0 (e.g. 5000) for better performance
+          on big collections
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 5000
+      - name: deepth
+        in: query
+        description: How deep should the objects extracted
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaAnalysis'
+        '400':
+          description: 'Invalid value for: query parameter sampleSize, Invalid value
+            for: query parameter deepth'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/clear:
+    delete:
+      tags:
+      - Collection
+      summary: Clear Collection
+      description: Delete all Document in Collection
+      operationId: clearCollection
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/aggregate:
+    post:
+      tags:
+      - Collection
+      summary: Aggregate in Collection
+      description: Aggregate in a given Collection
+      operationId: aggregate
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MongoAggregateRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers:
+            x-pagination-count-rows:
+              description: count all elements
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 200
+            x-pagination-rows-per-page:
+              description: Count elements per page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 20
+            x-pagination-current-page:
+              description: Current page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 1
+            x-pagination-count-pages:
+              description: Count pages
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 10
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Map_Any'
+        '400':
+          description: 'Invalid value for: body, Invalid value for: query parameter
+            rowsPerPage, Invalid value for: query parameter page'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/distinct/{field}:
+    post:
+      tags:
+      - Collection
+      summary: Distinct in Collection
+      description: Distinct for Field in a given Collection
+      operationId: distinct
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: field
+        in: path
+        description: The field for your distinct Request.
+        required: true
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      responses:
+        '200':
+          description: ''
+          headers:
+            x-pagination-count-rows:
+              description: count all elements
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 200
+            x-pagination-rows-per-page:
+              description: Count elements per page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 20
+            x-pagination-current-page:
+              description: Current page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 1
+            x-pagination-count-pages:
+              description: Count pages
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 10
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: 'Invalid value for: query parameter rowsPerPage, Invalid value
+            for: query parameter page'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /system/settings:
+    get:
+      tags:
+      - Application
+      summary: System Settings
+      description: Returns the Settings of the running MongoCamp Application.
+      operationId: settings
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingsResponse'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /system/configurations:
+    get:
+      tags:
+      - Application
+      summary: List Configurations
+      description: List all Configurations or filtered
+      operationId: listConfigurations
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MongoCampConfiguration'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /system/configurations/{configurationKey}:
+    get:
+      tags:
+      - Application
+      summary: Configuration for configurationKey
+      description: Get Configuration for key
+      operationId: getConfig
+      parameters:
+      - name: configurationKey
+        in: path
+        description: configurationKey to get
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MongoCampConfiguration'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    patch:
+      tags:
+      - Application
+      summary: Update Configuration
+      description: Update Configuration with the value
+      operationId: updateConfiguration
+      parameters:
+      - name: configurationKey
+        in: path
+        description: configurationKey to edit
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonValue_Any'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/databases:
+    get:
+      tags:
+      - Database
+      summary: List of Databases
+      description: List of all Databases
+      operationId: ListDatabases
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/databases/infos:
+    get:
+      tags:
+      - Database
+      summary: List of Database Infos
+      description: List of all Databases Infos
+      operationId: databaseInfos
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DatabaseInfo'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/databases/{databaseName}:
+    get:
+      tags:
+      - Database
+      summary: Database Infos of selected Database
+      description: All Information about given Database
+      operationId: getDatabaseInfo
+      parameters:
+      - name: databaseName
+        in: path
+        description: Name of your Database
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseInfo'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    delete:
+      tags:
+      - Database
+      summary: Delete Database
+      description: Delete given Database
+      operationId: deleteDatabase
+      parameters:
+      - name: databaseName
+        in: path
+        description: Name of your Database
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/databases/{databaseName}/collections:
+    get:
+      tags:
+      - Database
+      - Collection
+      summary: List of Collections
+      description: List of all Collections of the given database
+      operationId: listCollectionsByDatabase
+      parameters:
+      - name: databaseName
+        in: path
+        description: Name of your Database
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/documents:
+    get:
+      tags:
+      - Document
+      summary: Documents in Collection
+      description: Get Documents paginated from given Collection
+      operationId: listDocuments
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: MongoDB Filter Query by Default all filter
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: MongoDB sorting
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          default: []
+        example: []
+      - name: projection
+        in: query
+        description: MongoDB projection
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          default: []
+        example: []
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      responses:
+        '200':
+          description: ''
+          headers:
+            x-pagination-count-rows:
+              description: count all elements
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 200
+            x-pagination-rows-per-page:
+              description: Count elements per page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 20
+            x-pagination-current-page:
+              description: Current page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 1
+            x-pagination-count-pages:
+              description: Count pages
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 10
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Map_Any'
+        '400':
+          description: 'Invalid value for: query parameter filter, Invalid value for:
+            query parameter sort, Invalid value for: query parameter projection, Invalid
+            value for: query parameter rowsPerPage, Invalid value for: query parameter
+            page'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    put:
+      tags:
+      - Document
+      summary: Insert Document
+      description: Insert one Document in given Collection
+      operationId: insert
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: JSON Representation for your Document.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Map_Any'
+            example:
+              key1: value
+              key2: true
+              key3:
+                creationDate: '2024-02-12T19:29:44.303Z'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsertResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    post:
+      tags:
+      - Document
+      summary: Documents in Collection
+      description: Alternative to GET Route for more complex queries and URL max.
+        Length
+      operationId: find
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MongoFindRequest'
+            example:
+              filter:
+                additionalProp1: string
+                additionalProp2: 123
+              sort:
+                additionalProp2: -1
+              projection:
+                additionalProp1: 1
+                additionalProp2: 1
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers:
+            x-pagination-count-rows:
+              description: count all elements
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 200
+            x-pagination-rows-per-page:
+              description: Count elements per page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 20
+            x-pagination-current-page:
+              description: Current page
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 1
+            x-pagination-count-pages:
+              description: Count pages
+              required: true
+              schema:
+                type: integer
+                format: int64
+              example: 10
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Map_Any'
+        '400':
+          description: 'Invalid value for: body, Invalid value for: query parameter
+            rowsPerPage, Invalid value for: query parameter page'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/documents/many/insert:
+    put:
+      tags:
+      - Document
+      summary: Insert many Documents
+      description: Insert many documents in given Collection
+      operationId: insertMany
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Map_Any'
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsertResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/documents/many/update:
+    patch:
+      tags:
+      - Document
+      summary: Update many in Collection
+      description: Update many Document in given Collection
+      operationId: updateMany
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/documents/many/delete:
+    delete:
+      tags:
+      - Document
+      summary: Delete Many in Collection
+      description: Delete many Document in given Collection
+      operationId: deleteMany
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Map_Any'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/documents/{documentId}:
+    get:
+      tags:
+      - Document
+      summary: Document from Collection
+      description: Get one Document from given Collection
+      operationId: getDocument
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: documentId
+        in: path
+        description: DocumentId to read
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Map_Any'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    delete:
+      tags:
+      - Document
+      summary: Delete Document from Collection
+      description: Delete one Document from given Collection
+      operationId: delete
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: documentId
+        in: path
+        description: DocumentId to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    patch:
+      tags:
+      - Document
+      summary: Update Document in Collection
+      description: '''Replace'' one Document with the new document from Request in
+        Collection'
+      operationId: update
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: documentId
+        in: path
+        description: DocumentId to update
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Map_Any'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/documents/{documentId}/partial:
+    patch:
+      tags:
+      - Document
+      summary: Update Document Parts in Collection
+      description: Update the document Parts with the values from the Request
+      operationId: updateDocumentPartial
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: documentId
+        in: path
+        description: DocumentId to update
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Map_Any'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/index:
+    get:
+      tags:
+      - Index
+      summary: List Indices for Collection
+      description: List all Indices for given Collection
+      operationId: listIndices
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MongoIndex'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    put:
+      tags:
+      - Index
+      summary: Create Index for Collection
+      description: Create Index for given Collection
+      operationId: createIndex
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndexCreateRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexCreateResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/index/{indexName}:
+    get:
+      tags:
+      - Index
+      summary: Index for Collection
+      description: Index by Name for given Collection
+      operationId: index
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: indexName
+        in: path
+        description: The name of your Index
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MongoIndex'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    delete:
+      tags:
+      - Index
+      summary: Delete Index
+      description: Delete Index by Name for given Collection
+      operationId: deleteIndex
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: indexName
+        in: path
+        description: The name of your Index
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexDropResponse'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/index/field/{fieldName}:
+    put:
+      tags:
+      - Index
+      summary: Create Index by Field for Collection
+      description: Create Index by Field for given Collection
+      operationId: createIndexForField
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fieldName
+        in: path
+        description: The field Name for your index
+        required: true
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        description: Sort your index ascending
+        required: false
+        schema:
+          type: boolean
+          default: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndexOptionsRequest'
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexCreateResponse'
+        '400':
+          description: 'Invalid value for: query parameter sortAscending, Invalid
+            value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/index/field/{fieldName}/unique:
+    put:
+      tags:
+      - Index
+      summary: Create Unique Index
+      description: Create Unique Index by Field for given Collection
+      operationId: createUniqueIndex
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fieldName
+        in: path
+        description: The field Name for your index
+        required: true
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        description: Sort your index ascending
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: name
+        in: query
+        description: Name for your index
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexCreateResponse'
+        '400':
+          description: 'Invalid value for: query parameter sortAscending, Invalid
+            value for: query parameter name'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/index/field/{fieldName}/{duration}/expiring:
+    put:
+      tags:
+      - Index
+      summary: Create expiring Index by Field for Collection
+      description: Create expiring Index by Field for given Collection
+      operationId: createExpiringIndex
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fieldName
+        in: path
+        description: The field Name for your index
+        required: true
+        schema:
+          type: string
+      - name: duration
+        in: path
+        description: Expiring Duration in format 15d (https://www.scala-lang.org/api/2.13.7/scala/concurrent/duration/Duration.html)
+        required: true
+        schema:
+          type: string
+          default: 15d
+      - name: sortAscending
+        in: query
+        description: Sort your index ascending
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - name: name
+        in: query
+        description: Name for your index
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexCreateResponse'
+        '400':
+          description: 'Invalid value for: query parameter sortAscending, Invalid
+            value for: query parameter name'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/index/field/{fieldName}/text:
+    put:
+      tags:
+      - Index
+      summary: Create text index by field for collection
+      description: Create text index by field for given collection
+      operationId: createTextIndex
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fieldName
+        in: path
+        description: The field Name for your index
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndexOptionsRequest'
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexCreateResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /version:
+    get:
+      tags:
+      - Information
+      summary: Version Information
+      description: Version Info of the MongoCamp API
+      operationId: version
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+  /system/jobs:
+    get:
+      tags:
+      - Jobs
+      summary: Registered Jobs
+      description: Returns the List of all registered Jobs with full information
+      operationId: jobsList
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobInformation'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    put:
+      tags:
+      - Jobs
+      summary: Register Job
+      description: Register an Job and return the JobInformation with next schedule
+        information
+      operationId: registerJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobConfig'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobInformation'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /system/jobs/{jobGroup}/{jobName}:
+    post:
+      tags:
+      - Jobs
+      summary: Execute Job
+      description: Execute scheduled Job manually
+      operationId: executeJob
+      parameters:
+      - name: jobGroup
+        in: path
+        description: Group Name of the Job
+        required: true
+        schema:
+          type: string
+          default: Default
+      - name: jobName
+        in: path
+        description: Name of the Job
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    delete:
+      tags:
+      - Jobs
+      summary: Delete Job
+      description: Delete Job and reload all Job Information
+      operationId: deleteJob
+      parameters:
+      - name: jobGroup
+        in: path
+        description: Group Name of the Job
+        required: true
+        schema:
+          type: string
+          default: Default
+      - name: jobName
+        in: path
+        description: Name of the Job
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    patch:
+      tags:
+      - Jobs
+      summary: Update Job
+      description: Add Job and get JobInformation back
+      operationId: updateJob
+      parameters:
+      - name: jobGroup
+        in: path
+        description: Group Name of the Job
+        required: true
+        schema:
+          type: string
+          default: Default
+      - name: jobName
+        in: path
+        description: Name of the Job
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobConfig'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobInformation'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /system/jobs/classes:
+    get:
+      tags:
+      - Jobs
+      summary: Possible Jobs
+      description: Returns the List of possible job classes
+      operationId: possibleJobsList
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+components:
+  schemas:
+    BucketInformation:
+      required:
+      - name
+      - files
+      - size
+      - avgObjectSize
+      type: object
+      properties:
+        name:
+          type: string
+        files:
+          type: integer
+          format: int64
+        size:
+          type: number
+          format: double
+        avgObjectSize:
+          type: number
+          format: double
+    CollectionStatus:
+      required:
+      - ns
+      - collectionType
+      - scaleFactor
+      - size
+      - count
+      - storageSize
+      - avgObjSize
+      - nindexes
+      - indexSizes
+      - totalIndexSize
+      - ok
+      - fetched
+      - map
+      type: object
+      properties:
+        ns:
+          type: string
+        collectionType:
+          type: string
+        scaleFactor:
+          type: integer
+          format: int32
+        size:
+          type: number
+          format: double
+        count:
+          type: integer
+          format: int32
+        storageSize:
+          type: number
+          format: double
+        avgObjSize:
+          type: integer
+          format: int32
+        nindexes:
+          type: integer
+          format: int32
+        indexSizes:
+          $ref: '#/components/schemas/Map_Int'
+        totalIndexSize:
+          type: integer
+          format: int32
+        ok:
+          type: integer
+          format: int32
+        fetched:
+          type: string
+          format: date-time
+        map:
+          $ref: '#/components/schemas/Map_Any'
+    DatabaseInfo:
+      required:
+      - name
+      - sizeOnDisk
+      - empty
+      - fetched
+      - map
+      type: object
+      properties:
+        name:
+          type: string
+        sizeOnDisk:
+          type: number
+          format: double
+        empty:
+          type: boolean
+        fetched:
+          type: string
+          format: date-time
+        map:
+          $ref: '#/components/schemas/Map_Any'
+    DeleteResponse:
+      required:
+      - wasAcknowledged
+      - deletedCount
+      type: object
+      properties:
+        wasAcknowledged:
+          type: boolean
+        deletedCount:
+          type: integer
+          format: int64
+    ErrorDescription:
+      required:
+      - code
+      - msg
+      - additionalInfo
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        msg:
+          type: string
+        additionalInfo:
+          type: string
+    FileInformation:
+      required:
+      - _id
+      - filename
+      - length
+      - chunkSize
+      - uploadDate
+      - metadata
+      type: object
+      properties:
+        _id:
+          type: string
+        filename:
+          type: string
+        length:
+          type: integer
+          format: int64
+        chunkSize:
+          type: integer
+          format: int64
+        uploadDate:
+          type: string
+          format: date-time
+        metadata:
+          $ref: '#/components/schemas/Map_Any'
+    FileUploadForm:
+      required:
+      - file
+      - metaData
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+        metaData:
+          type: string
+    Grant:
+      required:
+      - name
+      - read
+      - write
+      - administrate
+      - grantType
+      type: object
+      properties:
+        name:
+          type: string
+        read:
+          type: boolean
+        write:
+          type: boolean
+        administrate:
+          type: boolean
+        grantType:
+          type: string
+    IndexCreateRequest:
+      required:
+      - keys
+      type: object
+      properties:
+        keys:
+          $ref: '#/components/schemas/Map_Int'
+        indexOptionsRequest:
+          $ref: '#/components/schemas/IndexOptionsRequest'
+    IndexCreateResponse:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+    IndexDropResponse:
+      required:
+      - dropped
+      type: object
+      properties:
+        dropped:
+          type: boolean
+    IndexOptionsRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        background:
+          type: boolean
+        defaultLanguage:
+          type: string
+        textVersion:
+          type: integer
+          format: int32
+        expireAfter:
+          type: string
+        unique:
+          type: boolean
+        max:
+          type: number
+          format: double
+        min:
+          type: number
+          format: double
+    InsertResponse:
+      required:
+      - wasAcknowledged
+      type: object
+      properties:
+        wasAcknowledged:
+          type: boolean
+        insertedIds:
+          type: array
+          items:
+            type: string
+    JobConfig:
+      required:
+      - name
+      - className
+      - description
+      - cronExpression
+      - group
+      - priority
+      type: object
+      properties:
+        name:
+          type: string
+        className:
+          type: string
+        description:
+          type: string
+        cronExpression:
+          type: string
+        group:
+          type: string
+        priority:
+          type: integer
+          format: int32
+    JobInformation:
+      required:
+      - name
+      - group
+      - jobClassName
+      - description
+      - cronExpression
+      - priority
+      type: object
+      properties:
+        name:
+          type: string
+        group:
+          type: string
+        jobClassName:
+          type: string
+        description:
+          type: string
+        cronExpression:
+          type: string
+        priority:
+          type: integer
+          format: int32
+        lastScheduledFireTime:
+          type: string
+          format: date-time
+        nextScheduledFireTime:
+          type: string
+          format: date-time
+        scheduleInformation:
+          type: string
+    JsonSchema:
+      required:
+      - $schema
+      - $ref
+      - definitions
+      type: object
+      properties:
+        $schema:
+          type: string
+        $ref:
+          type: string
+        definitions:
+          $ref: '#/components/schemas/Map_JsonSchemaDefinition'
+    JsonSchemaDefinition:
+      required:
+      - type
+      - title
+      - additionalProperties
+      - properties
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        additionalProperties:
+          type: boolean
+        required:
+          type: array
+          items:
+            type: string
+        properties:
+          $ref: '#/components/schemas/Map_Map_String_Any'
+    JsonValue_Any:
+      required:
+      - value
+      type: object
+      properties:
+        value:
+          type: string
+    JsonValue_Boolean:
+      required:
+      - value
+      type: object
+      properties:
+        value:
+          type: boolean
+    JsonValue_String:
+      required:
+      - value
+      type: object
+      properties:
+        value:
+          type: string
+    Login:
+      required:
+      - userId
+      - password
+      type: object
+      properties:
+        userId:
+          type: string
+        password:
+          type: string
+    LoginResult:
+      required:
+      - authToken
+      - userProfile
+      - expirationDate
+      type: object
+      properties:
+        authToken:
+          type: string
+        userProfile:
+          $ref: '#/components/schemas/UserProfile'
+        expirationDate:
+          type: string
+          format: date-time
+    Map_Any:
+      type: object
+      additionalProperties:
+        type: string
+    Map_Int:
+      type: object
+      additionalProperties:
+        type: integer
+        format: int32
+    Map_JsonSchemaDefinition:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/JsonSchemaDefinition'
+    Map_Map_String_Any:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Map_Any'
+    MongoAggregateRequest:
+      required:
+      - allowDiskUse
+      type: object
+      properties:
+        pipeline:
+          type: array
+          items:
+            $ref: '#/components/schemas/PipelineStage'
+        allowDiskUse:
+          type: boolean
+    MongoCampConfiguration:
+      required:
+      - key
+      - value
+      - configType
+      - comment
+      - needsRestartForActivation
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        configType:
+          type: string
+        comment:
+          type: string
+        needsRestartForActivation:
+          type: boolean
+    MongoFindRequest:
+      required:
+      - filter
+      - sort
+      - projection
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/Map_Any'
+        sort:
+          $ref: '#/components/schemas/Map_Any'
+        projection:
+          $ref: '#/components/schemas/Map_Any'
+    MongoIndex:
+      required:
+      - name
+      - unique
+      - version
+      - namespace
+      - keys
+      - weights
+      - expire
+      - expireAfterSeconds
+      - text
+      - fetched
+      - map
+      type: object
+      properties:
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+        unique:
+          type: boolean
+        version:
+          type: integer
+          format: int32
+        namespace:
+          type: string
+        keys:
+          $ref: '#/components/schemas/Map_Any'
+        weights:
+          $ref: '#/components/schemas/Map_Any'
+        expire:
+          type: boolean
+        expireAfterSeconds:
+          type: integer
+          format: int64
+        text:
+          type: boolean
+        fetched:
+          type: string
+          format: date-time
+        map:
+          $ref: '#/components/schemas/Map_Any'
+    PasswordUpdateRequest:
+      required:
+      - password
+      type: object
+      properties:
+        password:
+          type: string
+    PipelineStage:
+      required:
+      - stage
+      - value
+      type: object
+      properties:
+        stage:
+          type: string
+        value:
+          type: string
+    Role:
+      required:
+      - name
+      - isAdmin
+      type: object
+      properties:
+        name:
+          type: string
+        isAdmin:
+          type: boolean
+        collectionGrants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Grant'
+    SchemaAnalysis:
+      required:
+      - count
+      - sample
+      - percentageOfAnalysed
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        sample:
+          type: integer
+          format: int64
+        percentageOfAnalysed:
+          type: number
+          format: double
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaAnalysisField'
+    SchemaAnalysisField:
+      required:
+      - name
+      - fullName
+      - count
+      - percentageOfParent
+      type: object
+      properties:
+        name:
+          type: string
+        fullName:
+          type: string
+        fieldTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaAnalysisFieldType'
+        count:
+          type: integer
+          format: int64
+        percentageOfParent:
+          type: number
+          format: double
+        subFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaAnalysisField'
+    SchemaAnalysisFieldType:
+      required:
+      - fieldType
+      - count
+      - percentageOfParent
+      type: object
+      properties:
+        fieldType:
+          type: string
+        count:
+          type: integer
+          format: int64
+        percentageOfParent:
+          type: number
+          format: double
+    SettingsResponse:
+      required:
+      - configurations
+      type: object
+      properties:
+        routesPlugins:
+          type: array
+          items:
+            type: string
+        filePlugins:
+          type: array
+          items:
+            type: string
+        ignoredPlugins:
+          type: array
+          items:
+            type: string
+        configurations:
+          $ref: '#/components/schemas/Map_Any'
+    UpdateFileInformationRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/Map_Any'
+    UpdateRequest:
+      required:
+      - document
+      - filter
+      type: object
+      properties:
+        document:
+          $ref: '#/components/schemas/Map_Any'
+        filter:
+          $ref: '#/components/schemas/Map_Any'
+    UpdateResponse:
+      required:
+      - wasAcknowledged
+      - modifiedCount
+      - matchedCount
+      type: object
+      properties:
+        wasAcknowledged:
+          type: boolean
+        upsertedIds:
+          type: array
+          items:
+            type: string
+        modifiedCount:
+          type: integer
+          format: int64
+        matchedCount:
+          type: integer
+          format: int64
+    UpdateRoleRequest:
+      required:
+      - isAdmin
+      type: object
+      properties:
+        isAdmin:
+          type: boolean
+        collectionGrants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Grant'
+    UserInformation:
+      required:
+      - userId
+      - password
+      type: object
+      properties:
+        userId:
+          type: string
+        password:
+          type: string
+        apiKey:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+    UserProfile:
+      required:
+      - user
+      - isAdmin
+      type: object
+      properties:
+        user:
+          type: string
+        isAdmin:
+          type: boolean
+        apiKey:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        grants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Grant'
+    Version:
+      required:
+      - name
+      - version
+      - builtAt
+      type: object
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+        builtAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      name: X-AUTH-APIKEY
+      in: header
+    httpAuth:
+      type: http
+      scheme: bearer
+    httpAuth1:
+      type: http
+      scheme: basic
