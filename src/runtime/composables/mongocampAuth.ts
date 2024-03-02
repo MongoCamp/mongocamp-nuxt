@@ -1,10 +1,10 @@
 import { computed } from 'vue'
-import { useRuntimeConfig } from '#app'
 import type { Login, LoginResult, UserProfile } from '../api'
 
 import { useMongocampApi } from './mongocampApi'
 import { useMongocampStorage } from './mongocampStorage'
 import { useMongocampUser } from './mongocampUser'
+import { useRuntimeConfig } from '#app'
 
 export function useMongocampAuth () {
   const config = useRuntimeConfig()
@@ -53,7 +53,7 @@ export function useMongocampAuth () {
   }
 
   const isLoggedIn = computed(() => {
-    const result = state.value?.token?.length > 0
+    const result:boolean = state.value?.token?.length > 0
     if (result && refreshToken && !updateTokenInterval) {
       updateTokenInterval = window.setInterval(updateToken, tokenRefreshIntervall)
     } else if (!result && updateTokenInterval) {

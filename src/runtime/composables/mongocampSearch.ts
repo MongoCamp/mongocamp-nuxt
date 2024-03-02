@@ -1,7 +1,7 @@
-import { useRuntimeConfig } from '#app'
 import type { FindRequest, MongoFindRequest } from '../api'
 
 import { useMongocampApi } from './mongocampApi'
+import { useRuntimeConfig } from '#app'
 
 export function useMongocampSearch () {
   const { documentApi } = useMongocampApi()
@@ -16,13 +16,16 @@ export function useMongocampSearch () {
     return <FindRequest>{ collectionName: collection, mongoFindRequest: searchParameter, rowsPerPage: rows, page: actualPage } as FindRequest
   }
 
-  function findAll (collectionName: string, page = 1, sort: string[] | undefined = undefined, projection: string[] | undefined = undefined, rowsPerPage: number = config.public.mongocamp?.paginationSize) {
-    return documentApi.listDocuments({ collectionName, sort, projection, page, rowsPerPage })
+  function find (collectionName: string, filter:string | undefined, page = 1, sort: string[] | undefined = undefined, projection: string[] | undefined = undefined, rowsPerPage: number = config.public.mongocamp?.paginationSize) {
+    return documentApi.listDocuments({ collectionName, filter, sort, projection, page, rowsPerPage })
   }
 
+  function findAll (collectionName: string, page = 1, sort: string[] | undefined = undefined, projection: string[] | undefined = undefined, rowsPerPage: number = config.public.mongocamp?.paginationSize) {
+    return find(collectionName, undefined, page, sort, projection, rowsPerPage)
+  }
   function findByField (collectionName: string, field: string, value: string, page = 1, sort: string[] | undefined = undefined, projection: string[] | undefined = undefined, rowsPerPage: number = config.public.mongocamp?.paginationSize) {
     const expression = `${field}: ${value}`
-    return documentApi.listDocuments({ collectionName, filter: expression, sort, projection, page, rowsPerPage })
+    return find(collectionName, expression, page, sort, projection, rowsPerPage)
   }
 
   return { mongoFindRequest, findRequest, findAll, findByField }
