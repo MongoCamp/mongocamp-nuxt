@@ -1,7 +1,7 @@
+import { useRuntimeConfig } from '#app'
 import type { FindRequest, MongoFindRequest } from '../api'
 
 import { useMongocampApi } from './mongocampApi'
-import { useRuntimeConfig } from '#app'
 
 export function useMongocampSearch () {
   const { documentApi } = useMongocampApi()
@@ -28,5 +28,5 @@ export function useMongocampSearch () {
     return find(collectionName, expression, page, sort, projection, rowsPerPage)
   }
 
-  return { mongoFindRequest, findRequest, findAll, findByField }
+  return { mongoFindRequest, findRequest, find, findAll, findByField }
 }

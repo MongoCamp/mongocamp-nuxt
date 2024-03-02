@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 const url = useMongocampUrl()
 
-const { informationApi, documentApi } = useMongocampApi()
+const { informationApi } = useMongocampApi()
 const { findAll, findByField } = useMongocampSearch()
 
 const { login, logout, isLoggedIn, userGrants, isAuthenticated } = useMongocampAuth()
@@ -10,7 +10,7 @@ const state = useMongocampStorage()
 const { data: version, refresh: reloadVersion } = await useLazyAsyncData('version', () => informationApi.version())
 
 const { data: roles, refresh: reloadRoles } = await useLazyAsyncData('roles', () => findAll('mc_roles', 1, undefined, ['name', '_id']))
-const { data: adminRole, refresh: reloadRole } = await useLazyAsyncData('adminRole', () => documentApi.listDocuments({ collectionName: 'mc_roles', filter: 'name: admin*', page: 1, rowsPerPage: 500 }))
+const { data: adminRole, refresh: reloadRole } = await useLazyAsyncData('adminRole', () => findByField('mc_roles', 'name1', 'admin*'))
 
 const config = useRuntimeConfig()
 
