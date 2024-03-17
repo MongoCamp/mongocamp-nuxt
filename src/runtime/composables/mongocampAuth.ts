@@ -1,4 +1,6 @@
 import { computed } from 'vue'
+import { consola } from 'consola'
+
 import type { Login, LoginResult, UserProfile } from '../api'
 
 import { useMongocampApi } from './mongocampApi'
@@ -25,6 +27,7 @@ export function useMongocampAuth () {
       const result:LoginResult = await authApi.refreshToken()
       updateUserState(result)
     } catch (e) {
+      consola.log(e)
     }
   }
 

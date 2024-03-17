@@ -1,10 +1,12 @@
 <script setup lang='ts'>
+import { consola } from 'consola'
+
 const url = useMongocampUrl()
 
 const { informationApi } = useMongocampApi()
 const { findAll, findByField } = useMongocampSearch()
 
-const { login, logout, isLoggedIn, userGrants, isAuthenticated } = useMongocampAuth()
+const { login, logout, isLoggedIn, userGrants } = useMongocampAuth()
 const state = useMongocampStorage()
 
 const { data: version, refresh: reloadVersion } = await useLazyAsyncData('version', () => informationApi.version())
@@ -18,6 +20,7 @@ async function actionLogin () {
   try {
     await login(config.public.MONGOCAMP_ADMIN_USER, config.public.MONGOCAMP_ADMIN_PASSWORD)
   } catch (e) {
+    consola.error(e)
   }
 }
 
@@ -34,7 +37,11 @@ function actionReload () {
 function actionLogout () {
   logout()
 }
+
+
+
 </script>
+
 
 <template>
   <div>
@@ -49,12 +56,22 @@ function actionLogout () {
       logged in: {{ isLoggedIn }}
     </div>
     <h3>Token</h3>
-    <textarea v-model="state.token" rows="8" cols="100" />
+    <textarea
+      v-model="state.token"
+      rows="8"
+      cols="100"
+    />
     <div>
-      <button class="btn-green" @click="actionLogin">
+      <button
+        class="btn-green"
+        @click="actionLogin"
+      >
         Login
       </button>
-      <button class="ml-4 btn-red" @click="actionLogout">
+      <button
+        class="ml-4 btn-red"
+        @click="actionLogout"
+      >
         Logout
       </button>
     </div>
@@ -66,7 +83,10 @@ function actionLogout () {
   </pre>
     <h4>Roles</h4>
     <div>
-      <button class="btn-blue" @click="actionReload">
+      <button
+        class="btn-blue"
+        @click="actionReload"
+      >
         Reload Roles
       </button>
     </div>
