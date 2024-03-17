@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.1
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.0...v1.2.1)
+
+### 🏡 Chore
+
+- **REST:** Generate api with latest codegen ([7c317cb](https://github.com/MongoCamp/mongocamp-nuxt/commit/7c317cb))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](http://github.com/sfxcode))
+
 ## v1.2.0
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.0.7...v1.2.0)
