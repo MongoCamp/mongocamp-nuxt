@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { SchemaAnalysisField } from './SchemaAnalysisField';
 import {
     SchemaAnalysisFieldFromJSON,
@@ -56,12 +56,10 @@ export interface SchemaAnalysis {
  * Check if a given object implements the SchemaAnalysis interface.
  */
 export function instanceOfSchemaAnalysis(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "count" in value;
-    isInstance = isInstance && "sample" in value;
-    isInstance = isInstance && "percentageOfAnalysed" in value;
-
-    return isInstance;
+    if (!('count' in value)) return false;
+    if (!('sample' in value)) return false;
+    if (!('percentageOfAnalysed' in value)) return false;
+    return true;
 }
 
 export function SchemaAnalysisFromJSON(json: any): SchemaAnalysis {
@@ -69,7 +67,7 @@ export function SchemaAnalysisFromJSON(json: any): SchemaAnalysis {
 }
 
 export function SchemaAnalysisFromJSONTyped(json: any, ignoreDiscriminator: boolean): SchemaAnalysis {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -77,23 +75,20 @@ export function SchemaAnalysisFromJSONTyped(json: any, ignoreDiscriminator: bool
         'count': json['count'],
         'sample': json['sample'],
         'percentageOfAnalysed': json['percentageOfAnalysed'],
-        'fields': !exists(json, 'fields') ? undefined : ((json['fields'] as Array<any>).map(SchemaAnalysisFieldFromJSON)),
+        'fields': json['fields'] == null ? undefined : ((json['fields'] as Array<any>).map(SchemaAnalysisFieldFromJSON)),
     };
 }
 
 export function SchemaAnalysisToJSON(value?: SchemaAnalysis | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'count': value.count,
-        'sample': value.sample,
-        'percentageOfAnalysed': value.percentageOfAnalysed,
-        'fields': value.fields === undefined ? undefined : ((value.fields as Array<any>).map(SchemaAnalysisFieldToJSON)),
+        'count': value['count'],
+        'sample': value['sample'],
+        'percentageOfAnalysed': value['percentageOfAnalysed'],
+        'fields': value['fields'] == null ? undefined : ((value['fields'] as Array<any>).map(SchemaAnalysisFieldToJSON)),
     };
 }
 

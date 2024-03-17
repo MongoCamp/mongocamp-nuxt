@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -55,14 +55,12 @@ export interface Grant {
  * Check if a given object implements the Grant interface.
  */
 export function instanceOfGrant(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "read" in value;
-    isInstance = isInstance && "write" in value;
-    isInstance = isInstance && "administrate" in value;
-    isInstance = isInstance && "grantType" in value;
-
-    return isInstance;
+    if (!('name' in value)) return false;
+    if (!('read' in value)) return false;
+    if (!('write' in value)) return false;
+    if (!('administrate' in value)) return false;
+    if (!('grantType' in value)) return false;
+    return true;
 }
 
 export function GrantFromJSON(json: any): Grant {
@@ -70,7 +68,7 @@ export function GrantFromJSON(json: any): Grant {
 }
 
 export function GrantFromJSONTyped(json: any, ignoreDiscriminator: boolean): Grant {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -84,19 +82,16 @@ export function GrantFromJSONTyped(json: any, ignoreDiscriminator: boolean): Gra
 }
 
 export function GrantToJSON(value?: Grant | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'name': value.name,
-        'read': value.read,
-        'write': value.write,
-        'administrate': value.administrate,
-        'grantType': value.grantType,
+        'name': value['name'],
+        'read': value['read'],
+        'write': value['write'],
+        'administrate': value['administrate'],
+        'grantType': value['grantType'],
     };
 }
 

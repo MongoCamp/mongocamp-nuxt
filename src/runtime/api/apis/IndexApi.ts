@@ -94,26 +94,35 @@ export class IndexApi extends runtime.BaseAPI {
      * Create expiring Index by Field for Collection
      */
     async createExpiringIndexRaw(requestParameters: CreateExpiringIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling createExpiringIndex.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling createExpiringIndex().'
+            );
         }
 
-        if (requestParameters.fieldName === null || requestParameters.fieldName === undefined) {
-            throw new runtime.RequiredError('fieldName','Required parameter requestParameters.fieldName was null or undefined when calling createExpiringIndex.');
+        if (requestParameters['fieldName'] == null) {
+            throw new runtime.RequiredError(
+                'fieldName',
+                'Required parameter "fieldName" was null or undefined when calling createExpiringIndex().'
+            );
         }
 
-        if (requestParameters.duration === null || requestParameters.duration === undefined) {
-            throw new runtime.RequiredError('duration','Required parameter requestParameters.duration was null or undefined when calling createExpiringIndex.');
+        if (requestParameters['duration'] == null) {
+            throw new runtime.RequiredError(
+                'duration',
+                'Required parameter "duration" was null or undefined when calling createExpiringIndex().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.sortAscending !== undefined) {
-            queryParameters['sortAscending'] = requestParameters.sortAscending;
+        if (requestParameters['sortAscending'] != null) {
+            queryParameters['sortAscending'] = requestParameters['sortAscending'];
         }
 
-        if (requestParameters.name !== undefined) {
-            queryParameters['name'] = requestParameters.name;
+        if (requestParameters['name'] != null) {
+            queryParameters['name'] = requestParameters['name'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -130,11 +139,11 @@ export class IndexApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}/{duration}/expiring`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters.fieldName))).replace(`{${"duration"}}`, encodeURIComponent(String(requestParameters.duration))),
+            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}/{duration}/expiring`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName']))).replace(`{${"duration"}}`, encodeURIComponent(String(requestParameters['duration']))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -157,12 +166,18 @@ export class IndexApi extends runtime.BaseAPI {
      * Create Index for Collection
      */
     async createIndexRaw(requestParameters: CreateIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling createIndex.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling createIndex().'
+            );
         }
 
-        if (requestParameters.indexCreateRequest === null || requestParameters.indexCreateRequest === undefined) {
-            throw new runtime.RequiredError('indexCreateRequest','Required parameter requestParameters.indexCreateRequest was null or undefined when calling createIndex.');
+        if (requestParameters['indexCreateRequest'] == null) {
+            throw new runtime.RequiredError(
+                'indexCreateRequest',
+                'Required parameter "indexCreateRequest" was null or undefined when calling createIndex().'
+            );
         }
 
         const queryParameters: any = {};
@@ -183,15 +198,15 @@ export class IndexApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))),
+            path: `/mongodb/collections/{collectionName}/index`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: IndexCreateRequestToJSON(requestParameters.indexCreateRequest),
+            body: IndexCreateRequestToJSON(requestParameters['indexCreateRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IndexCreateResponseFromJSON(jsonValue));
@@ -211,18 +226,24 @@ export class IndexApi extends runtime.BaseAPI {
      * Create Index by Field for Collection
      */
     async createIndexForFieldRaw(requestParameters: CreateIndexForFieldRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling createIndexForField.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling createIndexForField().'
+            );
         }
 
-        if (requestParameters.fieldName === null || requestParameters.fieldName === undefined) {
-            throw new runtime.RequiredError('fieldName','Required parameter requestParameters.fieldName was null or undefined when calling createIndexForField.');
+        if (requestParameters['fieldName'] == null) {
+            throw new runtime.RequiredError(
+                'fieldName',
+                'Required parameter "fieldName" was null or undefined when calling createIndexForField().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.sortAscending !== undefined) {
-            queryParameters['sortAscending'] = requestParameters.sortAscending;
+        if (requestParameters['sortAscending'] != null) {
+            queryParameters['sortAscending'] = requestParameters['sortAscending'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -241,15 +262,15 @@ export class IndexApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters.fieldName))),
+            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName']))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: IndexOptionsRequestToJSON(requestParameters.indexOptionsRequest),
+            body: IndexOptionsRequestToJSON(requestParameters['indexOptionsRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IndexCreateResponseFromJSON(jsonValue));
@@ -269,12 +290,18 @@ export class IndexApi extends runtime.BaseAPI {
      * Create text index by field for collection
      */
     async createTextIndexRaw(requestParameters: CreateTextIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling createTextIndex.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling createTextIndex().'
+            );
         }
 
-        if (requestParameters.fieldName === null || requestParameters.fieldName === undefined) {
-            throw new runtime.RequiredError('fieldName','Required parameter requestParameters.fieldName was null or undefined when calling createTextIndex.');
+        if (requestParameters['fieldName'] == null) {
+            throw new runtime.RequiredError(
+                'fieldName',
+                'Required parameter "fieldName" was null or undefined when calling createTextIndex().'
+            );
         }
 
         const queryParameters: any = {};
@@ -295,15 +322,15 @@ export class IndexApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}/text`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters.fieldName))),
+            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}/text`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName']))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: IndexOptionsRequestToJSON(requestParameters.indexOptionsRequest),
+            body: IndexOptionsRequestToJSON(requestParameters['indexOptionsRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IndexCreateResponseFromJSON(jsonValue));
@@ -323,22 +350,28 @@ export class IndexApi extends runtime.BaseAPI {
      * Create Unique Index
      */
     async createUniqueIndexRaw(requestParameters: CreateUniqueIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling createUniqueIndex.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling createUniqueIndex().'
+            );
         }
 
-        if (requestParameters.fieldName === null || requestParameters.fieldName === undefined) {
-            throw new runtime.RequiredError('fieldName','Required parameter requestParameters.fieldName was null or undefined when calling createUniqueIndex.');
+        if (requestParameters['fieldName'] == null) {
+            throw new runtime.RequiredError(
+                'fieldName',
+                'Required parameter "fieldName" was null or undefined when calling createUniqueIndex().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.sortAscending !== undefined) {
-            queryParameters['sortAscending'] = requestParameters.sortAscending;
+        if (requestParameters['sortAscending'] != null) {
+            queryParameters['sortAscending'] = requestParameters['sortAscending'];
         }
 
-        if (requestParameters.name !== undefined) {
-            queryParameters['name'] = requestParameters.name;
+        if (requestParameters['name'] != null) {
+            queryParameters['name'] = requestParameters['name'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -355,11 +388,11 @@ export class IndexApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}/unique`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters.fieldName))),
+            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}/unique`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName']))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -382,12 +415,18 @@ export class IndexApi extends runtime.BaseAPI {
      * Delete Index
      */
     async deleteIndexRaw(requestParameters: DeleteIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexDropResponse>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling deleteIndex.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling deleteIndex().'
+            );
         }
 
-        if (requestParameters.indexName === null || requestParameters.indexName === undefined) {
-            throw new runtime.RequiredError('indexName','Required parameter requestParameters.indexName was null or undefined when calling deleteIndex.');
+        if (requestParameters['indexName'] == null) {
+            throw new runtime.RequiredError(
+                'indexName',
+                'Required parameter "indexName" was null or undefined when calling deleteIndex().'
+            );
         }
 
         const queryParameters: any = {};
@@ -406,11 +445,11 @@ export class IndexApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/{indexName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))).replace(`{${"indexName"}}`, encodeURIComponent(String(requestParameters.indexName))),
+            path: `/mongodb/collections/{collectionName}/index/{indexName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"indexName"}}`, encodeURIComponent(String(requestParameters['indexName']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -433,12 +472,18 @@ export class IndexApi extends runtime.BaseAPI {
      * Index for Collection
      */
     async indexRaw(requestParameters: IndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MongoIndex>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling index.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling index().'
+            );
         }
 
-        if (requestParameters.indexName === null || requestParameters.indexName === undefined) {
-            throw new runtime.RequiredError('indexName','Required parameter requestParameters.indexName was null or undefined when calling index.');
+        if (requestParameters['indexName'] == null) {
+            throw new runtime.RequiredError(
+                'indexName',
+                'Required parameter "indexName" was null or undefined when calling index().'
+            );
         }
 
         const queryParameters: any = {};
@@ -457,11 +502,11 @@ export class IndexApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/{indexName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))).replace(`{${"indexName"}}`, encodeURIComponent(String(requestParameters.indexName))),
+            path: `/mongodb/collections/{collectionName}/index/{indexName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"indexName"}}`, encodeURIComponent(String(requestParameters['indexName']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -484,8 +529,11 @@ export class IndexApi extends runtime.BaseAPI {
      * List Indices for Collection
      */
     async listIndicesRaw(requestParameters: ListIndicesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<MongoIndex>>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling listIndices.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling listIndices().'
+            );
         }
 
         const queryParameters: any = {};
@@ -504,11 +552,11 @@ export class IndexApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))),
+            path: `/mongodb/collections/{collectionName}/index`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

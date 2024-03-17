@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -49,11 +49,9 @@ export interface UserInformation {
  * Check if a given object implements the UserInformation interface.
  */
 export function instanceOfUserInformation(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "userId" in value;
-    isInstance = isInstance && "password" in value;
-
-    return isInstance;
+    if (!('userId' in value)) return false;
+    if (!('password' in value)) return false;
+    return true;
 }
 
 export function UserInformationFromJSON(json: any): UserInformation {
@@ -61,31 +59,28 @@ export function UserInformationFromJSON(json: any): UserInformation {
 }
 
 export function UserInformationFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserInformation {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
         'userId': json['userId'],
         'password': json['password'],
-        'apiKey': !exists(json, 'apiKey') ? undefined : json['apiKey'],
-        'roles': !exists(json, 'roles') ? undefined : json['roles'],
+        'apiKey': json['apiKey'] == null ? undefined : json['apiKey'],
+        'roles': json['roles'] == null ? undefined : json['roles'],
     };
 }
 
 export function UserInformationToJSON(value?: UserInformation | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'userId': value.userId,
-        'password': value.password,
-        'apiKey': value.apiKey,
-        'roles': value.roles,
+        'userId': value['userId'],
+        'password': value['password'],
+        'apiKey': value['apiKey'],
+        'roles': value['roles'],
     };
 }
 

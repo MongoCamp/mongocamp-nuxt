@@ -95,22 +95,28 @@ export class CollectionApi extends runtime.BaseAPI {
      * Aggregate in Collection
      */
     async aggregateRaw(requestParameters: AggregateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: string; }>>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling aggregate.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling aggregate().'
+            );
         }
 
-        if (requestParameters.mongoAggregateRequest === null || requestParameters.mongoAggregateRequest === undefined) {
-            throw new runtime.RequiredError('mongoAggregateRequest','Required parameter requestParameters.mongoAggregateRequest was null or undefined when calling aggregate.');
+        if (requestParameters['mongoAggregateRequest'] == null) {
+            throw new runtime.RequiredError(
+                'mongoAggregateRequest',
+                'Required parameter "mongoAggregateRequest" was null or undefined when calling aggregate().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.rowsPerPage !== undefined) {
-            queryParameters['rowsPerPage'] = requestParameters.rowsPerPage;
+        if (requestParameters['rowsPerPage'] != null) {
+            queryParameters['rowsPerPage'] = requestParameters['rowsPerPage'];
         }
 
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -129,15 +135,15 @@ export class CollectionApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/aggregate`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))),
+            path: `/mongodb/collections/{collectionName}/aggregate`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: MongoAggregateRequestToJSON(requestParameters.mongoAggregateRequest),
+            body: MongoAggregateRequestToJSON(requestParameters['mongoAggregateRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
@@ -157,8 +163,11 @@ export class CollectionApi extends runtime.BaseAPI {
      * Clear Collection
      */
     async clearCollectionRaw(requestParameters: ClearCollectionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling clearCollection.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling clearCollection().'
+            );
         }
 
         const queryParameters: any = {};
@@ -177,11 +186,11 @@ export class CollectionApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/clear`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))),
+            path: `/mongodb/collections/{collectionName}/clear`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -204,8 +213,11 @@ export class CollectionApi extends runtime.BaseAPI {
      * Delete Collection
      */
     async deleteCollectionRaw(requestParameters: DeleteCollectionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling deleteCollection.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling deleteCollection().'
+            );
         }
 
         const queryParameters: any = {};
@@ -224,11 +236,11 @@ export class CollectionApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))),
+            path: `/mongodb/collections/{collectionName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -251,22 +263,28 @@ export class CollectionApi extends runtime.BaseAPI {
      * Distinct in Collection
      */
     async distinctRaw(requestParameters: DistinctRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling distinct.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling distinct().'
+            );
         }
 
-        if (requestParameters.field === null || requestParameters.field === undefined) {
-            throw new runtime.RequiredError('field','Required parameter requestParameters.field was null or undefined when calling distinct.');
+        if (requestParameters['field'] == null) {
+            throw new runtime.RequiredError(
+                'field',
+                'Required parameter "field" was null or undefined when calling distinct().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.rowsPerPage !== undefined) {
-            queryParameters['rowsPerPage'] = requestParameters.rowsPerPage;
+        if (requestParameters['rowsPerPage'] != null) {
+            queryParameters['rowsPerPage'] = requestParameters['rowsPerPage'];
         }
 
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -283,11 +301,11 @@ export class CollectionApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/distinct/{field}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))).replace(`{${"field"}}`, encodeURIComponent(String(requestParameters.field))),
+            path: `/mongodb/collections/{collectionName}/distinct/{field}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"field"}}`, encodeURIComponent(String(requestParameters['field']))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -310,14 +328,17 @@ export class CollectionApi extends runtime.BaseAPI {
      * Collection Fields
      */
     async getCollectionFieldsRaw(requestParameters: GetCollectionFieldsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling getCollectionFields.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling getCollectionFields().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.sampleSize !== undefined) {
-            queryParameters['sample size'] = requestParameters.sampleSize;
+        if (requestParameters['sampleSize'] != null) {
+            queryParameters['sample size'] = requestParameters['sampleSize'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -334,11 +355,11 @@ export class CollectionApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/fields`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))),
+            path: `/mongodb/collections/{collectionName}/fields`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -361,14 +382,17 @@ export class CollectionApi extends runtime.BaseAPI {
      * Collection Information
      */
     async getCollectionInformationRaw(requestParameters: GetCollectionInformationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CollectionStatus>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling getCollectionInformation.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling getCollectionInformation().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.includeDetails !== undefined) {
-            queryParameters['includeDetails'] = requestParameters.includeDetails;
+        if (requestParameters['includeDetails'] != null) {
+            queryParameters['includeDetails'] = requestParameters['includeDetails'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -385,11 +409,11 @@ export class CollectionApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))),
+            path: `/mongodb/collections/{collectionName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -412,18 +436,21 @@ export class CollectionApi extends runtime.BaseAPI {
      * Collection Fields
      */
     async getJsonSchemaRaw(requestParameters: GetJsonSchemaRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonSchema>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling getJsonSchema.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling getJsonSchema().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.sampleSize !== undefined) {
-            queryParameters['sampleSize'] = requestParameters.sampleSize;
+        if (requestParameters['sampleSize'] != null) {
+            queryParameters['sampleSize'] = requestParameters['sampleSize'];
         }
 
-        if (requestParameters.deepth !== undefined) {
-            queryParameters['deepth'] = requestParameters.deepth;
+        if (requestParameters['deepth'] != null) {
+            queryParameters['deepth'] = requestParameters['deepth'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -440,11 +467,11 @@ export class CollectionApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/schema`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))),
+            path: `/mongodb/collections/{collectionName}/schema`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -467,18 +494,21 @@ export class CollectionApi extends runtime.BaseAPI {
      * Collection Fields
      */
     async getSchemaAnalysisRaw(requestParameters: GetSchemaAnalysisRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SchemaAnalysis>> {
-        if (requestParameters.collectionName === null || requestParameters.collectionName === undefined) {
-            throw new runtime.RequiredError('collectionName','Required parameter requestParameters.collectionName was null or undefined when calling getSchemaAnalysis.');
+        if (requestParameters['collectionName'] == null) {
+            throw new runtime.RequiredError(
+                'collectionName',
+                'Required parameter "collectionName" was null or undefined when calling getSchemaAnalysis().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.sampleSize !== undefined) {
-            queryParameters['sampleSize'] = requestParameters.sampleSize;
+        if (requestParameters['sampleSize'] != null) {
+            queryParameters['sampleSize'] = requestParameters['sampleSize'];
         }
 
-        if (requestParameters.deepth !== undefined) {
-            queryParameters['deepth'] = requestParameters.deepth;
+        if (requestParameters['deepth'] != null) {
+            queryParameters['deepth'] = requestParameters['deepth'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -495,11 +525,11 @@ export class CollectionApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/schema/analysis`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters.collectionName))),
+            path: `/mongodb/collections/{collectionName}/schema/analysis`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -538,7 +568,7 @@ export class CollectionApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -565,8 +595,11 @@ export class CollectionApi extends runtime.BaseAPI {
      * List of Collections
      */
     async listCollectionsByDatabaseRaw(requestParameters: ListCollectionsByDatabaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
-        if (requestParameters.databaseName === null || requestParameters.databaseName === undefined) {
-            throw new runtime.RequiredError('databaseName','Required parameter requestParameters.databaseName was null or undefined when calling listCollectionsByDatabase.');
+        if (requestParameters['databaseName'] == null) {
+            throw new runtime.RequiredError(
+                'databaseName',
+                'Required parameter "databaseName" was null or undefined when calling listCollectionsByDatabase().'
+            );
         }
 
         const queryParameters: any = {};
@@ -585,11 +618,11 @@ export class CollectionApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/databases/{databaseName}/collections`.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters.databaseName))),
+            path: `/mongodb/databases/{databaseName}/collections`.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters['databaseName']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

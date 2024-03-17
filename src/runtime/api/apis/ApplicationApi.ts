@@ -53,8 +53,11 @@ export class ApplicationApi extends runtime.BaseAPI {
      * Configuration for configurationKey
      */
     async getConfigRaw(requestParameters: GetConfigRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MongoCampConfiguration>> {
-        if (requestParameters.configurationKey === null || requestParameters.configurationKey === undefined) {
-            throw new runtime.RequiredError('configurationKey','Required parameter requestParameters.configurationKey was null or undefined when calling getConfig.');
+        if (requestParameters['configurationKey'] == null) {
+            throw new runtime.RequiredError(
+                'configurationKey',
+                'Required parameter "configurationKey" was null or undefined when calling getConfig().'
+            );
         }
 
         const queryParameters: any = {};
@@ -73,11 +76,11 @@ export class ApplicationApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/system/configurations/{configurationKey}`.replace(`{${"configurationKey"}}`, encodeURIComponent(String(requestParameters.configurationKey))),
+            path: `/system/configurations/{configurationKey}`.replace(`{${"configurationKey"}}`, encodeURIComponent(String(requestParameters['configurationKey']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -116,7 +119,7 @@ export class ApplicationApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -159,7 +162,7 @@ export class ApplicationApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -186,12 +189,18 @@ export class ApplicationApi extends runtime.BaseAPI {
      * Update Configuration
      */
     async updateConfigurationRaw(requestParameters: UpdateConfigurationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
-        if (requestParameters.configurationKey === null || requestParameters.configurationKey === undefined) {
-            throw new runtime.RequiredError('configurationKey','Required parameter requestParameters.configurationKey was null or undefined when calling updateConfiguration.');
+        if (requestParameters['configurationKey'] == null) {
+            throw new runtime.RequiredError(
+                'configurationKey',
+                'Required parameter "configurationKey" was null or undefined when calling updateConfiguration().'
+            );
         }
 
-        if (requestParameters.jsonValueAny === null || requestParameters.jsonValueAny === undefined) {
-            throw new runtime.RequiredError('jsonValueAny','Required parameter requestParameters.jsonValueAny was null or undefined when calling updateConfiguration.');
+        if (requestParameters['jsonValueAny'] == null) {
+            throw new runtime.RequiredError(
+                'jsonValueAny',
+                'Required parameter "jsonValueAny" was null or undefined when calling updateConfiguration().'
+            );
         }
 
         const queryParameters: any = {};
@@ -212,15 +221,15 @@ export class ApplicationApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/system/configurations/{configurationKey}`.replace(`{${"configurationKey"}}`, encodeURIComponent(String(requestParameters.configurationKey))),
+            path: `/system/configurations/{configurationKey}`.replace(`{${"configurationKey"}}`, encodeURIComponent(String(requestParameters['configurationKey']))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: JsonValueAnyToJSON(requestParameters.jsonValueAny),
+            body: JsonValueAnyToJSON(requestParameters['jsonValueAny']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));

@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -54,13 +54,13 @@ export interface MongoIndex {
      * @type {{ [key: string]: string; }}
      * @memberof MongoIndex
      */
-    keys: { [key: string]: string; } | null;
+    keys: { [key: string]: string; };
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof MongoIndex
      */
-    weights: { [key: string]: string; } | null;
+    weights: { [key: string]: string; };
     /**
      * 
      * @type {boolean}
@@ -90,27 +90,25 @@ export interface MongoIndex {
      * @type {{ [key: string]: string; }}
      * @memberof MongoIndex
      */
-    map: { [key: string]: string; } | null;
+    map: { [key: string]: string; };
 }
 
 /**
  * Check if a given object implements the MongoIndex interface.
  */
 export function instanceOfMongoIndex(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "unique" in value;
-    isInstance = isInstance && "version" in value;
-    isInstance = isInstance && "namespace" in value;
-    isInstance = isInstance && "keys" in value;
-    isInstance = isInstance && "weights" in value;
-    isInstance = isInstance && "expire" in value;
-    isInstance = isInstance && "expireAfterSeconds" in value;
-    isInstance = isInstance && "text" in value;
-    isInstance = isInstance && "fetched" in value;
-    isInstance = isInstance && "map" in value;
-
-    return isInstance;
+    if (!('name' in value)) return false;
+    if (!('unique' in value)) return false;
+    if (!('version' in value)) return false;
+    if (!('namespace' in value)) return false;
+    if (!('keys' in value)) return false;
+    if (!('weights' in value)) return false;
+    if (!('expire' in value)) return false;
+    if (!('expireAfterSeconds' in value)) return false;
+    if (!('text' in value)) return false;
+    if (!('fetched' in value)) return false;
+    if (!('map' in value)) return false;
+    return true;
 }
 
 export function MongoIndexFromJSON(json: any): MongoIndex {
@@ -118,13 +116,13 @@ export function MongoIndexFromJSON(json: any): MongoIndex {
 }
 
 export function MongoIndexFromJSONTyped(json: any, ignoreDiscriminator: boolean): MongoIndex {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
         'name': json['name'],
-        'fields': !exists(json, 'fields') ? undefined : json['fields'],
+        'fields': json['fields'] == null ? undefined : json['fields'],
         'unique': json['unique'],
         'version': json['version'],
         'namespace': json['namespace'],
@@ -139,26 +137,23 @@ export function MongoIndexFromJSONTyped(json: any, ignoreDiscriminator: boolean)
 }
 
 export function MongoIndexToJSON(value?: MongoIndex | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'name': value.name,
-        'fields': value.fields,
-        'unique': value.unique,
-        'version': value.version,
-        'namespace': value.namespace,
-        'keys': value.keys,
-        'weights': value.weights,
-        'expire': value.expire,
-        'expireAfterSeconds': value.expireAfterSeconds,
-        'text': value.text,
-        'fetched': (value.fetched.toISOString()),
-        'map': value.map,
+        'name': value['name'],
+        'fields': value['fields'],
+        'unique': value['unique'],
+        'version': value['version'],
+        'namespace': value['namespace'],
+        'keys': value['keys'],
+        'weights': value['weights'],
+        'expire': value['expire'],
+        'expireAfterSeconds': value['expireAfterSeconds'],
+        'text': value['text'],
+        'fetched': ((value['fetched']).toISOString()),
+        'map': value['map'],
     };
 }
 

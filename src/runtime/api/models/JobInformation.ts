@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -79,15 +79,13 @@ export interface JobInformation {
  * Check if a given object implements the JobInformation interface.
  */
 export function instanceOfJobInformation(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "group" in value;
-    isInstance = isInstance && "jobClassName" in value;
-    isInstance = isInstance && "description" in value;
-    isInstance = isInstance && "cronExpression" in value;
-    isInstance = isInstance && "priority" in value;
-
-    return isInstance;
+    if (!('name' in value)) return false;
+    if (!('group' in value)) return false;
+    if (!('jobClassName' in value)) return false;
+    if (!('description' in value)) return false;
+    if (!('cronExpression' in value)) return false;
+    if (!('priority' in value)) return false;
+    return true;
 }
 
 export function JobInformationFromJSON(json: any): JobInformation {
@@ -95,7 +93,7 @@ export function JobInformationFromJSON(json: any): JobInformation {
 }
 
 export function JobInformationFromJSONTyped(json: any, ignoreDiscriminator: boolean): JobInformation {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -106,30 +104,27 @@ export function JobInformationFromJSONTyped(json: any, ignoreDiscriminator: bool
         'description': json['description'],
         'cronExpression': json['cronExpression'],
         'priority': json['priority'],
-        'lastScheduledFireTime': !exists(json, 'lastScheduledFireTime') ? undefined : (new Date(json['lastScheduledFireTime'])),
-        'nextScheduledFireTime': !exists(json, 'nextScheduledFireTime') ? undefined : (new Date(json['nextScheduledFireTime'])),
-        'scheduleInformation': !exists(json, 'scheduleInformation') ? undefined : json['scheduleInformation'],
+        'lastScheduledFireTime': json['lastScheduledFireTime'] == null ? undefined : (new Date(json['lastScheduledFireTime'])),
+        'nextScheduledFireTime': json['nextScheduledFireTime'] == null ? undefined : (new Date(json['nextScheduledFireTime'])),
+        'scheduleInformation': json['scheduleInformation'] == null ? undefined : json['scheduleInformation'],
     };
 }
 
 export function JobInformationToJSON(value?: JobInformation | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'name': value.name,
-        'group': value.group,
-        'jobClassName': value.jobClassName,
-        'description': value.description,
-        'cronExpression': value.cronExpression,
-        'priority': value.priority,
-        'lastScheduledFireTime': value.lastScheduledFireTime === undefined ? undefined : (value.lastScheduledFireTime.toISOString()),
-        'nextScheduledFireTime': value.nextScheduledFireTime === undefined ? undefined : (value.nextScheduledFireTime.toISOString()),
-        'scheduleInformation': value.scheduleInformation,
+        'name': value['name'],
+        'group': value['group'],
+        'jobClassName': value['jobClassName'],
+        'description': value['description'],
+        'cronExpression': value['cronExpression'],
+        'priority': value['priority'],
+        'lastScheduledFireTime': value['lastScheduledFireTime'] == null ? undefined : ((value['lastScheduledFireTime']).toISOString()),
+        'nextScheduledFireTime': value['nextScheduledFireTime'] == null ? undefined : ((value['nextScheduledFireTime']).toISOString()),
+        'scheduleInformation': value['scheduleInformation'],
     };
 }
 

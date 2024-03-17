@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -61,15 +61,13 @@ export interface JobConfig {
  * Check if a given object implements the JobConfig interface.
  */
 export function instanceOfJobConfig(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "className" in value;
-    isInstance = isInstance && "description" in value;
-    isInstance = isInstance && "cronExpression" in value;
-    isInstance = isInstance && "group" in value;
-    isInstance = isInstance && "priority" in value;
-
-    return isInstance;
+    if (!('name' in value)) return false;
+    if (!('className' in value)) return false;
+    if (!('description' in value)) return false;
+    if (!('cronExpression' in value)) return false;
+    if (!('group' in value)) return false;
+    if (!('priority' in value)) return false;
+    return true;
 }
 
 export function JobConfigFromJSON(json: any): JobConfig {
@@ -77,7 +75,7 @@ export function JobConfigFromJSON(json: any): JobConfig {
 }
 
 export function JobConfigFromJSONTyped(json: any, ignoreDiscriminator: boolean): JobConfig {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -92,20 +90,17 @@ export function JobConfigFromJSONTyped(json: any, ignoreDiscriminator: boolean):
 }
 
 export function JobConfigToJSON(value?: JobConfig | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'name': value.name,
-        'className': value.className,
-        'description': value.description,
-        'cronExpression': value.cronExpression,
-        'group': value.group,
-        'priority': value.priority,
+        'name': value['name'],
+        'className': value['className'],
+        'description': value['description'],
+        'cronExpression': value['cronExpression'],
+        'group': value['group'],
+        'priority': value['priority'],
     };
 }
 

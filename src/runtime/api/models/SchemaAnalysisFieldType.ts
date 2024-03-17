@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -43,12 +43,10 @@ export interface SchemaAnalysisFieldType {
  * Check if a given object implements the SchemaAnalysisFieldType interface.
  */
 export function instanceOfSchemaAnalysisFieldType(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "fieldType" in value;
-    isInstance = isInstance && "count" in value;
-    isInstance = isInstance && "percentageOfParent" in value;
-
-    return isInstance;
+    if (!('fieldType' in value)) return false;
+    if (!('count' in value)) return false;
+    if (!('percentageOfParent' in value)) return false;
+    return true;
 }
 
 export function SchemaAnalysisFieldTypeFromJSON(json: any): SchemaAnalysisFieldType {
@@ -56,7 +54,7 @@ export function SchemaAnalysisFieldTypeFromJSON(json: any): SchemaAnalysisFieldT
 }
 
 export function SchemaAnalysisFieldTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): SchemaAnalysisFieldType {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -68,17 +66,14 @@ export function SchemaAnalysisFieldTypeFromJSONTyped(json: any, ignoreDiscrimina
 }
 
 export function SchemaAnalysisFieldTypeToJSON(value?: SchemaAnalysisFieldType | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'fieldType': value.fieldType,
-        'count': value.count,
-        'percentageOfParent': value.percentageOfParent,
+        'fieldType': value['fieldType'],
+        'count': value['count'],
+        'percentageOfParent': value['percentageOfParent'],
     };
 }
 

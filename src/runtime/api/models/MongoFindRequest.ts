@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -24,31 +24,29 @@ export interface MongoFindRequest {
      * @type {{ [key: string]: string; }}
      * @memberof MongoFindRequest
      */
-    filter: { [key: string]: string; } | null;
+    filter: { [key: string]: string; };
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof MongoFindRequest
      */
-    sort: { [key: string]: string; } | null;
+    sort: { [key: string]: string; };
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof MongoFindRequest
      */
-    projection: { [key: string]: string; } | null;
+    projection: { [key: string]: string; };
 }
 
 /**
  * Check if a given object implements the MongoFindRequest interface.
  */
 export function instanceOfMongoFindRequest(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "filter" in value;
-    isInstance = isInstance && "sort" in value;
-    isInstance = isInstance && "projection" in value;
-
-    return isInstance;
+    if (!('filter' in value)) return false;
+    if (!('sort' in value)) return false;
+    if (!('projection' in value)) return false;
+    return true;
 }
 
 export function MongoFindRequestFromJSON(json: any): MongoFindRequest {
@@ -56,7 +54,7 @@ export function MongoFindRequestFromJSON(json: any): MongoFindRequest {
 }
 
 export function MongoFindRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): MongoFindRequest {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -68,17 +66,14 @@ export function MongoFindRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
 }
 
 export function MongoFindRequestToJSON(value?: MongoFindRequest | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'filter': value.filter,
-        'sort': value.sort,
-        'projection': value.projection,
+        'filter': value['filter'],
+        'sort': value['sort'],
+        'projection': value['projection'],
     };
 }
 

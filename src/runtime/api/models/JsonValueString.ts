@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -31,10 +31,8 @@ export interface JsonValueString {
  * Check if a given object implements the JsonValueString interface.
  */
 export function instanceOfJsonValueString(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "value" in value;
-
-    return isInstance;
+    if (!('value' in value)) return false;
+    return true;
 }
 
 export function JsonValueStringFromJSON(json: any): JsonValueString {
@@ -42,7 +40,7 @@ export function JsonValueStringFromJSON(json: any): JsonValueString {
 }
 
 export function JsonValueStringFromJSONTyped(json: any, ignoreDiscriminator: boolean): JsonValueString {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -52,15 +50,12 @@ export function JsonValueStringFromJSONTyped(json: any, ignoreDiscriminator: boo
 }
 
 export function JsonValueStringToJSON(value?: JsonValueString | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'value': value.value,
+        'value': value['value'],
     };
 }
 

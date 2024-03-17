@@ -50,8 +50,11 @@ export class BucketApi extends runtime.BaseAPI {
      * Clear Bucket
      */
     async clearBucketRaw(requestParameters: ClearBucketRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
-        if (requestParameters.bucketName === null || requestParameters.bucketName === undefined) {
-            throw new runtime.RequiredError('bucketName','Required parameter requestParameters.bucketName was null or undefined when calling clearBucket.');
+        if (requestParameters['bucketName'] == null) {
+            throw new runtime.RequiredError(
+                'bucketName',
+                'Required parameter "bucketName" was null or undefined when calling clearBucket().'
+            );
         }
 
         const queryParameters: any = {};
@@ -70,11 +73,11 @@ export class BucketApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/clear`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters.bucketName))),
+            path: `/mongodb/buckets/{bucketName}/clear`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -97,8 +100,11 @@ export class BucketApi extends runtime.BaseAPI {
      * Delete Bucket
      */
     async deleteBucketRaw(requestParameters: DeleteBucketRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
-        if (requestParameters.bucketName === null || requestParameters.bucketName === undefined) {
-            throw new runtime.RequiredError('bucketName','Required parameter requestParameters.bucketName was null or undefined when calling deleteBucket.');
+        if (requestParameters['bucketName'] == null) {
+            throw new runtime.RequiredError(
+                'bucketName',
+                'Required parameter "bucketName" was null or undefined when calling deleteBucket().'
+            );
         }
 
         const queryParameters: any = {};
@@ -117,11 +123,11 @@ export class BucketApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters.bucketName))),
+            path: `/mongodb/buckets/{bucketName}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -144,8 +150,11 @@ export class BucketApi extends runtime.BaseAPI {
      * Bucket Information
      */
     async getBucketRaw(requestParameters: GetBucketRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BucketInformation>> {
-        if (requestParameters.bucketName === null || requestParameters.bucketName === undefined) {
-            throw new runtime.RequiredError('bucketName','Required parameter requestParameters.bucketName was null or undefined when calling getBucket.');
+        if (requestParameters['bucketName'] == null) {
+            throw new runtime.RequiredError(
+                'bucketName',
+                'Required parameter "bucketName" was null or undefined when calling getBucket().'
+            );
         }
 
         const queryParameters: any = {};
@@ -164,11 +173,11 @@ export class BucketApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters.bucketName))),
+            path: `/mongodb/buckets/{bucketName}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -207,7 +216,7 @@ export class BucketApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({

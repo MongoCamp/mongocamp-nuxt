@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -73,9 +73,7 @@ export interface IndexOptionsRequest {
  * Check if a given object implements the IndexOptionsRequest interface.
  */
 export function instanceOfIndexOptionsRequest(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+    return true;
 }
 
 export function IndexOptionsRequestFromJSON(json: any): IndexOptionsRequest {
@@ -83,39 +81,36 @@ export function IndexOptionsRequestFromJSON(json: any): IndexOptionsRequest {
 }
 
 export function IndexOptionsRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): IndexOptionsRequest {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'background': !exists(json, 'background') ? undefined : json['background'],
-        'defaultLanguage': !exists(json, 'defaultLanguage') ? undefined : json['defaultLanguage'],
-        'textVersion': !exists(json, 'textVersion') ? undefined : json['textVersion'],
-        'expireAfter': !exists(json, 'expireAfter') ? undefined : json['expireAfter'],
-        'unique': !exists(json, 'unique') ? undefined : json['unique'],
-        'max': !exists(json, 'max') ? undefined : json['max'],
-        'min': !exists(json, 'min') ? undefined : json['min'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'background': json['background'] == null ? undefined : json['background'],
+        'defaultLanguage': json['defaultLanguage'] == null ? undefined : json['defaultLanguage'],
+        'textVersion': json['textVersion'] == null ? undefined : json['textVersion'],
+        'expireAfter': json['expireAfter'] == null ? undefined : json['expireAfter'],
+        'unique': json['unique'] == null ? undefined : json['unique'],
+        'max': json['max'] == null ? undefined : json['max'],
+        'min': json['min'] == null ? undefined : json['min'],
     };
 }
 
 export function IndexOptionsRequestToJSON(value?: IndexOptionsRequest | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'name': value.name,
-        'background': value.background,
-        'defaultLanguage': value.defaultLanguage,
-        'textVersion': value.textVersion,
-        'expireAfter': value.expireAfter,
-        'unique': value.unique,
-        'max': value.max,
-        'min': value.min,
+        'name': value['name'],
+        'background': value['background'],
+        'defaultLanguage': value['defaultLanguage'],
+        'textVersion': value['textVersion'],
+        'expireAfter': value['expireAfter'],
+        'unique': value['unique'],
+        'max': value['max'],
+        'min': value['min'],
     };
 }
 

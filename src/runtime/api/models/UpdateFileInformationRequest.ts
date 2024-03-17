@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -30,16 +30,14 @@ export interface UpdateFileInformationRequest {
      * @type {{ [key: string]: string; }}
      * @memberof UpdateFileInformationRequest
      */
-    metadata?: { [key: string]: string; } | null;
+    metadata?: { [key: string]: string; };
 }
 
 /**
  * Check if a given object implements the UpdateFileInformationRequest interface.
  */
 export function instanceOfUpdateFileInformationRequest(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+    return true;
 }
 
 export function UpdateFileInformationRequestFromJSON(json: any): UpdateFileInformationRequest {
@@ -47,27 +45,24 @@ export function UpdateFileInformationRequestFromJSON(json: any): UpdateFileInfor
 }
 
 export function UpdateFileInformationRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateFileInformationRequest {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'filename': !exists(json, 'filename') ? undefined : json['filename'],
-        'metadata': !exists(json, 'metadata') ? undefined : json['metadata'],
+        'filename': json['filename'] == null ? undefined : json['filename'],
+        'metadata': json['metadata'] == null ? undefined : json['metadata'],
     };
 }
 
 export function UpdateFileInformationRequestToJSON(value?: UpdateFileInformationRequest | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'filename': value.filename,
-        'metadata': value.metadata,
+        'filename': value['filename'],
+        'metadata': value['metadata'],
     };
 }
 

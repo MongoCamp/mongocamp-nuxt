@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -55,14 +55,12 @@ export interface MongoCampConfiguration {
  * Check if a given object implements the MongoCampConfiguration interface.
  */
 export function instanceOfMongoCampConfiguration(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "key" in value;
-    isInstance = isInstance && "value" in value;
-    isInstance = isInstance && "configType" in value;
-    isInstance = isInstance && "comment" in value;
-    isInstance = isInstance && "needsRestartForActivation" in value;
-
-    return isInstance;
+    if (!('key' in value)) return false;
+    if (!('value' in value)) return false;
+    if (!('configType' in value)) return false;
+    if (!('comment' in value)) return false;
+    if (!('needsRestartForActivation' in value)) return false;
+    return true;
 }
 
 export function MongoCampConfigurationFromJSON(json: any): MongoCampConfiguration {
@@ -70,7 +68,7 @@ export function MongoCampConfigurationFromJSON(json: any): MongoCampConfiguratio
 }
 
 export function MongoCampConfigurationFromJSONTyped(json: any, ignoreDiscriminator: boolean): MongoCampConfiguration {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -84,19 +82,16 @@ export function MongoCampConfigurationFromJSONTyped(json: any, ignoreDiscriminat
 }
 
 export function MongoCampConfigurationToJSON(value?: MongoCampConfiguration | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'key': value.key,
-        'value': value.value,
-        'configType': value.configType,
-        'comment': value.comment,
-        'needsRestartForActivation': value.needsRestartForActivation,
+        'key': value['key'],
+        'value': value['value'],
+        'configType': value['configType'],
+        'comment': value['comment'],
+        'needsRestartForActivation': value['needsRestartForActivation'],
     };
 }
 

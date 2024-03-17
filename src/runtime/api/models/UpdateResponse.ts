@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -49,12 +49,10 @@ export interface UpdateResponse {
  * Check if a given object implements the UpdateResponse interface.
  */
 export function instanceOfUpdateResponse(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "wasAcknowledged" in value;
-    isInstance = isInstance && "modifiedCount" in value;
-    isInstance = isInstance && "matchedCount" in value;
-
-    return isInstance;
+    if (!('wasAcknowledged' in value)) return false;
+    if (!('modifiedCount' in value)) return false;
+    if (!('matchedCount' in value)) return false;
+    return true;
 }
 
 export function UpdateResponseFromJSON(json: any): UpdateResponse {
@@ -62,31 +60,28 @@ export function UpdateResponseFromJSON(json: any): UpdateResponse {
 }
 
 export function UpdateResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateResponse {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
         'wasAcknowledged': json['wasAcknowledged'],
-        'upsertedIds': !exists(json, 'upsertedIds') ? undefined : json['upsertedIds'],
+        'upsertedIds': json['upsertedIds'] == null ? undefined : json['upsertedIds'],
         'modifiedCount': json['modifiedCount'],
         'matchedCount': json['matchedCount'],
     };
 }
 
 export function UpdateResponseToJSON(value?: UpdateResponse | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'wasAcknowledged': value.wasAcknowledged,
-        'upsertedIds': value.upsertedIds,
-        'modifiedCount': value.modifiedCount,
-        'matchedCount': value.matchedCount,
+        'wasAcknowledged': value['wasAcknowledged'],
+        'upsertedIds': value['upsertedIds'],
+        'modifiedCount': value['modifiedCount'],
+        'matchedCount': value['matchedCount'],
     };
 }
 

@@ -74,7 +74,7 @@ export class AuthApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -117,7 +117,7 @@ export class AuthApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -144,8 +144,11 @@ export class AuthApi extends runtime.BaseAPI {
      * Login User
      */
     async loginRaw(requestParameters: LoginRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LoginResult>> {
-        if (requestParameters.login === null || requestParameters.login === undefined) {
-            throw new runtime.RequiredError('login','Required parameter requestParameters.login was null or undefined when calling login.');
+        if (requestParameters['login'] == null) {
+            throw new runtime.RequiredError(
+                'login',
+                'Required parameter "login" was null or undefined when calling login().'
+            );
         }
 
         const queryParameters: any = {};
@@ -159,7 +162,7 @@ export class AuthApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: LoginToJSON(requestParameters.login),
+            body: LoginToJSON(requestParameters['login']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LoginResultFromJSON(jsonValue));
@@ -195,7 +198,7 @@ export class AuthApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -238,7 +241,7 @@ export class AuthApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -281,7 +284,7 @@ export class AuthApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -308,8 +311,11 @@ export class AuthApi extends runtime.BaseAPI {
      * Update Password
      */
     async updatePasswordRaw(requestParameters: UpdatePasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
-        if (requestParameters.passwordUpdateRequest === null || requestParameters.passwordUpdateRequest === undefined) {
-            throw new runtime.RequiredError('passwordUpdateRequest','Required parameter requestParameters.passwordUpdateRequest was null or undefined when calling updatePassword.');
+        if (requestParameters['passwordUpdateRequest'] == null) {
+            throw new runtime.RequiredError(
+                'passwordUpdateRequest',
+                'Required parameter "passwordUpdateRequest" was null or undefined when calling updatePassword().'
+            );
         }
 
         const queryParameters: any = {};
@@ -330,7 +336,7 @@ export class AuthApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -338,7 +344,7 @@ export class AuthApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PasswordUpdateRequestToJSON(requestParameters.passwordUpdateRequest),
+            body: PasswordUpdateRequestToJSON(requestParameters['passwordUpdateRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
@@ -374,7 +380,7 @@ export class AuthApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({

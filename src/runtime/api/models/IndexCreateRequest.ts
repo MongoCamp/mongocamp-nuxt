@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { IndexOptionsRequest } from './IndexOptionsRequest';
 import {
     IndexOptionsRequestFromJSON,
@@ -31,7 +31,7 @@ export interface IndexCreateRequest {
      * @type {{ [key: string]: number; }}
      * @memberof IndexCreateRequest
      */
-    keys: { [key: string]: number; } | null;
+    keys: { [key: string]: number; };
     /**
      * 
      * @type {IndexOptionsRequest}
@@ -44,10 +44,8 @@ export interface IndexCreateRequest {
  * Check if a given object implements the IndexCreateRequest interface.
  */
 export function instanceOfIndexCreateRequest(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "keys" in value;
-
-    return isInstance;
+    if (!('keys' in value)) return false;
+    return true;
 }
 
 export function IndexCreateRequestFromJSON(json: any): IndexCreateRequest {
@@ -55,27 +53,24 @@ export function IndexCreateRequestFromJSON(json: any): IndexCreateRequest {
 }
 
 export function IndexCreateRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): IndexCreateRequest {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
         'keys': json['keys'],
-        'indexOptionsRequest': !exists(json, 'indexOptionsRequest') ? undefined : IndexOptionsRequestFromJSON(json['indexOptionsRequest']),
+        'indexOptionsRequest': json['indexOptionsRequest'] == null ? undefined : IndexOptionsRequestFromJSON(json['indexOptionsRequest']),
     };
 }
 
 export function IndexCreateRequestToJSON(value?: IndexCreateRequest | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'keys': value.keys,
-        'indexOptionsRequest': IndexOptionsRequestToJSON(value.indexOptionsRequest),
+        'keys': value['keys'],
+        'indexOptionsRequest': IndexOptionsRequestToJSON(value['indexOptionsRequest']),
     };
 }
 

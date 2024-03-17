@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { PipelineStage } from './PipelineStage';
 import {
     PipelineStageFromJSON,
@@ -44,10 +44,8 @@ export interface MongoAggregateRequest {
  * Check if a given object implements the MongoAggregateRequest interface.
  */
 export function instanceOfMongoAggregateRequest(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "allowDiskUse" in value;
-
-    return isInstance;
+    if (!('allowDiskUse' in value)) return false;
+    return true;
 }
 
 export function MongoAggregateRequestFromJSON(json: any): MongoAggregateRequest {
@@ -55,27 +53,24 @@ export function MongoAggregateRequestFromJSON(json: any): MongoAggregateRequest 
 }
 
 export function MongoAggregateRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): MongoAggregateRequest {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'pipeline': !exists(json, 'pipeline') ? undefined : ((json['pipeline'] as Array<any>).map(PipelineStageFromJSON)),
+        'pipeline': json['pipeline'] == null ? undefined : ((json['pipeline'] as Array<any>).map(PipelineStageFromJSON)),
         'allowDiskUse': json['allowDiskUse'],
     };
 }
 
 export function MongoAggregateRequestToJSON(value?: MongoAggregateRequest | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'pipeline': value.pipeline === undefined ? undefined : ((value.pipeline as Array<any>).map(PipelineStageToJSON)),
-        'allowDiskUse': value.allowDiskUse,
+        'pipeline': value['pipeline'] == null ? undefined : ((value['pipeline'] as Array<any>).map(PipelineStageToJSON)),
+        'allowDiskUse': value['allowDiskUse'],
     };
 }
 

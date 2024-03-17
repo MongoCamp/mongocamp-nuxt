@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { UserProfile } from './UserProfile';
 import {
     UserProfileFromJSON,
@@ -50,12 +50,10 @@ export interface LoginResult {
  * Check if a given object implements the LoginResult interface.
  */
 export function instanceOfLoginResult(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "authToken" in value;
-    isInstance = isInstance && "userProfile" in value;
-    isInstance = isInstance && "expirationDate" in value;
-
-    return isInstance;
+    if (!('authToken' in value)) return false;
+    if (!('userProfile' in value)) return false;
+    if (!('expirationDate' in value)) return false;
+    return true;
 }
 
 export function LoginResultFromJSON(json: any): LoginResult {
@@ -63,7 +61,7 @@ export function LoginResultFromJSON(json: any): LoginResult {
 }
 
 export function LoginResultFromJSONTyped(json: any, ignoreDiscriminator: boolean): LoginResult {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -75,17 +73,14 @@ export function LoginResultFromJSONTyped(json: any, ignoreDiscriminator: boolean
 }
 
 export function LoginResultToJSON(value?: LoginResult | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'authToken': value.authToken,
-        'userProfile': UserProfileToJSON(value.userProfile),
-        'expirationDate': (value.expirationDate.toISOString()),
+        'authToken': value['authToken'],
+        'userProfile': UserProfileToJSON(value['userProfile']),
+        'expirationDate': ((value['expirationDate']).toISOString()),
     };
 }
 

@@ -94,12 +94,18 @@ export class FileApi extends runtime.BaseAPI {
      * Delete File from Bucket
      */
     async deleteFileRaw(requestParameters: DeleteFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeleteResponse>> {
-        if (requestParameters.bucketName === null || requestParameters.bucketName === undefined) {
-            throw new runtime.RequiredError('bucketName','Required parameter requestParameters.bucketName was null or undefined when calling deleteFile.');
+        if (requestParameters['bucketName'] == null) {
+            throw new runtime.RequiredError(
+                'bucketName',
+                'Required parameter "bucketName" was null or undefined when calling deleteFile().'
+            );
         }
 
-        if (requestParameters.fileId === null || requestParameters.fileId === undefined) {
-            throw new runtime.RequiredError('fileId','Required parameter requestParameters.fileId was null or undefined when calling deleteFile.');
+        if (requestParameters['fileId'] == null) {
+            throw new runtime.RequiredError(
+                'fileId',
+                'Required parameter "fileId" was null or undefined when calling deleteFile().'
+            );
         }
 
         const queryParameters: any = {};
@@ -118,11 +124,11 @@ export class FileApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files/{fileId}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters.bucketName))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters.fileId))),
+            path: `/mongodb/buckets/{bucketName}/files/{fileId}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -145,22 +151,28 @@ export class FileApi extends runtime.BaseAPI {
      * Files in Bucket
      */
     async findFilesRaw(requestParameters: FindFilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<FileInformation>>> {
-        if (requestParameters.bucketName === null || requestParameters.bucketName === undefined) {
-            throw new runtime.RequiredError('bucketName','Required parameter requestParameters.bucketName was null or undefined when calling findFiles.');
+        if (requestParameters['bucketName'] == null) {
+            throw new runtime.RequiredError(
+                'bucketName',
+                'Required parameter "bucketName" was null or undefined when calling findFiles().'
+            );
         }
 
-        if (requestParameters.mongoFindRequest === null || requestParameters.mongoFindRequest === undefined) {
-            throw new runtime.RequiredError('mongoFindRequest','Required parameter requestParameters.mongoFindRequest was null or undefined when calling findFiles.');
+        if (requestParameters['mongoFindRequest'] == null) {
+            throw new runtime.RequiredError(
+                'mongoFindRequest',
+                'Required parameter "mongoFindRequest" was null or undefined when calling findFiles().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.rowsPerPage !== undefined) {
-            queryParameters['rowsPerPage'] = requestParameters.rowsPerPage;
+        if (requestParameters['rowsPerPage'] != null) {
+            queryParameters['rowsPerPage'] = requestParameters['rowsPerPage'];
         }
 
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -179,15 +191,15 @@ export class FileApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters.bucketName))),
+            path: `/mongodb/buckets/{bucketName}/files`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: MongoFindRequestToJSON(requestParameters.mongoFindRequest),
+            body: MongoFindRequestToJSON(requestParameters['mongoFindRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FileInformationFromJSON));
@@ -207,12 +219,18 @@ export class FileApi extends runtime.BaseAPI {
      * File from Bucket
      */
     async getFileRaw(requestParameters: GetFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
-        if (requestParameters.bucketName === null || requestParameters.bucketName === undefined) {
-            throw new runtime.RequiredError('bucketName','Required parameter requestParameters.bucketName was null or undefined when calling getFile.');
+        if (requestParameters['bucketName'] == null) {
+            throw new runtime.RequiredError(
+                'bucketName',
+                'Required parameter "bucketName" was null or undefined when calling getFile().'
+            );
         }
 
-        if (requestParameters.fileId === null || requestParameters.fileId === undefined) {
-            throw new runtime.RequiredError('fileId','Required parameter requestParameters.fileId was null or undefined when calling getFile.');
+        if (requestParameters['fileId'] == null) {
+            throw new runtime.RequiredError(
+                'fileId',
+                'Required parameter "fileId" was null or undefined when calling getFile().'
+            );
         }
 
         const queryParameters: any = {};
@@ -231,11 +249,11 @@ export class FileApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files/{fileId}/file`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters.bucketName))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters.fileId))),
+            path: `/mongodb/buckets/{bucketName}/files/{fileId}/file`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -258,12 +276,18 @@ export class FileApi extends runtime.BaseAPI {
      * FileInformation from Bucket
      */
     async getFileInformationRaw(requestParameters: GetFileInformationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileInformation>> {
-        if (requestParameters.bucketName === null || requestParameters.bucketName === undefined) {
-            throw new runtime.RequiredError('bucketName','Required parameter requestParameters.bucketName was null or undefined when calling getFileInformation.');
+        if (requestParameters['bucketName'] == null) {
+            throw new runtime.RequiredError(
+                'bucketName',
+                'Required parameter "bucketName" was null or undefined when calling getFileInformation().'
+            );
         }
 
-        if (requestParameters.fileId === null || requestParameters.fileId === undefined) {
-            throw new runtime.RequiredError('fileId','Required parameter requestParameters.fileId was null or undefined when calling getFileInformation.');
+        if (requestParameters['fileId'] == null) {
+            throw new runtime.RequiredError(
+                'fileId',
+                'Required parameter "fileId" was null or undefined when calling getFileInformation().'
+            );
         }
 
         const queryParameters: any = {};
@@ -282,11 +306,11 @@ export class FileApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files/{fileId}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters.bucketName))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters.fileId))),
+            path: `/mongodb/buckets/{bucketName}/files/{fileId}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -309,22 +333,31 @@ export class FileApi extends runtime.BaseAPI {
      * Insert File
      */
     async insertFileRaw(requestParameters: InsertFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InsertResponse>> {
-        if (requestParameters.bucketName === null || requestParameters.bucketName === undefined) {
-            throw new runtime.RequiredError('bucketName','Required parameter requestParameters.bucketName was null or undefined when calling insertFile.');
+        if (requestParameters['bucketName'] == null) {
+            throw new runtime.RequiredError(
+                'bucketName',
+                'Required parameter "bucketName" was null or undefined when calling insertFile().'
+            );
         }
 
-        if (requestParameters.file === null || requestParameters.file === undefined) {
-            throw new runtime.RequiredError('file','Required parameter requestParameters.file was null or undefined when calling insertFile.');
+        if (requestParameters['file'] == null) {
+            throw new runtime.RequiredError(
+                'file',
+                'Required parameter "file" was null or undefined when calling insertFile().'
+            );
         }
 
-        if (requestParameters.metaData === null || requestParameters.metaData === undefined) {
-            throw new runtime.RequiredError('metaData','Required parameter requestParameters.metaData was null or undefined when calling insertFile.');
+        if (requestParameters['metaData'] == null) {
+            throw new runtime.RequiredError(
+                'metaData',
+                'Required parameter "metaData" was null or undefined when calling insertFile().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.fileName !== undefined) {
-            queryParameters['fileName'] = requestParameters.fileName;
+        if (requestParameters['fileName'] != null) {
+            queryParameters['fileName'] = requestParameters['fileName'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -341,7 +374,7 @@ export class FileApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const consumes: runtime.Consume[] = [
@@ -360,16 +393,16 @@ export class FileApi extends runtime.BaseAPI {
             formParams = new URLSearchParams();
         }
 
-        if (requestParameters.file !== undefined) {
-            formParams.append('file', requestParameters.file as any);
+        if (requestParameters['file'] != null) {
+            formParams.append('file', requestParameters['file'] as any);
         }
 
-        if (requestParameters.metaData !== undefined) {
-            formParams.append('metaData', requestParameters.metaData as any);
+        if (requestParameters['metaData'] != null) {
+            formParams.append('metaData', requestParameters['metaData'] as any);
         }
 
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters.bucketName))),
+            path: `/mongodb/buckets/{bucketName}/files`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -393,30 +426,33 @@ export class FileApi extends runtime.BaseAPI {
      * Files in Bucket
      */
     async listFilesRaw(requestParameters: ListFilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<FileInformation>>> {
-        if (requestParameters.bucketName === null || requestParameters.bucketName === undefined) {
-            throw new runtime.RequiredError('bucketName','Required parameter requestParameters.bucketName was null or undefined when calling listFiles.');
+        if (requestParameters['bucketName'] == null) {
+            throw new runtime.RequiredError(
+                'bucketName',
+                'Required parameter "bucketName" was null or undefined when calling listFiles().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.filter !== undefined) {
-            queryParameters['filter'] = requestParameters.filter;
+        if (requestParameters['filter'] != null) {
+            queryParameters['filter'] = requestParameters['filter'];
         }
 
-        if (requestParameters.sort !== undefined) {
-            queryParameters['sort'] = requestParameters.sort;
+        if (requestParameters['sort'] != null) {
+            queryParameters['sort'] = requestParameters['sort'];
         }
 
-        if (requestParameters.projection !== undefined) {
-            queryParameters['projection'] = requestParameters.projection;
+        if (requestParameters['projection'] != null) {
+            queryParameters['projection'] = requestParameters['projection'];
         }
 
-        if (requestParameters.rowsPerPage !== undefined) {
-            queryParameters['rowsPerPage'] = requestParameters.rowsPerPage;
+        if (requestParameters['rowsPerPage'] != null) {
+            queryParameters['rowsPerPage'] = requestParameters['rowsPerPage'];
         }
 
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -433,11 +469,11 @@ export class FileApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters.bucketName))),
+            path: `/mongodb/buckets/{bucketName}/files`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -460,16 +496,25 @@ export class FileApi extends runtime.BaseAPI {
      * Update FileInformation in Bucket
      */
     async updateFileInformationRaw(requestParameters: UpdateFileInformationOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateResponse>> {
-        if (requestParameters.bucketName === null || requestParameters.bucketName === undefined) {
-            throw new runtime.RequiredError('bucketName','Required parameter requestParameters.bucketName was null or undefined when calling updateFileInformation.');
+        if (requestParameters['bucketName'] == null) {
+            throw new runtime.RequiredError(
+                'bucketName',
+                'Required parameter "bucketName" was null or undefined when calling updateFileInformation().'
+            );
         }
 
-        if (requestParameters.fileId === null || requestParameters.fileId === undefined) {
-            throw new runtime.RequiredError('fileId','Required parameter requestParameters.fileId was null or undefined when calling updateFileInformation.');
+        if (requestParameters['fileId'] == null) {
+            throw new runtime.RequiredError(
+                'fileId',
+                'Required parameter "fileId" was null or undefined when calling updateFileInformation().'
+            );
         }
 
-        if (requestParameters.updateFileInformationRequest === null || requestParameters.updateFileInformationRequest === undefined) {
-            throw new runtime.RequiredError('updateFileInformationRequest','Required parameter requestParameters.updateFileInformationRequest was null or undefined when calling updateFileInformation.');
+        if (requestParameters['updateFileInformationRequest'] == null) {
+            throw new runtime.RequiredError(
+                'updateFileInformationRequest',
+                'Required parameter "updateFileInformationRequest" was null or undefined when calling updateFileInformation().'
+            );
         }
 
         const queryParameters: any = {};
@@ -490,15 +535,15 @@ export class FileApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files/{fileId}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters.bucketName))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters.fileId))),
+            path: `/mongodb/buckets/{bucketName}/files/{fileId}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId']))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: UpdateFileInformationRequestToJSON(requestParameters.updateFileInformationRequest),
+            body: UpdateFileInformationRequestToJSON(requestParameters['updateFileInformationRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UpdateResponseFromJSON(jsonValue));

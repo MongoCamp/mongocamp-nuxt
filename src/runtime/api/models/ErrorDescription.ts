@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -43,12 +43,10 @@ export interface ErrorDescription {
  * Check if a given object implements the ErrorDescription interface.
  */
 export function instanceOfErrorDescription(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "code" in value;
-    isInstance = isInstance && "msg" in value;
-    isInstance = isInstance && "additionalInfo" in value;
-
-    return isInstance;
+    if (!('code' in value)) return false;
+    if (!('msg' in value)) return false;
+    if (!('additionalInfo' in value)) return false;
+    return true;
 }
 
 export function ErrorDescriptionFromJSON(json: any): ErrorDescription {
@@ -56,7 +54,7 @@ export function ErrorDescriptionFromJSON(json: any): ErrorDescription {
 }
 
 export function ErrorDescriptionFromJSONTyped(json: any, ignoreDiscriminator: boolean): ErrorDescription {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -68,17 +66,14 @@ export function ErrorDescriptionFromJSONTyped(json: any, ignoreDiscriminator: bo
 }
 
 export function ErrorDescriptionToJSON(value?: ErrorDescription | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'code': value.code,
-        'msg': value.msg,
-        'additionalInfo': value.additionalInfo,
+        'code': value['code'],
+        'msg': value['msg'],
+        'additionalInfo': value['additionalInfo'],
     };
 }
 

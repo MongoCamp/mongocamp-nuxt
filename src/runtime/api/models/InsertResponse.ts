@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,10 +37,8 @@ export interface InsertResponse {
  * Check if a given object implements the InsertResponse interface.
  */
 export function instanceOfInsertResponse(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "wasAcknowledged" in value;
-
-    return isInstance;
+    if (!('wasAcknowledged' in value)) return false;
+    return true;
 }
 
 export function InsertResponseFromJSON(json: any): InsertResponse {
@@ -48,27 +46,24 @@ export function InsertResponseFromJSON(json: any): InsertResponse {
 }
 
 export function InsertResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): InsertResponse {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
         'wasAcknowledged': json['wasAcknowledged'],
-        'insertedIds': !exists(json, 'insertedIds') ? undefined : json['insertedIds'],
+        'insertedIds': json['insertedIds'] == null ? undefined : json['insertedIds'],
     };
 }
 
 export function InsertResponseToJSON(value?: InsertResponse | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'wasAcknowledged': value.wasAcknowledged,
-        'insertedIds': value.insertedIds,
+        'wasAcknowledged': value['wasAcknowledged'],
+        'insertedIds': value['insertedIds'],
     };
 }
 

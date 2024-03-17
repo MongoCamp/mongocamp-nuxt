@@ -61,12 +61,18 @@ export class JobsApi extends runtime.BaseAPI {
      * Delete Job
      */
     async deleteJobRaw(requestParameters: DeleteJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
-        if (requestParameters.jobGroup === null || requestParameters.jobGroup === undefined) {
-            throw new runtime.RequiredError('jobGroup','Required parameter requestParameters.jobGroup was null or undefined when calling deleteJob.');
+        if (requestParameters['jobGroup'] == null) {
+            throw new runtime.RequiredError(
+                'jobGroup',
+                'Required parameter "jobGroup" was null or undefined when calling deleteJob().'
+            );
         }
 
-        if (requestParameters.jobName === null || requestParameters.jobName === undefined) {
-            throw new runtime.RequiredError('jobName','Required parameter requestParameters.jobName was null or undefined when calling deleteJob.');
+        if (requestParameters['jobName'] == null) {
+            throw new runtime.RequiredError(
+                'jobName',
+                'Required parameter "jobName" was null or undefined when calling deleteJob().'
+            );
         }
 
         const queryParameters: any = {};
@@ -85,11 +91,11 @@ export class JobsApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters.jobGroup))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters.jobName))),
+            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup']))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -112,12 +118,18 @@ export class JobsApi extends runtime.BaseAPI {
      * Execute Job
      */
     async executeJobRaw(requestParameters: ExecuteJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
-        if (requestParameters.jobGroup === null || requestParameters.jobGroup === undefined) {
-            throw new runtime.RequiredError('jobGroup','Required parameter requestParameters.jobGroup was null or undefined when calling executeJob.');
+        if (requestParameters['jobGroup'] == null) {
+            throw new runtime.RequiredError(
+                'jobGroup',
+                'Required parameter "jobGroup" was null or undefined when calling executeJob().'
+            );
         }
 
-        if (requestParameters.jobName === null || requestParameters.jobName === undefined) {
-            throw new runtime.RequiredError('jobName','Required parameter requestParameters.jobName was null or undefined when calling executeJob.');
+        if (requestParameters['jobName'] == null) {
+            throw new runtime.RequiredError(
+                'jobName',
+                'Required parameter "jobName" was null or undefined when calling executeJob().'
+            );
         }
 
         const queryParameters: any = {};
@@ -136,11 +148,11 @@ export class JobsApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters.jobGroup))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters.jobName))),
+            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup']))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName']))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -179,7 +191,7 @@ export class JobsApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -222,7 +234,7 @@ export class JobsApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -249,8 +261,11 @@ export class JobsApi extends runtime.BaseAPI {
      * Register Job
      */
     async registerJobRaw(requestParameters: RegisterJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobInformation>> {
-        if (requestParameters.jobConfig === null || requestParameters.jobConfig === undefined) {
-            throw new runtime.RequiredError('jobConfig','Required parameter requestParameters.jobConfig was null or undefined when calling registerJob.');
+        if (requestParameters['jobConfig'] == null) {
+            throw new runtime.RequiredError(
+                'jobConfig',
+                'Required parameter "jobConfig" was null or undefined when calling registerJob().'
+            );
         }
 
         const queryParameters: any = {};
@@ -271,7 +286,7 @@ export class JobsApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -279,7 +294,7 @@ export class JobsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: JobConfigToJSON(requestParameters.jobConfig),
+            body: JobConfigToJSON(requestParameters['jobConfig']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JobInformationFromJSON(jsonValue));
@@ -299,16 +314,25 @@ export class JobsApi extends runtime.BaseAPI {
      * Update Job
      */
     async updateJobRaw(requestParameters: UpdateJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobInformation>> {
-        if (requestParameters.jobGroup === null || requestParameters.jobGroup === undefined) {
-            throw new runtime.RequiredError('jobGroup','Required parameter requestParameters.jobGroup was null or undefined when calling updateJob.');
+        if (requestParameters['jobGroup'] == null) {
+            throw new runtime.RequiredError(
+                'jobGroup',
+                'Required parameter "jobGroup" was null or undefined when calling updateJob().'
+            );
         }
 
-        if (requestParameters.jobName === null || requestParameters.jobName === undefined) {
-            throw new runtime.RequiredError('jobName','Required parameter requestParameters.jobName was null or undefined when calling updateJob.');
+        if (requestParameters['jobName'] == null) {
+            throw new runtime.RequiredError(
+                'jobName',
+                'Required parameter "jobName" was null or undefined when calling updateJob().'
+            );
         }
 
-        if (requestParameters.jobConfig === null || requestParameters.jobConfig === undefined) {
-            throw new runtime.RequiredError('jobConfig','Required parameter requestParameters.jobConfig was null or undefined when calling updateJob.');
+        if (requestParameters['jobConfig'] == null) {
+            throw new runtime.RequiredError(
+                'jobConfig',
+                'Required parameter "jobConfig" was null or undefined when calling updateJob().'
+            );
         }
 
         const queryParameters: any = {};
@@ -329,15 +353,15 @@ export class JobsApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters.jobGroup))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters.jobName))),
+            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup']))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName']))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: JobConfigToJSON(requestParameters.jobConfig),
+            body: JobConfigToJSON(requestParameters['jobConfig']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JobInformationFromJSON(jsonValue));

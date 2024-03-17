@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -48,20 +48,18 @@ export interface JsonSchemaDefinition {
      * @type {{ [key: string]: { [key: string]: string; }; }}
      * @memberof JsonSchemaDefinition
      */
-    properties: { [key: string]: { [key: string]: string; }; } | null;
+    properties: { [key: string]: { [key: string]: string; }; };
 }
 
 /**
  * Check if a given object implements the JsonSchemaDefinition interface.
  */
 export function instanceOfJsonSchemaDefinition(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "type" in value;
-    isInstance = isInstance && "title" in value;
-    isInstance = isInstance && "additionalProperties" in value;
-    isInstance = isInstance && "properties" in value;
-
-    return isInstance;
+    if (!('type' in value)) return false;
+    if (!('title' in value)) return false;
+    if (!('additionalProperties' in value)) return false;
+    if (!('properties' in value)) return false;
+    return true;
 }
 
 export function JsonSchemaDefinitionFromJSON(json: any): JsonSchemaDefinition {
@@ -69,7 +67,7 @@ export function JsonSchemaDefinitionFromJSON(json: any): JsonSchemaDefinition {
 }
 
 export function JsonSchemaDefinitionFromJSONTyped(json: any, ignoreDiscriminator: boolean): JsonSchemaDefinition {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -77,25 +75,22 @@ export function JsonSchemaDefinitionFromJSONTyped(json: any, ignoreDiscriminator
         'type': json['type'],
         'title': json['title'],
         'additionalProperties': json['additionalProperties'],
-        'required': !exists(json, 'required') ? undefined : json['required'],
+        'required': json['required'] == null ? undefined : json['required'],
         'properties': json['properties'],
     };
 }
 
 export function JsonSchemaDefinitionToJSON(value?: JsonSchemaDefinition | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'type': value.type,
-        'title': value.title,
-        'additionalProperties': value.additionalProperties,
-        'required': value.required,
-        'properties': value.properties,
+        'type': value['type'],
+        'title': value['title'],
+        'additionalProperties': value['additionalProperties'],
+        'required': value['required'],
+        'properties': value['properties'],
     };
 }
 

@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -42,17 +42,15 @@ export interface SettingsResponse {
      * @type {{ [key: string]: string; }}
      * @memberof SettingsResponse
      */
-    configurations: { [key: string]: string; } | null;
+    configurations: { [key: string]: string; };
 }
 
 /**
  * Check if a given object implements the SettingsResponse interface.
  */
 export function instanceOfSettingsResponse(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "configurations" in value;
-
-    return isInstance;
+    if (!('configurations' in value)) return false;
+    return true;
 }
 
 export function SettingsResponseFromJSON(json: any): SettingsResponse {
@@ -60,31 +58,28 @@ export function SettingsResponseFromJSON(json: any): SettingsResponse {
 }
 
 export function SettingsResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): SettingsResponse {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'routesPlugins': !exists(json, 'routesPlugins') ? undefined : json['routesPlugins'],
-        'filePlugins': !exists(json, 'filePlugins') ? undefined : json['filePlugins'],
-        'ignoredPlugins': !exists(json, 'ignoredPlugins') ? undefined : json['ignoredPlugins'],
+        'routesPlugins': json['routesPlugins'] == null ? undefined : json['routesPlugins'],
+        'filePlugins': json['filePlugins'] == null ? undefined : json['filePlugins'],
+        'ignoredPlugins': json['ignoredPlugins'] == null ? undefined : json['ignoredPlugins'],
         'configurations': json['configurations'],
     };
 }
 
 export function SettingsResponseToJSON(value?: SettingsResponse | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'routesPlugins': value.routesPlugins,
-        'filePlugins': value.filePlugins,
-        'ignoredPlugins': value.ignoredPlugins,
-        'configurations': value.configurations,
+        'routesPlugins': value['routesPlugins'],
+        'filePlugins': value['filePlugins'],
+        'ignoredPlugins': value['ignoredPlugins'],
+        'configurations': value['configurations'],
     };
 }
 

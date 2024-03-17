@@ -108,8 +108,11 @@ export class AdminApi extends runtime.BaseAPI {
      * Add Role
      */
     async addRoleRaw(requestParameters: AddRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Role>> {
-        if (requestParameters.role === null || requestParameters.role === undefined) {
-            throw new runtime.RequiredError('role','Required parameter requestParameters.role was null or undefined when calling addRole.');
+        if (requestParameters['role'] == null) {
+            throw new runtime.RequiredError(
+                'role',
+                'Required parameter "role" was null or undefined when calling addRole().'
+            );
         }
 
         const queryParameters: any = {};
@@ -130,7 +133,7 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -138,7 +141,7 @@ export class AdminApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: RoleToJSON(requestParameters.role),
+            body: RoleToJSON(requestParameters['role']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RoleFromJSON(jsonValue));
@@ -158,8 +161,11 @@ export class AdminApi extends runtime.BaseAPI {
      * Add User
      */
     async addUserRaw(requestParameters: AddUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserProfile>> {
-        if (requestParameters.userInformation === null || requestParameters.userInformation === undefined) {
-            throw new runtime.RequiredError('userInformation','Required parameter requestParameters.userInformation was null or undefined when calling addUser.');
+        if (requestParameters['userInformation'] == null) {
+            throw new runtime.RequiredError(
+                'userInformation',
+                'Required parameter "userInformation" was null or undefined when calling addUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -180,7 +186,7 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -188,7 +194,7 @@ export class AdminApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: UserInformationToJSON(requestParameters.userInformation),
+            body: UserInformationToJSON(requestParameters['userInformation']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserProfileFromJSON(jsonValue));
@@ -208,8 +214,11 @@ export class AdminApi extends runtime.BaseAPI {
      * Delete Role
      */
     async deleteRoleRaw(requestParameters: DeleteRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
-        if (requestParameters.roleName === null || requestParameters.roleName === undefined) {
-            throw new runtime.RequiredError('roleName','Required parameter requestParameters.roleName was null or undefined when calling deleteRole.');
+        if (requestParameters['roleName'] == null) {
+            throw new runtime.RequiredError(
+                'roleName',
+                'Required parameter "roleName" was null or undefined when calling deleteRole().'
+            );
         }
 
         const queryParameters: any = {};
@@ -228,11 +237,11 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/admin/roles/{roleName}`.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters.roleName))),
+            path: `/admin/roles/{roleName}`.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -255,8 +264,11 @@ export class AdminApi extends runtime.BaseAPI {
      * Delete User
      */
     async deleteUserRaw(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling deleteUser.');
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling deleteUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -275,11 +287,11 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/admin/users/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters.userId))),
+            path: `/admin/users/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -302,8 +314,11 @@ export class AdminApi extends runtime.BaseAPI {
      * Get Role
      */
     async getRoleRaw(requestParameters: GetRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Role>> {
-        if (requestParameters.roleName === null || requestParameters.roleName === undefined) {
-            throw new runtime.RequiredError('roleName','Required parameter requestParameters.roleName was null or undefined when calling getRole.');
+        if (requestParameters['roleName'] == null) {
+            throw new runtime.RequiredError(
+                'roleName',
+                'Required parameter "roleName" was null or undefined when calling getRole().'
+            );
         }
 
         const queryParameters: any = {};
@@ -322,11 +337,11 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/admin/roles/{roleName}`.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters.roleName))),
+            path: `/admin/roles/{roleName}`.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -349,8 +364,11 @@ export class AdminApi extends runtime.BaseAPI {
      * UserProfile for userId
      */
     async getUserRaw(requestParameters: GetUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserProfile>> {
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling getUser.');
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling getUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -369,11 +387,11 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/admin/users/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters.userId))),
+            path: `/admin/users/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -396,8 +414,11 @@ export class AdminApi extends runtime.BaseAPI {
      * Update ApiKey
      */
     async gnerateNewApiKeyForUserRaw(requestParameters: GnerateNewApiKeyForUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueString>> {
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling gnerateNewApiKeyForUser.');
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling gnerateNewApiKeyForUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -416,11 +437,11 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/admin/users/{userId}/apikey`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters.userId))),
+            path: `/admin/users/{userId}/apikey`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -445,16 +466,16 @@ export class AdminApi extends runtime.BaseAPI {
     async listRolesRaw(requestParameters: ListRolesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Role>>> {
         const queryParameters: any = {};
 
-        if (requestParameters.filter !== undefined) {
-            queryParameters['filter'] = requestParameters.filter;
+        if (requestParameters['filter'] != null) {
+            queryParameters['filter'] = requestParameters['filter'];
         }
 
-        if (requestParameters.rowsPerPage !== undefined) {
-            queryParameters['rowsPerPage'] = requestParameters.rowsPerPage;
+        if (requestParameters['rowsPerPage'] != null) {
+            queryParameters['rowsPerPage'] = requestParameters['rowsPerPage'];
         }
 
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -471,7 +492,7 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -500,16 +521,16 @@ export class AdminApi extends runtime.BaseAPI {
     async listUsersRaw(requestParameters: ListUsersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<UserProfile>>> {
         const queryParameters: any = {};
 
-        if (requestParameters.filter !== undefined) {
-            queryParameters['filter'] = requestParameters.filter;
+        if (requestParameters['filter'] != null) {
+            queryParameters['filter'] = requestParameters['filter'];
         }
 
-        if (requestParameters.rowsPerPage !== undefined) {
-            queryParameters['rowsPerPage'] = requestParameters.rowsPerPage;
+        if (requestParameters['rowsPerPage'] != null) {
+            queryParameters['rowsPerPage'] = requestParameters['rowsPerPage'];
         }
 
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -526,7 +547,7 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -553,12 +574,18 @@ export class AdminApi extends runtime.BaseAPI {
      * Update Password
      */
     async updatePasswordForUserRaw(requestParameters: UpdatePasswordForUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling updatePasswordForUser.');
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling updatePasswordForUser().'
+            );
         }
 
-        if (requestParameters.passwordUpdateRequest === null || requestParameters.passwordUpdateRequest === undefined) {
-            throw new runtime.RequiredError('passwordUpdateRequest','Required parameter requestParameters.passwordUpdateRequest was null or undefined when calling updatePasswordForUser.');
+        if (requestParameters['passwordUpdateRequest'] == null) {
+            throw new runtime.RequiredError(
+                'passwordUpdateRequest',
+                'Required parameter "passwordUpdateRequest" was null or undefined when calling updatePasswordForUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -579,15 +606,15 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/admin/users/{userId}/password`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters.userId))),
+            path: `/admin/users/{userId}/password`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PasswordUpdateRequestToJSON(requestParameters.passwordUpdateRequest),
+            body: PasswordUpdateRequestToJSON(requestParameters['passwordUpdateRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
@@ -607,12 +634,18 @@ export class AdminApi extends runtime.BaseAPI {
      * Update Role
      */
     async updateRoleRaw(requestParameters: UpdateRoleOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Role>> {
-        if (requestParameters.roleName === null || requestParameters.roleName === undefined) {
-            throw new runtime.RequiredError('roleName','Required parameter requestParameters.roleName was null or undefined when calling updateRole.');
+        if (requestParameters['roleName'] == null) {
+            throw new runtime.RequiredError(
+                'roleName',
+                'Required parameter "roleName" was null or undefined when calling updateRole().'
+            );
         }
 
-        if (requestParameters.updateRoleRequest === null || requestParameters.updateRoleRequest === undefined) {
-            throw new runtime.RequiredError('updateRoleRequest','Required parameter requestParameters.updateRoleRequest was null or undefined when calling updateRole.');
+        if (requestParameters['updateRoleRequest'] == null) {
+            throw new runtime.RequiredError(
+                'updateRoleRequest',
+                'Required parameter "updateRoleRequest" was null or undefined when calling updateRole().'
+            );
         }
 
         const queryParameters: any = {};
@@ -633,15 +666,15 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/admin/roles/{roleName}`.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters.roleName))),
+            path: `/admin/roles/{roleName}`.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName']))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: UpdateRoleRequestToJSON(requestParameters.updateRoleRequest),
+            body: UpdateRoleRequestToJSON(requestParameters['updateRoleRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RoleFromJSON(jsonValue));
@@ -661,8 +694,11 @@ export class AdminApi extends runtime.BaseAPI {
      * Update User Roles
      */
     async updateRolesForUserRaw(requestParameters: UpdateRolesForUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserProfile>> {
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling updateRolesForUser.');
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling updateRolesForUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -683,15 +719,15 @@ export class AdminApi extends runtime.BaseAPI {
             }
         }
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-AUTH-APIKEY"] = this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
+            headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
         const response = await this.request({
-            path: `/admin/users/{userId}/roles`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters.userId))),
+            path: `/admin/users/{userId}/roles`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.requestBody,
+            body: requestParameters['requestBody'],
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserProfileFromJSON(jsonValue));

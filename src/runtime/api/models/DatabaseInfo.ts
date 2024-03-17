@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -48,21 +48,19 @@ export interface DatabaseInfo {
      * @type {{ [key: string]: string; }}
      * @memberof DatabaseInfo
      */
-    map: { [key: string]: string; } | null;
+    map: { [key: string]: string; };
 }
 
 /**
  * Check if a given object implements the DatabaseInfo interface.
  */
 export function instanceOfDatabaseInfo(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "sizeOnDisk" in value;
-    isInstance = isInstance && "empty" in value;
-    isInstance = isInstance && "fetched" in value;
-    isInstance = isInstance && "map" in value;
-
-    return isInstance;
+    if (!('name' in value)) return false;
+    if (!('sizeOnDisk' in value)) return false;
+    if (!('empty' in value)) return false;
+    if (!('fetched' in value)) return false;
+    if (!('map' in value)) return false;
+    return true;
 }
 
 export function DatabaseInfoFromJSON(json: any): DatabaseInfo {
@@ -70,7 +68,7 @@ export function DatabaseInfoFromJSON(json: any): DatabaseInfo {
 }
 
 export function DatabaseInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): DatabaseInfo {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -84,19 +82,16 @@ export function DatabaseInfoFromJSONTyped(json: any, ignoreDiscriminator: boolea
 }
 
 export function DatabaseInfoToJSON(value?: DatabaseInfo | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'name': value.name,
-        'sizeOnDisk': value.sizeOnDisk,
-        'empty': value.empty,
-        'fetched': (value.fetched.toISOString()),
-        'map': value.map,
+        'name': value['name'],
+        'sizeOnDisk': value['sizeOnDisk'],
+        'empty': value['empty'],
+        'fetched': ((value['fetched']).toISOString()),
+        'map': value['map'],
     };
 }
 

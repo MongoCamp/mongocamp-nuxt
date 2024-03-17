@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -72,7 +72,7 @@ export interface CollectionStatus {
      * @type {{ [key: string]: number; }}
      * @memberof CollectionStatus
      */
-    indexSizes: { [key: string]: number; } | null;
+    indexSizes: { [key: string]: number; };
     /**
      * 
      * @type {number}
@@ -96,29 +96,27 @@ export interface CollectionStatus {
      * @type {{ [key: string]: string; }}
      * @memberof CollectionStatus
      */
-    map: { [key: string]: string; } | null;
+    map: { [key: string]: string; };
 }
 
 /**
  * Check if a given object implements the CollectionStatus interface.
  */
 export function instanceOfCollectionStatus(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "ns" in value;
-    isInstance = isInstance && "collectionType" in value;
-    isInstance = isInstance && "scaleFactor" in value;
-    isInstance = isInstance && "size" in value;
-    isInstance = isInstance && "count" in value;
-    isInstance = isInstance && "storageSize" in value;
-    isInstance = isInstance && "avgObjSize" in value;
-    isInstance = isInstance && "nindexes" in value;
-    isInstance = isInstance && "indexSizes" in value;
-    isInstance = isInstance && "totalIndexSize" in value;
-    isInstance = isInstance && "ok" in value;
-    isInstance = isInstance && "fetched" in value;
-    isInstance = isInstance && "map" in value;
-
-    return isInstance;
+    if (!('ns' in value)) return false;
+    if (!('collectionType' in value)) return false;
+    if (!('scaleFactor' in value)) return false;
+    if (!('size' in value)) return false;
+    if (!('count' in value)) return false;
+    if (!('storageSize' in value)) return false;
+    if (!('avgObjSize' in value)) return false;
+    if (!('nindexes' in value)) return false;
+    if (!('indexSizes' in value)) return false;
+    if (!('totalIndexSize' in value)) return false;
+    if (!('ok' in value)) return false;
+    if (!('fetched' in value)) return false;
+    if (!('map' in value)) return false;
+    return true;
 }
 
 export function CollectionStatusFromJSON(json: any): CollectionStatus {
@@ -126,7 +124,7 @@ export function CollectionStatusFromJSON(json: any): CollectionStatus {
 }
 
 export function CollectionStatusFromJSONTyped(json: any, ignoreDiscriminator: boolean): CollectionStatus {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -148,27 +146,24 @@ export function CollectionStatusFromJSONTyped(json: any, ignoreDiscriminator: bo
 }
 
 export function CollectionStatusToJSON(value?: CollectionStatus | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'ns': value.ns,
-        'collectionType': value.collectionType,
-        'scaleFactor': value.scaleFactor,
-        'size': value.size,
-        'count': value.count,
-        'storageSize': value.storageSize,
-        'avgObjSize': value.avgObjSize,
-        'nindexes': value.nindexes,
-        'indexSizes': value.indexSizes,
-        'totalIndexSize': value.totalIndexSize,
-        'ok': value.ok,
-        'fetched': (value.fetched.toISOString()),
-        'map': value.map,
+        'ns': value['ns'],
+        'collectionType': value['collectionType'],
+        'scaleFactor': value['scaleFactor'],
+        'size': value['size'],
+        'count': value['count'],
+        'storageSize': value['storageSize'],
+        'avgObjSize': value['avgObjSize'],
+        'nindexes': value['nindexes'],
+        'indexSizes': value['indexSizes'],
+        'totalIndexSize': value['totalIndexSize'],
+        'ok': value['ok'],
+        'fetched': ((value['fetched']).toISOString()),
+        'map': value['map'],
     };
 }
 

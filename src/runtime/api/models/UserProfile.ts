@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { Grant } from './Grant';
 import {
     GrantFromJSON,
@@ -62,11 +62,9 @@ export interface UserProfile {
  * Check if a given object implements the UserProfile interface.
  */
 export function instanceOfUserProfile(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "user" in value;
-    isInstance = isInstance && "isAdmin" in value;
-
-    return isInstance;
+    if (!('user' in value)) return false;
+    if (!('isAdmin' in value)) return false;
+    return true;
 }
 
 export function UserProfileFromJSON(json: any): UserProfile {
@@ -74,33 +72,30 @@ export function UserProfileFromJSON(json: any): UserProfile {
 }
 
 export function UserProfileFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserProfile {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
         'user': json['user'],
         'isAdmin': json['isAdmin'],
-        'apiKey': !exists(json, 'apiKey') ? undefined : json['apiKey'],
-        'roles': !exists(json, 'roles') ? undefined : json['roles'],
-        'grants': !exists(json, 'grants') ? undefined : ((json['grants'] as Array<any>).map(GrantFromJSON)),
+        'apiKey': json['apiKey'] == null ? undefined : json['apiKey'],
+        'roles': json['roles'] == null ? undefined : json['roles'],
+        'grants': json['grants'] == null ? undefined : ((json['grants'] as Array<any>).map(GrantFromJSON)),
     };
 }
 
 export function UserProfileToJSON(value?: UserProfile | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'user': value.user,
-        'isAdmin': value.isAdmin,
-        'apiKey': value.apiKey,
-        'roles': value.roles,
-        'grants': value.grants === undefined ? undefined : ((value.grants as Array<any>).map(GrantToJSON)),
+        'user': value['user'],
+        'isAdmin': value['isAdmin'],
+        'apiKey': value['apiKey'],
+        'roles': value['roles'],
+        'grants': value['grants'] == null ? undefined : ((value['grants'] as Array<any>).map(GrantToJSON)),
     };
 }
 

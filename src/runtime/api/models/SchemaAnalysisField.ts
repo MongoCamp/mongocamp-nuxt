@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { SchemaAnalysisFieldType } from './SchemaAnalysisFieldType';
 import {
     SchemaAnalysisFieldTypeFromJSON,
@@ -68,13 +68,11 @@ export interface SchemaAnalysisField {
  * Check if a given object implements the SchemaAnalysisField interface.
  */
 export function instanceOfSchemaAnalysisField(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "fullName" in value;
-    isInstance = isInstance && "count" in value;
-    isInstance = isInstance && "percentageOfParent" in value;
-
-    return isInstance;
+    if (!('name' in value)) return false;
+    if (!('fullName' in value)) return false;
+    if (!('count' in value)) return false;
+    if (!('percentageOfParent' in value)) return false;
+    return true;
 }
 
 export function SchemaAnalysisFieldFromJSON(json: any): SchemaAnalysisField {
@@ -82,35 +80,32 @@ export function SchemaAnalysisFieldFromJSON(json: any): SchemaAnalysisField {
 }
 
 export function SchemaAnalysisFieldFromJSONTyped(json: any, ignoreDiscriminator: boolean): SchemaAnalysisField {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
         'name': json['name'],
         'fullName': json['fullName'],
-        'fieldTypes': !exists(json, 'fieldTypes') ? undefined : ((json['fieldTypes'] as Array<any>).map(SchemaAnalysisFieldTypeFromJSON)),
+        'fieldTypes': json['fieldTypes'] == null ? undefined : ((json['fieldTypes'] as Array<any>).map(SchemaAnalysisFieldTypeFromJSON)),
         'count': json['count'],
         'percentageOfParent': json['percentageOfParent'],
-        'subFields': !exists(json, 'subFields') ? undefined : ((json['subFields'] as Array<any>).map(SchemaAnalysisFieldFromJSON)),
+        'subFields': json['subFields'] == null ? undefined : ((json['subFields'] as Array<any>).map(SchemaAnalysisFieldFromJSON)),
     };
 }
 
 export function SchemaAnalysisFieldToJSON(value?: SchemaAnalysisField | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'name': value.name,
-        'fullName': value.fullName,
-        'fieldTypes': value.fieldTypes === undefined ? undefined : ((value.fieldTypes as Array<any>).map(SchemaAnalysisFieldTypeToJSON)),
-        'count': value.count,
-        'percentageOfParent': value.percentageOfParent,
-        'subFields': value.subFields === undefined ? undefined : ((value.subFields as Array<any>).map(SchemaAnalysisFieldToJSON)),
+        'name': value['name'],
+        'fullName': value['fullName'],
+        'fieldTypes': value['fieldTypes'] == null ? undefined : ((value['fieldTypes'] as Array<any>).map(SchemaAnalysisFieldTypeToJSON)),
+        'count': value['count'],
+        'percentageOfParent': value['percentageOfParent'],
+        'subFields': value['subFields'] == null ? undefined : ((value['subFields'] as Array<any>).map(SchemaAnalysisFieldToJSON)),
     };
 }
 

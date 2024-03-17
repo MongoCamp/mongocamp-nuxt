@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -43,12 +43,10 @@ export interface Version {
  * Check if a given object implements the Version interface.
  */
 export function instanceOfVersion(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "version" in value;
-    isInstance = isInstance && "builtAt" in value;
-
-    return isInstance;
+    if (!('name' in value)) return false;
+    if (!('version' in value)) return false;
+    if (!('builtAt' in value)) return false;
+    return true;
 }
 
 export function VersionFromJSON(json: any): Version {
@@ -56,7 +54,7 @@ export function VersionFromJSON(json: any): Version {
 }
 
 export function VersionFromJSONTyped(json: any, ignoreDiscriminator: boolean): Version {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -68,17 +66,14 @@ export function VersionFromJSONTyped(json: any, ignoreDiscriminator: boolean): V
 }
 
 export function VersionToJSON(value?: Version | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'name': value.name,
-        'version': value.version,
-        'builtAt': (value.builtAt.toISOString()),
+        'name': value['name'],
+        'version': value['version'],
+        'builtAt': ((value['builtAt']).toISOString()),
     };
 }
 

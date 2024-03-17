@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,11 +37,9 @@ export interface DeleteResponse {
  * Check if a given object implements the DeleteResponse interface.
  */
 export function instanceOfDeleteResponse(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "wasAcknowledged" in value;
-    isInstance = isInstance && "deletedCount" in value;
-
-    return isInstance;
+    if (!('wasAcknowledged' in value)) return false;
+    if (!('deletedCount' in value)) return false;
+    return true;
 }
 
 export function DeleteResponseFromJSON(json: any): DeleteResponse {
@@ -49,7 +47,7 @@ export function DeleteResponseFromJSON(json: any): DeleteResponse {
 }
 
 export function DeleteResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): DeleteResponse {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -60,16 +58,13 @@ export function DeleteResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
 }
 
 export function DeleteResponseToJSON(value?: DeleteResponse | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'wasAcknowledged': value.wasAcknowledged,
-        'deletedCount': value.deletedCount,
+        'wasAcknowledged': value['wasAcknowledged'],
+        'deletedCount': value['deletedCount'],
     };
 }
 

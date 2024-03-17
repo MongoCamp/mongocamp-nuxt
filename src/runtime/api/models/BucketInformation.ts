@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -49,13 +49,11 @@ export interface BucketInformation {
  * Check if a given object implements the BucketInformation interface.
  */
 export function instanceOfBucketInformation(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "files" in value;
-    isInstance = isInstance && "size" in value;
-    isInstance = isInstance && "avgObjectSize" in value;
-
-    return isInstance;
+    if (!('name' in value)) return false;
+    if (!('files' in value)) return false;
+    if (!('size' in value)) return false;
+    if (!('avgObjectSize' in value)) return false;
+    return true;
 }
 
 export function BucketInformationFromJSON(json: any): BucketInformation {
@@ -63,7 +61,7 @@ export function BucketInformationFromJSON(json: any): BucketInformation {
 }
 
 export function BucketInformationFromJSONTyped(json: any, ignoreDiscriminator: boolean): BucketInformation {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -76,18 +74,15 @@ export function BucketInformationFromJSONTyped(json: any, ignoreDiscriminator: b
 }
 
 export function BucketInformationToJSON(value?: BucketInformation | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'name': value.name,
-        'files': value.files,
-        'size': value.size,
-        'avgObjectSize': value.avgObjectSize,
+        'name': value['name'],
+        'files': value['files'],
+        'size': value['size'],
+        'avgObjectSize': value['avgObjectSize'],
     };
 }
 

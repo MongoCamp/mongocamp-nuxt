@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -24,24 +24,22 @@ export interface UpdateRequest {
      * @type {{ [key: string]: string; }}
      * @memberof UpdateRequest
      */
-    document: { [key: string]: string; } | null;
+    document: { [key: string]: string; };
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof UpdateRequest
      */
-    filter: { [key: string]: string; } | null;
+    filter: { [key: string]: string; };
 }
 
 /**
  * Check if a given object implements the UpdateRequest interface.
  */
 export function instanceOfUpdateRequest(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "document" in value;
-    isInstance = isInstance && "filter" in value;
-
-    return isInstance;
+    if (!('document' in value)) return false;
+    if (!('filter' in value)) return false;
+    return true;
 }
 
 export function UpdateRequestFromJSON(json: any): UpdateRequest {
@@ -49,7 +47,7 @@ export function UpdateRequestFromJSON(json: any): UpdateRequest {
 }
 
 export function UpdateRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateRequest {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -60,16 +58,13 @@ export function UpdateRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
 }
 
 export function UpdateRequestToJSON(value?: UpdateRequest | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'document': value.document,
-        'filter': value.filter,
+        'document': value['document'],
+        'filter': value['filter'],
     };
 }
 

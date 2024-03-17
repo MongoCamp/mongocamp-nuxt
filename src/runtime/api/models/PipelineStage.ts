@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,11 +37,9 @@ export interface PipelineStage {
  * Check if a given object implements the PipelineStage interface.
  */
 export function instanceOfPipelineStage(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "stage" in value;
-    isInstance = isInstance && "value" in value;
-
-    return isInstance;
+    if (!('stage' in value)) return false;
+    if (!('value' in value)) return false;
+    return true;
 }
 
 export function PipelineStageFromJSON(json: any): PipelineStage {
@@ -49,7 +47,7 @@ export function PipelineStageFromJSON(json: any): PipelineStage {
 }
 
 export function PipelineStageFromJSONTyped(json: any, ignoreDiscriminator: boolean): PipelineStage {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -60,16 +58,13 @@ export function PipelineStageFromJSONTyped(json: any, ignoreDiscriminator: boole
 }
 
 export function PipelineStageToJSON(value?: PipelineStage | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'stage': value.stage,
-        'value': value.value,
+        'stage': value['stage'],
+        'value': value['value'],
     };
 }
 

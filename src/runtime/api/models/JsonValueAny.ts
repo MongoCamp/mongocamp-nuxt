@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -31,10 +31,8 @@ export interface JsonValueAny {
  * Check if a given object implements the JsonValueAny interface.
  */
 export function instanceOfJsonValueAny(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "value" in value;
-
-    return isInstance;
+    if (!('value' in value)) return false;
+    return true;
 }
 
 export function JsonValueAnyFromJSON(json: any): JsonValueAny {
@@ -42,7 +40,7 @@ export function JsonValueAnyFromJSON(json: any): JsonValueAny {
 }
 
 export function JsonValueAnyFromJSONTyped(json: any, ignoreDiscriminator: boolean): JsonValueAny {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -52,15 +50,12 @@ export function JsonValueAnyFromJSONTyped(json: any, ignoreDiscriminator: boolea
 }
 
 export function JsonValueAnyToJSON(value?: JsonValueAny | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'value': value.value,
+        'value': value['value'],
     };
 }
 

@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { Grant } from './Grant';
 import {
     GrantFromJSON,
@@ -44,10 +44,8 @@ export interface UpdateRoleRequest {
  * Check if a given object implements the UpdateRoleRequest interface.
  */
 export function instanceOfUpdateRoleRequest(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "isAdmin" in value;
-
-    return isInstance;
+    if (!('isAdmin' in value)) return false;
+    return true;
 }
 
 export function UpdateRoleRequestFromJSON(json: any): UpdateRoleRequest {
@@ -55,27 +53,24 @@ export function UpdateRoleRequestFromJSON(json: any): UpdateRoleRequest {
 }
 
 export function UpdateRoleRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateRoleRequest {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
         'isAdmin': json['isAdmin'],
-        'collectionGrants': !exists(json, 'collectionGrants') ? undefined : ((json['collectionGrants'] as Array<any>).map(GrantFromJSON)),
+        'collectionGrants': json['collectionGrants'] == null ? undefined : ((json['collectionGrants'] as Array<any>).map(GrantFromJSON)),
     };
 }
 
 export function UpdateRoleRequestToJSON(value?: UpdateRoleRequest | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        'isAdmin': value.isAdmin,
-        'collectionGrants': value.collectionGrants === undefined ? undefined : ((value.collectionGrants as Array<any>).map(GrantToJSON)),
+        'isAdmin': value['isAdmin'],
+        'collectionGrants': value['collectionGrants'] == null ? undefined : ((value['collectionGrants'] as Array<any>).map(GrantToJSON)),
     };
 }
 

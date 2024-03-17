@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -54,22 +54,20 @@ export interface FileInformation {
      * @type {{ [key: string]: string; }}
      * @memberof FileInformation
      */
-    metadata: { [key: string]: string; } | null;
+    metadata: { [key: string]: string; };
 }
 
 /**
  * Check if a given object implements the FileInformation interface.
  */
 export function instanceOfFileInformation(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "filename" in value;
-    isInstance = isInstance && "length" in value;
-    isInstance = isInstance && "chunkSize" in value;
-    isInstance = isInstance && "uploadDate" in value;
-    isInstance = isInstance && "metadata" in value;
-
-    return isInstance;
+    if (!('id' in value)) return false;
+    if (!('filename' in value)) return false;
+    if (!('length' in value)) return false;
+    if (!('chunkSize' in value)) return false;
+    if (!('uploadDate' in value)) return false;
+    if (!('metadata' in value)) return false;
+    return true;
 }
 
 export function FileInformationFromJSON(json: any): FileInformation {
@@ -77,7 +75,7 @@ export function FileInformationFromJSON(json: any): FileInformation {
 }
 
 export function FileInformationFromJSONTyped(json: any, ignoreDiscriminator: boolean): FileInformation {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -92,20 +90,17 @@ export function FileInformationFromJSONTyped(json: any, ignoreDiscriminator: boo
 }
 
 export function FileInformationToJSON(value?: FileInformation | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
+    if (value == null) {
+        return value;
     }
     return {
         
-        '_id': value.id,
-        'filename': value.filename,
-        'length': value.length,
-        'chunkSize': value.chunkSize,
-        'uploadDate': (value.uploadDate.toISOString()),
-        'metadata': value.metadata,
+        '_id': value['id'],
+        'filename': value['filename'],
+        'length': value['length'],
+        'chunkSize': value['chunkSize'],
+        'uploadDate': ((value['uploadDate']).toISOString()),
+        'metadata': value['metadata'],
     };
 }
 
