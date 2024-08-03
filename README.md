@@ -8,7 +8,7 @@
 
 Install node:
 
-**Latest node LTS version required (16)**
+**Latest node LTS version required (20)**
 Use node manager like **nvm** to install.
 
 Install pnpm:

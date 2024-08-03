@@ -16,32 +16,29 @@ const { data: adminRole, refresh: reloadRole } = await useLazyAsyncData('adminRo
 
 const config = useRuntimeConfig()
 
-async function actionLogin () {
+async function actionLogin() {
   try {
     await login(config.public.MONGOCAMP_ADMIN_USER, config.public.MONGOCAMP_ADMIN_PASSWORD)
-  } catch (e) {
+  }
+  catch (e) {
     consola.error(e)
   }
 }
 
 onMounted(() => {
   reloadVersion()
-}
+},
 )
 
-function actionReload () {
+function actionReload() {
   reloadRoles()
   reloadRole()
 }
 
-function actionLogout () {
+function actionLogout() {
   logout()
 }
-
-
-
 </script>
-
 
 <template>
   <div>
