@@ -42,10 +42,10 @@ export interface Version {
 /**
  * Check if a given object implements the Version interface.
  */
-export function instanceOfVersion(value: object): boolean {
-    if (!('name' in value)) return false;
-    if (!('version' in value)) return false;
-    if (!('builtAt' in value)) return false;
+export function instanceOfVersion(value: object): value is Version {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('version' in value) || value['version'] === undefined) return false;
+    if (!('builtAt' in value) || value['builtAt'] === undefined) return false;
     return true;
 }
 

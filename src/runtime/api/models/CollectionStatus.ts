@@ -102,20 +102,20 @@ export interface CollectionStatus {
 /**
  * Check if a given object implements the CollectionStatus interface.
  */
-export function instanceOfCollectionStatus(value: object): boolean {
-    if (!('ns' in value)) return false;
-    if (!('collectionType' in value)) return false;
-    if (!('scaleFactor' in value)) return false;
-    if (!('size' in value)) return false;
-    if (!('count' in value)) return false;
-    if (!('storageSize' in value)) return false;
-    if (!('avgObjSize' in value)) return false;
-    if (!('nindexes' in value)) return false;
-    if (!('indexSizes' in value)) return false;
-    if (!('totalIndexSize' in value)) return false;
-    if (!('ok' in value)) return false;
-    if (!('fetched' in value)) return false;
-    if (!('map' in value)) return false;
+export function instanceOfCollectionStatus(value: object): value is CollectionStatus {
+    if (!('ns' in value) || value['ns'] === undefined) return false;
+    if (!('collectionType' in value) || value['collectionType'] === undefined) return false;
+    if (!('scaleFactor' in value) || value['scaleFactor'] === undefined) return false;
+    if (!('size' in value) || value['size'] === undefined) return false;
+    if (!('count' in value) || value['count'] === undefined) return false;
+    if (!('storageSize' in value) || value['storageSize'] === undefined) return false;
+    if (!('avgObjSize' in value) || value['avgObjSize'] === undefined) return false;
+    if (!('nindexes' in value) || value['nindexes'] === undefined) return false;
+    if (!('indexSizes' in value) || value['indexSizes'] === undefined) return false;
+    if (!('totalIndexSize' in value) || value['totalIndexSize'] === undefined) return false;
+    if (!('ok' in value) || value['ok'] === undefined) return false;
+    if (!('fetched' in value) || value['fetched'] === undefined) return false;
+    if (!('map' in value) || value['map'] === undefined) return false;
     return true;
 }
 

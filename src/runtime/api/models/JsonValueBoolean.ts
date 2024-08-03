@@ -30,8 +30,8 @@ export interface JsonValueBoolean {
 /**
  * Check if a given object implements the JsonValueBoolean interface.
  */
-export function instanceOfJsonValueBoolean(value: object): boolean {
-    if (!('value' in value)) return false;
+export function instanceOfJsonValueBoolean(value: object): value is JsonValueBoolean {
+    if (!('value' in value) || value['value'] === undefined) return false;
     return true;
 }
 

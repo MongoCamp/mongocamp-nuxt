@@ -36,7 +36,7 @@ export interface UpdateFileInformationRequest {
 /**
  * Check if a given object implements the UpdateFileInformationRequest interface.
  */
-export function instanceOfUpdateFileInformationRequest(value: object): boolean {
+export function instanceOfUpdateFileInformationRequest(value: object): value is UpdateFileInformationRequest {
     return true;
 }
 

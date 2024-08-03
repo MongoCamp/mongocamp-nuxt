@@ -48,9 +48,9 @@ export interface UserInformation {
 /**
  * Check if a given object implements the UserInformation interface.
  */
-export function instanceOfUserInformation(value: object): boolean {
-    if (!('userId' in value)) return false;
-    if (!('password' in value)) return false;
+export function instanceOfUserInformation(value: object): value is UserInformation {
+    if (!('userId' in value) || value['userId'] === undefined) return false;
+    if (!('password' in value) || value['password'] === undefined) return false;
     return true;
 }
 

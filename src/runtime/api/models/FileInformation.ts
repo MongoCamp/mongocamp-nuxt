@@ -60,13 +60,13 @@ export interface FileInformation {
 /**
  * Check if a given object implements the FileInformation interface.
  */
-export function instanceOfFileInformation(value: object): boolean {
-    if (!('id' in value)) return false;
-    if (!('filename' in value)) return false;
-    if (!('length' in value)) return false;
-    if (!('chunkSize' in value)) return false;
-    if (!('uploadDate' in value)) return false;
-    if (!('metadata' in value)) return false;
+export function instanceOfFileInformation(value: object): value is FileInformation {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('filename' in value) || value['filename'] === undefined) return false;
+    if (!('length' in value) || value['length'] === undefined) return false;
+    if (!('chunkSize' in value) || value['chunkSize'] === undefined) return false;
+    if (!('uploadDate' in value) || value['uploadDate'] === undefined) return false;
+    if (!('metadata' in value) || value['metadata'] === undefined) return false;
     return true;
 }
 

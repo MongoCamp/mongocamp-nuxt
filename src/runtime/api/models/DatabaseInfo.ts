@@ -54,12 +54,12 @@ export interface DatabaseInfo {
 /**
  * Check if a given object implements the DatabaseInfo interface.
  */
-export function instanceOfDatabaseInfo(value: object): boolean {
-    if (!('name' in value)) return false;
-    if (!('sizeOnDisk' in value)) return false;
-    if (!('empty' in value)) return false;
-    if (!('fetched' in value)) return false;
-    if (!('map' in value)) return false;
+export function instanceOfDatabaseInfo(value: object): value is DatabaseInfo {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('sizeOnDisk' in value) || value['sizeOnDisk'] === undefined) return false;
+    if (!('empty' in value) || value['empty'] === undefined) return false;
+    if (!('fetched' in value) || value['fetched'] === undefined) return false;
+    if (!('map' in value) || value['map'] === undefined) return false;
     return true;
 }
 

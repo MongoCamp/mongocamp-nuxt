@@ -54,11 +54,11 @@ export interface JsonSchemaDefinition {
 /**
  * Check if a given object implements the JsonSchemaDefinition interface.
  */
-export function instanceOfJsonSchemaDefinition(value: object): boolean {
-    if (!('type' in value)) return false;
-    if (!('title' in value)) return false;
-    if (!('additionalProperties' in value)) return false;
-    if (!('properties' in value)) return false;
+export function instanceOfJsonSchemaDefinition(value: object): value is JsonSchemaDefinition {
+    if (!('type' in value) || value['type'] === undefined) return false;
+    if (!('title' in value) || value['title'] === undefined) return false;
+    if (!('additionalProperties' in value) || value['additionalProperties'] === undefined) return false;
+    if (!('properties' in value) || value['properties'] === undefined) return false;
     return true;
 }
 

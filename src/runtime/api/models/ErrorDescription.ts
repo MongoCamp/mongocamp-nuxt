@@ -42,10 +42,10 @@ export interface ErrorDescription {
 /**
  * Check if a given object implements the ErrorDescription interface.
  */
-export function instanceOfErrorDescription(value: object): boolean {
-    if (!('code' in value)) return false;
-    if (!('msg' in value)) return false;
-    if (!('additionalInfo' in value)) return false;
+export function instanceOfErrorDescription(value: object): value is ErrorDescription {
+    if (!('code' in value) || value['code'] === undefined) return false;
+    if (!('msg' in value) || value['msg'] === undefined) return false;
+    if (!('additionalInfo' in value) || value['additionalInfo'] === undefined) return false;
     return true;
 }
 

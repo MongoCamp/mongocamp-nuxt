@@ -72,7 +72,7 @@ export interface IndexOptionsRequest {
 /**
  * Check if a given object implements the IndexOptionsRequest interface.
  */
-export function instanceOfIndexOptionsRequest(value: object): boolean {
+export function instanceOfIndexOptionsRequest(value: object): value is IndexOptionsRequest {
     return true;
 }
 

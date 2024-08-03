@@ -48,10 +48,10 @@ export interface UpdateResponse {
 /**
  * Check if a given object implements the UpdateResponse interface.
  */
-export function instanceOfUpdateResponse(value: object): boolean {
-    if (!('wasAcknowledged' in value)) return false;
-    if (!('modifiedCount' in value)) return false;
-    if (!('matchedCount' in value)) return false;
+export function instanceOfUpdateResponse(value: object): value is UpdateResponse {
+    if (!('wasAcknowledged' in value) || value['wasAcknowledged'] === undefined) return false;
+    if (!('modifiedCount' in value) || value['modifiedCount'] === undefined) return false;
+    if (!('matchedCount' in value) || value['matchedCount'] === undefined) return false;
     return true;
 }
 

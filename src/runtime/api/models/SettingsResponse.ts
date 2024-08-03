@@ -48,8 +48,8 @@ export interface SettingsResponse {
 /**
  * Check if a given object implements the SettingsResponse interface.
  */
-export function instanceOfSettingsResponse(value: object): boolean {
-    if (!('configurations' in value)) return false;
+export function instanceOfSettingsResponse(value: object): value is SettingsResponse {
+    if (!('configurations' in value) || value['configurations'] === undefined) return false;
     return true;
 }
 

@@ -54,12 +54,12 @@ export interface Grant {
 /**
  * Check if a given object implements the Grant interface.
  */
-export function instanceOfGrant(value: object): boolean {
-    if (!('name' in value)) return false;
-    if (!('read' in value)) return false;
-    if (!('write' in value)) return false;
-    if (!('administrate' in value)) return false;
-    if (!('grantType' in value)) return false;
+export function instanceOfGrant(value: object): value is Grant {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('read' in value) || value['read'] === undefined) return false;
+    if (!('write' in value) || value['write'] === undefined) return false;
+    if (!('administrate' in value) || value['administrate'] === undefined) return false;
+    if (!('grantType' in value) || value['grantType'] === undefined) return false;
     return true;
 }
 

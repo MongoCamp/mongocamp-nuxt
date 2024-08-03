@@ -48,11 +48,11 @@ export interface BucketInformation {
 /**
  * Check if a given object implements the BucketInformation interface.
  */
-export function instanceOfBucketInformation(value: object): boolean {
-    if (!('name' in value)) return false;
-    if (!('files' in value)) return false;
-    if (!('size' in value)) return false;
-    if (!('avgObjectSize' in value)) return false;
+export function instanceOfBucketInformation(value: object): value is BucketInformation {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('files' in value) || value['files'] === undefined) return false;
+    if (!('size' in value) || value['size'] === undefined) return false;
+    if (!('avgObjectSize' in value) || value['avgObjectSize'] === undefined) return false;
     return true;
 }
 

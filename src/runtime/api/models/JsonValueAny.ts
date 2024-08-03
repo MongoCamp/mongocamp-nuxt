@@ -30,8 +30,8 @@ export interface JsonValueAny {
 /**
  * Check if a given object implements the JsonValueAny interface.
  */
-export function instanceOfJsonValueAny(value: object): boolean {
-    if (!('value' in value)) return false;
+export function instanceOfJsonValueAny(value: object): value is JsonValueAny {
+    if (!('value' in value) || value['value'] === undefined) return false;
     return true;
 }
 

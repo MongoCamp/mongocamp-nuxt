@@ -55,10 +55,10 @@ export interface SchemaAnalysis {
 /**
  * Check if a given object implements the SchemaAnalysis interface.
  */
-export function instanceOfSchemaAnalysis(value: object): boolean {
-    if (!('count' in value)) return false;
-    if (!('sample' in value)) return false;
-    if (!('percentageOfAnalysed' in value)) return false;
+export function instanceOfSchemaAnalysis(value: object): value is SchemaAnalysis {
+    if (!('count' in value) || value['count'] === undefined) return false;
+    if (!('sample' in value) || value['sample'] === undefined) return false;
+    if (!('percentageOfAnalysed' in value) || value['percentageOfAnalysed'] === undefined) return false;
     return true;
 }
 

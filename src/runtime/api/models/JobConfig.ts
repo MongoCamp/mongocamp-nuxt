@@ -60,13 +60,13 @@ export interface JobConfig {
 /**
  * Check if a given object implements the JobConfig interface.
  */
-export function instanceOfJobConfig(value: object): boolean {
-    if (!('name' in value)) return false;
-    if (!('className' in value)) return false;
-    if (!('description' in value)) return false;
-    if (!('cronExpression' in value)) return false;
-    if (!('group' in value)) return false;
-    if (!('priority' in value)) return false;
+export function instanceOfJobConfig(value: object): value is JobConfig {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('className' in value) || value['className'] === undefined) return false;
+    if (!('description' in value) || value['description'] === undefined) return false;
+    if (!('cronExpression' in value) || value['cronExpression'] === undefined) return false;
+    if (!('group' in value) || value['group'] === undefined) return false;
+    if (!('priority' in value) || value['priority'] === undefined) return false;
     return true;
 }
 

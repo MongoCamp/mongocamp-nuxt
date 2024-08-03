@@ -43,8 +43,8 @@ export interface MongoAggregateRequest {
 /**
  * Check if a given object implements the MongoAggregateRequest interface.
  */
-export function instanceOfMongoAggregateRequest(value: object): boolean {
-    if (!('allowDiskUse' in value)) return false;
+export function instanceOfMongoAggregateRequest(value: object): value is MongoAggregateRequest {
+    if (!('allowDiskUse' in value) || value['allowDiskUse'] === undefined) return false;
     return true;
 }
 

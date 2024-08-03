@@ -42,10 +42,10 @@ export interface MongoFindRequest {
 /**
  * Check if a given object implements the MongoFindRequest interface.
  */
-export function instanceOfMongoFindRequest(value: object): boolean {
-    if (!('filter' in value)) return false;
-    if (!('sort' in value)) return false;
-    if (!('projection' in value)) return false;
+export function instanceOfMongoFindRequest(value: object): value is MongoFindRequest {
+    if (!('filter' in value) || value['filter'] === undefined) return false;
+    if (!('sort' in value) || value['sort'] === undefined) return false;
+    if (!('projection' in value) || value['projection'] === undefined) return false;
     return true;
 }
 

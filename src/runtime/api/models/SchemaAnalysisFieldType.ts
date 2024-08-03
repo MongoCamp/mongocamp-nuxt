@@ -42,10 +42,10 @@ export interface SchemaAnalysisFieldType {
 /**
  * Check if a given object implements the SchemaAnalysisFieldType interface.
  */
-export function instanceOfSchemaAnalysisFieldType(value: object): boolean {
-    if (!('fieldType' in value)) return false;
-    if (!('count' in value)) return false;
-    if (!('percentageOfParent' in value)) return false;
+export function instanceOfSchemaAnalysisFieldType(value: object): value is SchemaAnalysisFieldType {
+    if (!('fieldType' in value) || value['fieldType'] === undefined) return false;
+    if (!('count' in value) || value['count'] === undefined) return false;
+    if (!('percentageOfParent' in value) || value['percentageOfParent'] === undefined) return false;
     return true;
 }
 

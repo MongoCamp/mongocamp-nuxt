@@ -36,8 +36,8 @@ export interface InsertResponse {
 /**
  * Check if a given object implements the InsertResponse interface.
  */
-export function instanceOfInsertResponse(value: object): boolean {
-    if (!('wasAcknowledged' in value)) return false;
+export function instanceOfInsertResponse(value: object): value is InsertResponse {
+    if (!('wasAcknowledged' in value) || value['wasAcknowledged'] === undefined) return false;
     return true;
 }
 

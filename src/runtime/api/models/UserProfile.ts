@@ -61,9 +61,9 @@ export interface UserProfile {
 /**
  * Check if a given object implements the UserProfile interface.
  */
-export function instanceOfUserProfile(value: object): boolean {
-    if (!('user' in value)) return false;
-    if (!('isAdmin' in value)) return false;
+export function instanceOfUserProfile(value: object): value is UserProfile {
+    if (!('user' in value) || value['user'] === undefined) return false;
+    if (!('isAdmin' in value) || value['isAdmin'] === undefined) return false;
     return true;
 }
 

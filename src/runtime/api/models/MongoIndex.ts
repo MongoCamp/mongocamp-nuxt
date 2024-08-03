@@ -96,18 +96,18 @@ export interface MongoIndex {
 /**
  * Check if a given object implements the MongoIndex interface.
  */
-export function instanceOfMongoIndex(value: object): boolean {
-    if (!('name' in value)) return false;
-    if (!('unique' in value)) return false;
-    if (!('version' in value)) return false;
-    if (!('namespace' in value)) return false;
-    if (!('keys' in value)) return false;
-    if (!('weights' in value)) return false;
-    if (!('expire' in value)) return false;
-    if (!('expireAfterSeconds' in value)) return false;
-    if (!('text' in value)) return false;
-    if (!('fetched' in value)) return false;
-    if (!('map' in value)) return false;
+export function instanceOfMongoIndex(value: object): value is MongoIndex {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('unique' in value) || value['unique'] === undefined) return false;
+    if (!('version' in value) || value['version'] === undefined) return false;
+    if (!('namespace' in value) || value['namespace'] === undefined) return false;
+    if (!('keys' in value) || value['keys'] === undefined) return false;
+    if (!('weights' in value) || value['weights'] === undefined) return false;
+    if (!('expire' in value) || value['expire'] === undefined) return false;
+    if (!('expireAfterSeconds' in value) || value['expireAfterSeconds'] === undefined) return false;
+    if (!('text' in value) || value['text'] === undefined) return false;
+    if (!('fetched' in value) || value['fetched'] === undefined) return false;
+    if (!('map' in value) || value['map'] === undefined) return false;
     return true;
 }
 

@@ -30,8 +30,8 @@ export interface IndexCreateResponse {
 /**
  * Check if a given object implements the IndexCreateResponse interface.
  */
-export function instanceOfIndexCreateResponse(value: object): boolean {
-    if (!('name' in value)) return false;
+export function instanceOfIndexCreateResponse(value: object): value is IndexCreateResponse {
+    if (!('name' in value) || value['name'] === undefined) return false;
     return true;
 }
 

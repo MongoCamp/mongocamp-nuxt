@@ -67,11 +67,11 @@ export interface SchemaAnalysisField {
 /**
  * Check if a given object implements the SchemaAnalysisField interface.
  */
-export function instanceOfSchemaAnalysisField(value: object): boolean {
-    if (!('name' in value)) return false;
-    if (!('fullName' in value)) return false;
-    if (!('count' in value)) return false;
-    if (!('percentageOfParent' in value)) return false;
+export function instanceOfSchemaAnalysisField(value: object): value is SchemaAnalysisField {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('fullName' in value) || value['fullName'] === undefined) return false;
+    if (!('count' in value) || value['count'] === undefined) return false;
+    if (!('percentageOfParent' in value) || value['percentageOfParent'] === undefined) return false;
     return true;
 }
 

@@ -49,10 +49,10 @@ export interface JsonSchema {
 /**
  * Check if a given object implements the JsonSchema interface.
  */
-export function instanceOfJsonSchema(value: object): boolean {
-    if (!('$schema' in value)) return false;
-    if (!('$ref' in value)) return false;
-    if (!('definitions' in value)) return false;
+export function instanceOfJsonSchema(value: object): value is JsonSchema {
+    if (!('$schema' in value) || value['$schema'] === undefined) return false;
+    if (!('$ref' in value) || value['$ref'] === undefined) return false;
+    if (!('definitions' in value) || value['definitions'] === undefined) return false;
     return true;
 }
 
@@ -68,7 +68,7 @@ export function JsonSchemaFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         
         '$schema': json['$schema'],
         '$ref': json['$ref'],
-        'definitions': json['definitions'],
+        'definitions': (mapValues(json['definitions'], JsonSchemaDefinitionFromJSON)),
     };
 }
 
@@ -80,7 +80,7 @@ export function JsonSchemaToJSON(value?: JsonSchema | null): any {
         
         '$schema': value['$schema'],
         '$ref': value['$ref'],
-        'definitions': value['definitions'],
+        'definitions': (mapValues(value['definitions'], JsonSchemaDefinitionToJSON)),
     };
 }
 

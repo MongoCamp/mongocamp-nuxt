@@ -54,12 +54,12 @@ export interface MongoCampConfiguration {
 /**
  * Check if a given object implements the MongoCampConfiguration interface.
  */
-export function instanceOfMongoCampConfiguration(value: object): boolean {
-    if (!('key' in value)) return false;
-    if (!('value' in value)) return false;
-    if (!('configType' in value)) return false;
-    if (!('comment' in value)) return false;
-    if (!('needsRestartForActivation' in value)) return false;
+export function instanceOfMongoCampConfiguration(value: object): value is MongoCampConfiguration {
+    if (!('key' in value) || value['key'] === undefined) return false;
+    if (!('value' in value) || value['value'] === undefined) return false;
+    if (!('configType' in value) || value['configType'] === undefined) return false;
+    if (!('comment' in value) || value['comment'] === undefined) return false;
+    if (!('needsRestartForActivation' in value) || value['needsRestartForActivation'] === undefined) return false;
     return true;
 }
 

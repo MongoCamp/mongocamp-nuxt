@@ -43,8 +43,8 @@ export interface IndexCreateRequest {
 /**
  * Check if a given object implements the IndexCreateRequest interface.
  */
-export function instanceOfIndexCreateRequest(value: object): boolean {
-    if (!('keys' in value)) return false;
+export function instanceOfIndexCreateRequest(value: object): value is IndexCreateRequest {
+    if (!('keys' in value) || value['keys'] === undefined) return false;
     return true;
 }
 

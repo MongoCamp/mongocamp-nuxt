@@ -30,8 +30,8 @@ export interface JsonValueString {
 /**
  * Check if a given object implements the JsonValueString interface.
  */
-export function instanceOfJsonValueString(value: object): boolean {
-    if (!('value' in value)) return false;
+export function instanceOfJsonValueString(value: object): value is JsonValueString {
+    if (!('value' in value) || value['value'] === undefined) return false;
     return true;
 }
 

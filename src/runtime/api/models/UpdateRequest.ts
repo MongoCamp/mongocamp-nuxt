@@ -36,9 +36,9 @@ export interface UpdateRequest {
 /**
  * Check if a given object implements the UpdateRequest interface.
  */
-export function instanceOfUpdateRequest(value: object): boolean {
-    if (!('document' in value)) return false;
-    if (!('filter' in value)) return false;
+export function instanceOfUpdateRequest(value: object): value is UpdateRequest {
+    if (!('document' in value) || value['document'] === undefined) return false;
+    if (!('filter' in value) || value['filter'] === undefined) return false;
     return true;
 }
 

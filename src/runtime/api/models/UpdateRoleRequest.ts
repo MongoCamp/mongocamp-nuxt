@@ -43,8 +43,8 @@ export interface UpdateRoleRequest {
 /**
  * Check if a given object implements the UpdateRoleRequest interface.
  */
-export function instanceOfUpdateRoleRequest(value: object): boolean {
-    if (!('isAdmin' in value)) return false;
+export function instanceOfUpdateRoleRequest(value: object): value is UpdateRoleRequest {
+    if (!('isAdmin' in value) || value['isAdmin'] === undefined) return false;
     return true;
 }
 

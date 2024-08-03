@@ -49,10 +49,10 @@ export interface LoginResult {
 /**
  * Check if a given object implements the LoginResult interface.
  */
-export function instanceOfLoginResult(value: object): boolean {
-    if (!('authToken' in value)) return false;
-    if (!('userProfile' in value)) return false;
-    if (!('expirationDate' in value)) return false;
+export function instanceOfLoginResult(value: object): value is LoginResult {
+    if (!('authToken' in value) || value['authToken'] === undefined) return false;
+    if (!('userProfile' in value) || value['userProfile'] === undefined) return false;
+    if (!('expirationDate' in value) || value['expirationDate'] === undefined) return false;
     return true;
 }
 

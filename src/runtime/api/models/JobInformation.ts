@@ -78,13 +78,13 @@ export interface JobInformation {
 /**
  * Check if a given object implements the JobInformation interface.
  */
-export function instanceOfJobInformation(value: object): boolean {
-    if (!('name' in value)) return false;
-    if (!('group' in value)) return false;
-    if (!('jobClassName' in value)) return false;
-    if (!('description' in value)) return false;
-    if (!('cronExpression' in value)) return false;
-    if (!('priority' in value)) return false;
+export function instanceOfJobInformation(value: object): value is JobInformation {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('group' in value) || value['group'] === undefined) return false;
+    if (!('jobClassName' in value) || value['jobClassName'] === undefined) return false;
+    if (!('description' in value) || value['description'] === undefined) return false;
+    if (!('cronExpression' in value) || value['cronExpression'] === undefined) return false;
+    if (!('priority' in value) || value['priority'] === undefined) return false;
     return true;
 }
 

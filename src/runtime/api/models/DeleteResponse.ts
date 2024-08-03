@@ -36,9 +36,9 @@ export interface DeleteResponse {
 /**
  * Check if a given object implements the DeleteResponse interface.
  */
-export function instanceOfDeleteResponse(value: object): boolean {
-    if (!('wasAcknowledged' in value)) return false;
-    if (!('deletedCount' in value)) return false;
+export function instanceOfDeleteResponse(value: object): value is DeleteResponse {
+    if (!('wasAcknowledged' in value) || value['wasAcknowledged'] === undefined) return false;
+    if (!('deletedCount' in value) || value['deletedCount'] === undefined) return false;
     return true;
 }
 

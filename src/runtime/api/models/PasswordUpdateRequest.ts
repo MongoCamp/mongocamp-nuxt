@@ -30,8 +30,8 @@ export interface PasswordUpdateRequest {
 /**
  * Check if a given object implements the PasswordUpdateRequest interface.
  */
-export function instanceOfPasswordUpdateRequest(value: object): boolean {
-    if (!('password' in value)) return false;
+export function instanceOfPasswordUpdateRequest(value: object): value is PasswordUpdateRequest {
+    if (!('password' in value) || value['password'] === undefined) return false;
     return true;
 }
 

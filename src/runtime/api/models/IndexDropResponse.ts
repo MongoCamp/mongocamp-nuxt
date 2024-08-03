@@ -30,8 +30,8 @@ export interface IndexDropResponse {
 /**
  * Check if a given object implements the IndexDropResponse interface.
  */
-export function instanceOfIndexDropResponse(value: object): boolean {
-    if (!('dropped' in value)) return false;
+export function instanceOfIndexDropResponse(value: object): value is IndexDropResponse {
+    if (!('dropped' in value) || value['dropped'] === undefined) return false;
     return true;
 }
 
