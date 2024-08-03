@@ -1,6 +1,21 @@
 # Changelog
 
 
+## v1.2.2
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.1...v1.2.2)
+
+### 🏡 Chore
+
+- **Deps:** Update Dependencies ([028dc56](https://github.com/MongoCamp/mongocamp-nuxt/commit/028dc56))
+- **REST:** Update to openapi generator 7.7..0 ([bdf1e4a](https://github.com/MongoCamp/mongocamp-nuxt/commit/bdf1e4a))
+- **linting:** Fix linting errors and update to latest nuxt eslint ([aeda35b](https://github.com/MongoCamp/mongocamp-nuxt/commit/aeda35b))
+- **Deps:** Update Dependencies ([876c7b5](https://github.com/MongoCamp/mongocamp-nuxt/commit/876c7b5))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](http://github.com/sfxcode))
+
 ## v1.2.1
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.0...v1.2.1)
