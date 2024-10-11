@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: mongocamp-library
-  version: 1.5.9
+  version: 1.5.10
 paths:
   /auth/login:
     post:
@@ -1296,8 +1296,8 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadForm'
-            example: 'Part(file,FileRange(/tmp/prefix7840090514016931836suffix,None),Map(filename
-              -> prefix7840090514016931836suffix),List(Content-Type: application/octet-stream))'
+            example: 'Part(file,FileRange(/tmp/prefix14723180015267959272suffix,None),Map(filename
+              -> prefix14723180015267959272suffix),List(Content-Type: application/octet-stream))'
         required: true
       responses:
         '200':
@@ -2771,6 +2771,65 @@ paths:
       - httpAuth: []
       - httpAuth1: []
       - apiKeyAuth: []
+  /system:
+    delete:
+      tags:
+      - Application
+      summary: Shutdown MongoCamp
+      description: Shutdown the running MongoCamp Application. CLI Mode will automatically
+        restart the Application.
+      operationId: shutdown
+      parameters:
+      - name: force
+        in: query
+        description: Shutdown Server and don`t send reboot event.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonValue_Boolean'
+        '400':
+          description: 'Invalid value for: query parameter force'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/databases:
     get:
       tags:
@@ -3174,7 +3233,7 @@ paths:
               key1: value
               key2: true
               key3:
-                creationDate: '2024-02-12T19:29:44.303Z'
+                creationDate: '2024-10-11T16:43:24.553Z'
         required: true
       responses:
         '200':
