@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.2.3
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.2...v1.2.3)
+
+### 🏡 Chore
+
+- **Deps:** Update Dependencies ([83dab42](https://github.com/MongoCamp/mongocamp-nuxt/commit/83dab42))
+- **REST:** Update to mongocamp API 1.5.10 ([62073a8](https://github.com/MongoCamp/mongocamp-nuxt/commit/62073a8))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](http://github.com/sfxcode))
+
 ## v1.2.2
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.1...v1.2.2)
