@@ -1,18 +1,12 @@
 import NuxtMongocamp from '..'
 
 export default defineNuxtConfig({
-  ssr: true,
 
   modules: [
     NuxtMongocamp,
     '@unocss/nuxt',
   ],
-
-  mongocamp: {
-    url: process.env.MONGOCAMP_URL,
-    refreshToken: false,
-    tokenRefreshIntervall: 10000,
-  },
+  ssr: true,
 
   runtimeConfig: {
     // Private config that is only available on the server
@@ -22,6 +16,14 @@ export default defineNuxtConfig({
       MONGOCAMP_ADMIN_USER: process.env.MONGOCAMP_ADMIN_USER,
       MONGOCAMP_ADMIN_PASSWORD: process.env.MONGOCAMP_ADMIN_PASSWORD,
     },
+  },
+
+  compatibilityDate: '2024-10-11',
+
+  mongocamp: {
+    url: process.env.MONGOCAMP_URL,
+    refreshToken: false,
+    tokenRefreshIntervall: 10000,
   },
 
   unocss: {
@@ -40,6 +42,4 @@ export default defineNuxtConfig({
       [/^btn-(.*)$/, ([, c]) => `bg-${c}-400 text-${c}-100 py-2 px-4 rounded-lg`],
     ],
   },
-
-  compatibilityDate: '2024-10-11',
 })
