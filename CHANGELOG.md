@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.2.5
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.4...v1.2.5)
+
+### 🏡 Chore
+
+- **dependencies:** Update to nuxt 3.16.2 ([fb40bdb](https://github.com/MongoCamp/mongocamp-nuxt/commit/fb40bdb))
+
+### 🤖 CI
+
+- **workflows:** Update ([8e3fcd2](https://github.com/MongoCamp/mongocamp-nuxt/commit/8e3fcd2))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.2.4
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.3...v1.2.4)
