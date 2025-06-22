@@ -49,11 +49,11 @@ export function PasswordUpdateRequestFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-  export function PasswordUpdateRequestToJSON(json: any): PasswordUpdateRequest {
-      return PasswordUpdateRequestToJSONTyped(json, false);
-  }
+export function PasswordUpdateRequestToJSON(json: any): PasswordUpdateRequest {
+    return PasswordUpdateRequestToJSONTyped(json, false);
+}
 
-  export function PasswordUpdateRequestToJSONTyped(value?: PasswordUpdateRequest | null, ignoreDiscriminator: boolean = false): any {
+export function PasswordUpdateRequestToJSONTyped(value?: PasswordUpdateRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

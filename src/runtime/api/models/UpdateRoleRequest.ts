@@ -64,11 +64,11 @@ export function UpdateRoleRequestFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-  export function UpdateRoleRequestToJSON(json: any): UpdateRoleRequest {
-      return UpdateRoleRequestToJSONTyped(json, false);
-  }
+export function UpdateRoleRequestToJSON(json: any): UpdateRoleRequest {
+    return UpdateRoleRequestToJSONTyped(json, false);
+}
 
-  export function UpdateRoleRequestToJSONTyped(value?: UpdateRoleRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UpdateRoleRequestToJSONTyped(value?: UpdateRoleRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

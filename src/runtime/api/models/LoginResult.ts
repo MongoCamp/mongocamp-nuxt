@@ -73,11 +73,11 @@ export function LoginResultFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-  export function LoginResultToJSON(json: any): LoginResult {
-      return LoginResultToJSONTyped(json, false);
-  }
+export function LoginResultToJSON(json: any): LoginResult {
+    return LoginResultToJSONTyped(json, false);
+}
 
-  export function LoginResultToJSONTyped(value?: LoginResult | null, ignoreDiscriminator: boolean = false): any {
+export function LoginResultToJSONTyped(value?: LoginResult | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

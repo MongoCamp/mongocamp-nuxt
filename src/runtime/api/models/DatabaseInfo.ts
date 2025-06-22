@@ -81,11 +81,11 @@ export function DatabaseInfoFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-  export function DatabaseInfoToJSON(json: any): DatabaseInfo {
-      return DatabaseInfoToJSONTyped(json, false);
-  }
+export function DatabaseInfoToJSON(json: any): DatabaseInfo {
+    return DatabaseInfoToJSONTyped(json, false);
+}
 
-  export function DatabaseInfoToJSONTyped(value?: DatabaseInfo | null, ignoreDiscriminator: boolean = false): any {
+export function DatabaseInfoToJSONTyped(value?: DatabaseInfo | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

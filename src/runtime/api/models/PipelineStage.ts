@@ -57,11 +57,11 @@ export function PipelineStageFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-  export function PipelineStageToJSON(json: any): PipelineStage {
-      return PipelineStageToJSONTyped(json, false);
-  }
+export function PipelineStageToJSON(json: any): PipelineStage {
+    return PipelineStageToJSONTyped(json, false);
+}
 
-  export function PipelineStageToJSONTyped(value?: PipelineStage | null, ignoreDiscriminator: boolean = false): any {
+export function PipelineStageToJSONTyped(value?: PipelineStage | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -89,11 +89,11 @@ export function JobConfigFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     };
 }
 
-  export function JobConfigToJSON(json: any): JobConfig {
-      return JobConfigToJSONTyped(json, false);
-  }
+export function JobConfigToJSON(json: any): JobConfig {
+    return JobConfigToJSONTyped(json, false);
+}
 
-  export function JobConfigToJSONTyped(value?: JobConfig | null, ignoreDiscriminator: boolean = false): any {
+export function JobConfigToJSONTyped(value?: JobConfig | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

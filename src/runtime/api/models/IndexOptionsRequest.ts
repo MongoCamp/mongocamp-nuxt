@@ -97,11 +97,11 @@ export function IndexOptionsRequestFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-  export function IndexOptionsRequestToJSON(json: any): IndexOptionsRequest {
-      return IndexOptionsRequestToJSONTyped(json, false);
-  }
+export function IndexOptionsRequestToJSON(json: any): IndexOptionsRequest {
+    return IndexOptionsRequestToJSONTyped(json, false);
+}
 
-  export function IndexOptionsRequestToJSONTyped(value?: IndexOptionsRequest | null, ignoreDiscriminator: boolean = false): any {
+export function IndexOptionsRequestToJSONTyped(value?: IndexOptionsRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

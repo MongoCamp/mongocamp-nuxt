@@ -49,11 +49,11 @@ export function IndexCreateResponseFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-  export function IndexCreateResponseToJSON(json: any): IndexCreateResponse {
-      return IndexCreateResponseToJSONTyped(json, false);
-  }
+export function IndexCreateResponseToJSON(json: any): IndexCreateResponse {
+    return IndexCreateResponseToJSONTyped(json, false);
+}
 
-  export function IndexCreateResponseToJSONTyped(value?: IndexCreateResponse | null, ignoreDiscriminator: boolean = false): any {
+export function IndexCreateResponseToJSONTyped(value?: IndexCreateResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

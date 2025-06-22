@@ -73,11 +73,11 @@ export function JsonSchemaFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     };
 }
 
-  export function JsonSchemaToJSON(json: any): JsonSchema {
-      return JsonSchemaToJSONTyped(json, false);
-  }
+export function JsonSchemaToJSON(json: any): JsonSchema {
+    return JsonSchemaToJSONTyped(json, false);
+}
 
-  export function JsonSchemaToJSONTyped(value?: JsonSchema | null, ignoreDiscriminator: boolean = false): any {
+export function JsonSchemaToJSONTyped(value?: JsonSchema | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

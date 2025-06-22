@@ -95,11 +95,11 @@ export function SchemaAnalysisFieldFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-  export function SchemaAnalysisFieldToJSON(json: any): SchemaAnalysisField {
-      return SchemaAnalysisFieldToJSONTyped(json, false);
-  }
+export function SchemaAnalysisFieldToJSON(json: any): SchemaAnalysisField {
+    return SchemaAnalysisFieldToJSONTyped(json, false);
+}
 
-  export function SchemaAnalysisFieldToJSONTyped(value?: SchemaAnalysisField | null, ignoreDiscriminator: boolean = false): any {
+export function SchemaAnalysisFieldToJSONTyped(value?: SchemaAnalysisField | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

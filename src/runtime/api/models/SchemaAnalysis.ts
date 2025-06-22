@@ -80,11 +80,11 @@ export function SchemaAnalysisFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-  export function SchemaAnalysisToJSON(json: any): SchemaAnalysis {
-      return SchemaAnalysisToJSONTyped(json, false);
-  }
+export function SchemaAnalysisToJSON(json: any): SchemaAnalysis {
+    return SchemaAnalysisToJSONTyped(json, false);
+}
 
-  export function SchemaAnalysisToJSONTyped(value?: SchemaAnalysis | null, ignoreDiscriminator: boolean = false): any {
+export function SchemaAnalysisToJSONTyped(value?: SchemaAnalysis | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

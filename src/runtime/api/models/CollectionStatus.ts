@@ -145,11 +145,11 @@ export function CollectionStatusFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function CollectionStatusToJSON(json: any): CollectionStatus {
-      return CollectionStatusToJSONTyped(json, false);
-  }
+export function CollectionStatusToJSON(json: any): CollectionStatus {
+    return CollectionStatusToJSONTyped(json, false);
+}
 
-  export function CollectionStatusToJSONTyped(value?: CollectionStatus | null, ignoreDiscriminator: boolean = false): any {
+export function CollectionStatusToJSONTyped(value?: CollectionStatus | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

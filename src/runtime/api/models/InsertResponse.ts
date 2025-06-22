@@ -56,11 +56,11 @@ export function InsertResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-  export function InsertResponseToJSON(json: any): InsertResponse {
-      return InsertResponseToJSONTyped(json, false);
-  }
+export function InsertResponseToJSON(json: any): InsertResponse {
+    return InsertResponseToJSONTyped(json, false);
+}
 
-  export function InsertResponseToJSONTyped(value?: InsertResponse | null, ignoreDiscriminator: boolean = false): any {
+export function InsertResponseToJSONTyped(value?: InsertResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

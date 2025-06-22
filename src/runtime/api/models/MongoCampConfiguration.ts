@@ -81,11 +81,11 @@ export function MongoCampConfigurationFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-  export function MongoCampConfigurationToJSON(json: any): MongoCampConfiguration {
-      return MongoCampConfigurationToJSONTyped(json, false);
-  }
+export function MongoCampConfigurationToJSON(json: any): MongoCampConfiguration {
+    return MongoCampConfigurationToJSONTyped(json, false);
+}
 
-  export function MongoCampConfigurationToJSONTyped(value?: MongoCampConfiguration | null, ignoreDiscriminator: boolean = false): any {
+export function MongoCampConfigurationToJSONTyped(value?: MongoCampConfiguration | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

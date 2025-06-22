@@ -70,11 +70,11 @@ export function SettingsResponseFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function SettingsResponseToJSON(json: any): SettingsResponse {
-      return SettingsResponseToJSONTyped(json, false);
-  }
+export function SettingsResponseToJSON(json: any): SettingsResponse {
+    return SettingsResponseToJSONTyped(json, false);
+}
 
-  export function SettingsResponseToJSONTyped(value?: SettingsResponse | null, ignoreDiscriminator: boolean = false): any {
+export function SettingsResponseToJSONTyped(value?: SettingsResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

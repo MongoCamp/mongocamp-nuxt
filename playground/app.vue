@@ -11,7 +11,7 @@ const state = useMongocampStorage()
 
 const { data: version, refresh: reloadVersion } = await useLazyAsyncData('version', () => informationApi.version())
 
-const { data: roles, refresh: reloadRoles } = await useLazyAsyncData('roles', () => findAll('mc_roles', 1, undefined, ['name', '_id']))
+const { data: roles, refresh: reloadRoles } = await useLazyAsyncData('roles', () => findAll('mc_roles', 1, ['-name'], ['name', '_id']))
 const { data: adminRole, refresh: reloadRole } = await useLazyAsyncData('adminRole', () => findByField('mc_roles', 'name1', 'admin*'))
 
 const config = useRuntimeConfig()

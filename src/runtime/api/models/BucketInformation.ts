@@ -73,11 +73,11 @@ export function BucketInformationFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-  export function BucketInformationToJSON(json: any): BucketInformation {
-      return BucketInformationToJSONTyped(json, false);
-  }
+export function BucketInformationToJSON(json: any): BucketInformation {
+    return BucketInformationToJSONTyped(json, false);
+}
 
-  export function BucketInformationToJSONTyped(value?: BucketInformation | null, ignoreDiscriminator: boolean = false): any {
+export function BucketInformationToJSONTyped(value?: BucketInformation | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

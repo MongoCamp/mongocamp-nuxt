@@ -65,11 +65,11 @@ export function VersionFromJSONTyped(json: any, ignoreDiscriminator: boolean): V
     };
 }
 
-  export function VersionToJSON(json: any): Version {
-      return VersionToJSONTyped(json, false);
-  }
+export function VersionToJSON(json: any): Version {
+    return VersionToJSONTyped(json, false);
+}
 
-  export function VersionToJSONTyped(value?: Version | null, ignoreDiscriminator: boolean = false): any {
+export function VersionToJSONTyped(value?: Version | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

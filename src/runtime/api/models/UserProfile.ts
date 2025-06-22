@@ -86,11 +86,11 @@ export function UserProfileFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-  export function UserProfileToJSON(json: any): UserProfile {
-      return UserProfileToJSONTyped(json, false);
-  }
+export function UserProfileToJSON(json: any): UserProfile {
+    return UserProfileToJSONTyped(json, false);
+}
 
-  export function UserProfileToJSONTyped(value?: UserProfile | null, ignoreDiscriminator: boolean = false): any {
+export function UserProfileToJSONTyped(value?: UserProfile | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

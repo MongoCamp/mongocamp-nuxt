@@ -80,11 +80,11 @@ export function JsonSchemaDefinitionFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-  export function JsonSchemaDefinitionToJSON(json: any): JsonSchemaDefinition {
-      return JsonSchemaDefinitionToJSONTyped(json, false);
-  }
+export function JsonSchemaDefinitionToJSON(json: any): JsonSchemaDefinition {
+    return JsonSchemaDefinitionToJSONTyped(json, false);
+}
 
-  export function JsonSchemaDefinitionToJSONTyped(value?: JsonSchemaDefinition | null, ignoreDiscriminator: boolean = false): any {
+export function JsonSchemaDefinitionToJSONTyped(value?: JsonSchemaDefinition | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

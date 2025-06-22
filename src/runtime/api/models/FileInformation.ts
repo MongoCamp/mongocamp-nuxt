@@ -89,11 +89,11 @@ export function FileInformationFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-  export function FileInformationToJSON(json: any): FileInformation {
-      return FileInformationToJSONTyped(json, false);
-  }
+export function FileInformationToJSON(json: any): FileInformation {
+    return FileInformationToJSONTyped(json, false);
+}
 
-  export function FileInformationToJSONTyped(value?: FileInformation | null, ignoreDiscriminator: boolean = false): any {
+export function FileInformationToJSONTyped(value?: FileInformation | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

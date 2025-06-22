@@ -65,11 +65,11 @@ export function ErrorDescriptionFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function ErrorDescriptionToJSON(json: any): ErrorDescription {
-      return ErrorDescriptionToJSONTyped(json, false);
-  }
+export function ErrorDescriptionToJSON(json: any): ErrorDescription {
+    return ErrorDescriptionToJSONTyped(json, false);
+}
 
-  export function ErrorDescriptionToJSONTyped(value?: ErrorDescription | null, ignoreDiscriminator: boolean = false): any {
+export function ErrorDescriptionToJSONTyped(value?: ErrorDescription | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

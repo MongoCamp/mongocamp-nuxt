@@ -57,11 +57,11 @@ export function DeleteResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-  export function DeleteResponseToJSON(json: any): DeleteResponse {
-      return DeleteResponseToJSONTyped(json, false);
-  }
+export function DeleteResponseToJSON(json: any): DeleteResponse {
+    return DeleteResponseToJSONTyped(json, false);
+}
 
-  export function DeleteResponseToJSONTyped(value?: DeleteResponse | null, ignoreDiscriminator: boolean = false): any {
+export function DeleteResponseToJSONTyped(value?: DeleteResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -49,11 +49,11 @@ export function JsonValueAnyFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-  export function JsonValueAnyToJSON(json: any): JsonValueAny {
-      return JsonValueAnyToJSONTyped(json, false);
-  }
+export function JsonValueAnyToJSON(json: any): JsonValueAny {
+    return JsonValueAnyToJSONTyped(json, false);
+}
 
-  export function JsonValueAnyToJSONTyped(value?: JsonValueAny | null, ignoreDiscriminator: boolean = false): any {
+export function JsonValueAnyToJSONTyped(value?: JsonValueAny | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -49,11 +49,11 @@ export function IndexDropResponseFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-  export function IndexDropResponseToJSON(json: any): IndexDropResponse {
-      return IndexDropResponseToJSONTyped(json, false);
-  }
+export function IndexDropResponseToJSON(json: any): IndexDropResponse {
+    return IndexDropResponseToJSONTyped(json, false);
+}
 
-  export function IndexDropResponseToJSONTyped(value?: IndexDropResponse | null, ignoreDiscriminator: boolean = false): any {
+export function IndexDropResponseToJSONTyped(value?: IndexDropResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

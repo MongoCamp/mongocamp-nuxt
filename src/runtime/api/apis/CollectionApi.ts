@@ -81,7 +81,7 @@ export interface GetSchemaAnalysisRequest {
     deepth?: number;
 }
 
-export interface ListCollectionsByDatabase0Request {
+export interface ListCollectionsByDatabaseRequest {
     databaseName: string;
 }
 
@@ -594,7 +594,7 @@ export class CollectionApi extends runtime.BaseAPI {
      * List of all Collections of the given database
      * List of Collections
      */
-    async listCollectionsByDatabaseRaw(requestParameters: ListCollectionsByDatabase0Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+    async listCollectionsByDatabaseRaw(requestParameters: ListCollectionsByDatabaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
         if (requestParameters['databaseName'] == null) {
             throw new runtime.RequiredError(
                 'databaseName',
@@ -635,7 +635,7 @@ export class CollectionApi extends runtime.BaseAPI {
      * List of all Collections of the given database
      * List of Collections
      */
-    async listCollectionsByDatabase(requestParameters: ListCollectionsByDatabase0Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<string>> {
+    async listCollectionsByDatabase(requestParameters: ListCollectionsByDatabaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<string>> {
         const response = await this.listCollectionsByDatabaseRaw(requestParameters, initOverrides);
         return await response.value();
     }

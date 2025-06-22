@@ -55,11 +55,11 @@ export function UpdateFileInformationRequestFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-  export function UpdateFileInformationRequestToJSON(json: any): UpdateFileInformationRequest {
-      return UpdateFileInformationRequestToJSONTyped(json, false);
-  }
+export function UpdateFileInformationRequestToJSON(json: any): UpdateFileInformationRequest {
+    return UpdateFileInformationRequestToJSONTyped(json, false);
+}
 
-  export function UpdateFileInformationRequestToJSONTyped(value?: UpdateFileInformationRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UpdateFileInformationRequestToJSONTyped(value?: UpdateFileInformationRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

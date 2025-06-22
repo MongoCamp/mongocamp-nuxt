@@ -64,11 +64,11 @@ export function MongoAggregateRequestFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-  export function MongoAggregateRequestToJSON(json: any): MongoAggregateRequest {
-      return MongoAggregateRequestToJSONTyped(json, false);
-  }
+export function MongoAggregateRequestToJSON(json: any): MongoAggregateRequest {
+    return MongoAggregateRequestToJSONTyped(json, false);
+}
 
-  export function MongoAggregateRequestToJSONTyped(value?: MongoAggregateRequest | null, ignoreDiscriminator: boolean = false): any {
+export function MongoAggregateRequestToJSONTyped(value?: MongoAggregateRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -110,11 +110,11 @@ export function JobInformationFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-  export function JobInformationToJSON(json: any): JobInformation {
-      return JobInformationToJSONTyped(json, false);
-  }
+export function JobInformationToJSON(json: any): JobInformation {
+    return JobInformationToJSONTyped(json, false);
+}
 
-  export function JobInformationToJSONTyped(value?: JobInformation | null, ignoreDiscriminator: boolean = false): any {
+export function JobInformationToJSONTyped(value?: JobInformation | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

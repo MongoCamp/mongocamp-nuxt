@@ -72,11 +72,11 @@ export function UpdateResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-  export function UpdateResponseToJSON(json: any): UpdateResponse {
-      return UpdateResponseToJSONTyped(json, false);
-  }
+export function UpdateResponseToJSON(json: any): UpdateResponse {
+    return UpdateResponseToJSONTyped(json, false);
+}
 
-  export function UpdateResponseToJSONTyped(value?: UpdateResponse | null, ignoreDiscriminator: boolean = false): any {
+export function UpdateResponseToJSONTyped(value?: UpdateResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

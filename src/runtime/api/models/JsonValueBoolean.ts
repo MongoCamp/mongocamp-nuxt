@@ -49,11 +49,11 @@ export function JsonValueBooleanFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function JsonValueBooleanToJSON(json: any): JsonValueBoolean {
-      return JsonValueBooleanToJSONTyped(json, false);
-  }
+export function JsonValueBooleanToJSON(json: any): JsonValueBoolean {
+    return JsonValueBooleanToJSONTyped(json, false);
+}
 
-  export function JsonValueBooleanToJSONTyped(value?: JsonValueBoolean | null, ignoreDiscriminator: boolean = false): any {
+export function JsonValueBooleanToJSONTyped(value?: JsonValueBoolean | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

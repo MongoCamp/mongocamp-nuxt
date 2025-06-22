@@ -65,11 +65,11 @@ export function SchemaAnalysisFieldTypeFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-  export function SchemaAnalysisFieldTypeToJSON(json: any): SchemaAnalysisFieldType {
-      return SchemaAnalysisFieldTypeToJSONTyped(json, false);
-  }
+export function SchemaAnalysisFieldTypeToJSON(json: any): SchemaAnalysisFieldType {
+    return SchemaAnalysisFieldTypeToJSONTyped(json, false);
+}
 
-  export function SchemaAnalysisFieldTypeToJSONTyped(value?: SchemaAnalysisFieldType | null, ignoreDiscriminator: boolean = false): any {
+export function SchemaAnalysisFieldTypeToJSONTyped(value?: SchemaAnalysisFieldType | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

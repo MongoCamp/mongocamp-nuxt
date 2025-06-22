@@ -136,11 +136,11 @@ export function MongoIndexFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     };
 }
 
-  export function MongoIndexToJSON(json: any): MongoIndex {
-      return MongoIndexToJSONTyped(json, false);
-  }
+export function MongoIndexToJSON(json: any): MongoIndex {
+    return MongoIndexToJSONTyped(json, false);
+}
 
-  export function MongoIndexToJSONTyped(value?: MongoIndex | null, ignoreDiscriminator: boolean = false): any {
+export function MongoIndexToJSONTyped(value?: MongoIndex | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

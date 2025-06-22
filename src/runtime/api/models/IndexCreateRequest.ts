@@ -64,11 +64,11 @@ export function IndexCreateRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-  export function IndexCreateRequestToJSON(json: any): IndexCreateRequest {
-      return IndexCreateRequestToJSONTyped(json, false);
-  }
+export function IndexCreateRequestToJSON(json: any): IndexCreateRequest {
+    return IndexCreateRequestToJSONTyped(json, false);
+}
 
-  export function IndexCreateRequestToJSONTyped(value?: IndexCreateRequest | null, ignoreDiscriminator: boolean = false): any {
+export function IndexCreateRequestToJSONTyped(value?: IndexCreateRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

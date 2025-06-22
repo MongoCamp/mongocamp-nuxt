@@ -57,11 +57,11 @@ export function UpdateRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-  export function UpdateRequestToJSON(json: any): UpdateRequest {
-      return UpdateRequestToJSONTyped(json, false);
-  }
+export function UpdateRequestToJSON(json: any): UpdateRequest {
+    return UpdateRequestToJSONTyped(json, false);
+}
 
-  export function UpdateRequestToJSONTyped(value?: UpdateRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UpdateRequestToJSONTyped(value?: UpdateRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

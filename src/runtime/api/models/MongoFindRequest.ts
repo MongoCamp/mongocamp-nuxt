@@ -65,11 +65,11 @@ export function MongoFindRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function MongoFindRequestToJSON(json: any): MongoFindRequest {
-      return MongoFindRequestToJSONTyped(json, false);
-  }
+export function MongoFindRequestToJSON(json: any): MongoFindRequest {
+    return MongoFindRequestToJSONTyped(json, false);
+}
 
-  export function MongoFindRequestToJSONTyped(value?: MongoFindRequest | null, ignoreDiscriminator: boolean = false): any {
+export function MongoFindRequestToJSONTyped(value?: MongoFindRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

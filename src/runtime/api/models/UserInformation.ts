@@ -71,11 +71,11 @@ export function UserInformationFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-  export function UserInformationToJSON(json: any): UserInformation {
-      return UserInformationToJSONTyped(json, false);
-  }
+export function UserInformationToJSON(json: any): UserInformation {
+    return UserInformationToJSONTyped(json, false);
+}
 
-  export function UserInformationToJSONTyped(value?: UserInformation | null, ignoreDiscriminator: boolean = false): any {
+export function UserInformationToJSONTyped(value?: UserInformation | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

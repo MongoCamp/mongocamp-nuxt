@@ -81,11 +81,11 @@ export function GrantFromJSONTyped(json: any, ignoreDiscriminator: boolean): Gra
     };
 }
 
-  export function GrantToJSON(json: any): Grant {
-      return GrantToJSONTyped(json, false);
-  }
+export function GrantToJSON(json: any): Grant {
+    return GrantToJSONTyped(json, false);
+}
 
-  export function GrantToJSONTyped(value?: Grant | null, ignoreDiscriminator: boolean = false): any {
+export function GrantToJSONTyped(value?: Grant | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
