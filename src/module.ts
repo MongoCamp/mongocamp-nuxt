@@ -16,7 +16,7 @@ export default defineNuxtModule<ModuleOptions>({
     version,
     configKey: 'mongocamp',
     compatibility: {
-      nuxt: '^3.0.0',
+      nuxt: '>=3.16.0',
     },
   },
 
