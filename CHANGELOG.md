@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.2.7
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.6...v1.2.7)
+
+### 🏡 Chore
+
+- Update Nuxt and dependencies to latest versions ([d2110b2](https://github.com/MongoCamp/mongocamp-nuxt/commit/d2110b2))
+- Update Nuxt compatibility version to >=3.16.0 ([a78bdf6](https://github.com/MongoCamp/mongocamp-nuxt/commit/a78bdf6))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.2.6
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.5...v1.2.6)
