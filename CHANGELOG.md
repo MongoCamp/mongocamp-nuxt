@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.8
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.7...v1.2.8)
+
+### 🏡 Chore
+
+- Refactor API imports for better organization ([2393b28](https://github.com/MongoCamp/mongocamp-nuxt/commit/2393b28))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.2.7
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.6...v1.2.7)
