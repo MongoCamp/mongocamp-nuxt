@@ -1,17 +1,16 @@
-import {
-  AdminApi,
-  ApplicationApi,
-  AuthApi,
-  BucketApi,
-  CollectionApi,
-  Configuration,
-  DatabaseApi,
-  DocumentApi,
-  FileApi,
-  IndexApi,
-  InformationApi,
-  JobsApi,
-} from '../api'
+import { AdminApi } from '../api/apis/AdminApi'
+import { ApplicationApi } from '../api/apis/ApplicationApi'
+import { AuthApi } from '../api/apis/AuthApi'
+import { BucketApi } from '../api/apis/BucketApi'
+import { CollectionApi } from '../api/apis/CollectionApi'
+import { DatabaseApi } from '../api/apis/DatabaseApi'
+import { DocumentApi } from '../api/apis/DocumentApi'
+import { FileApi } from '../api/apis/FileApi'
+import { IndexApi } from '../api/apis/IndexApi'
+import { InformationApi } from '../api/apis/InformationApi'
+import { JobsApi } from '../api/apis/JobsApi'
+
+import { Configuration } from '../api'
 
 import { useMongocampUrl } from './mongocampUrl'
 import { useMongocampStorage } from './mongocampStorage'
