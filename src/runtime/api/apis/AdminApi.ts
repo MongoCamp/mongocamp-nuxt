@@ -136,8 +136,11 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/roles`;
+
         const response = await this.request({
-            path: `/admin/roles`,
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -189,8 +192,11 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/users`;
+
         const response = await this.request({
-            path: `/admin/users`,
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -240,8 +246,12 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/roles/{roleName}`;
+        urlPath = urlPath.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName'])));
+
         const response = await this.request({
-            path: `/admin/roles/{roleName}`.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -290,8 +300,12 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/users/{userId}`;
+        urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
+
         const response = await this.request({
-            path: `/admin/users/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -340,8 +354,12 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/roles/{roleName}`;
+        urlPath = urlPath.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName'])));
+
         const response = await this.request({
-            path: `/admin/roles/{roleName}`.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -390,8 +408,12 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/users/{userId}`;
+        urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
+
         const response = await this.request({
-            path: `/admin/users/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -440,8 +462,12 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/users/{userId}/apikey`;
+        urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
+
         const response = await this.request({
-            path: `/admin/users/{userId}/apikey`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -495,8 +521,11 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/roles`;
+
         const response = await this.request({
-            path: `/admin/roles`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -550,8 +579,11 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/users`;
+
         const response = await this.request({
-            path: `/admin/users`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -609,8 +641,12 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/users/{userId}/password`;
+        urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
+
         const response = await this.request({
-            path: `/admin/users/{userId}/password`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -669,8 +705,12 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/roles/{roleName}`;
+        urlPath = urlPath.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName'])));
+
         const response = await this.request({
-            path: `/admin/roles/{roleName}`.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -722,8 +762,12 @@ export class AdminApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/admin/users/{userId}/roles`;
+        urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
+
         const response = await this.request({
-            path: `/admin/users/{userId}/roles`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,

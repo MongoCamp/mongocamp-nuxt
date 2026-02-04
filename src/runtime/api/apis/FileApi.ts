@@ -127,8 +127,13 @@ export class FileApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/buckets/{bucketName}/files/{fileId}`;
+        urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
+        urlPath = urlPath.replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId'])));
+
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files/{fileId}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -194,8 +199,12 @@ export class FileApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/buckets/{bucketName}/files`;
+        urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
+
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -252,8 +261,13 @@ export class FileApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/buckets/{bucketName}/files/{fileId}/file`;
+        urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
+        urlPath = urlPath.replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId'])));
+
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files/{fileId}/file`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -309,8 +323,13 @@ export class FileApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/buckets/{bucketName}/files/{fileId}`;
+        urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
+        urlPath = urlPath.replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId'])));
+
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files/{fileId}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -401,8 +420,12 @@ export class FileApi extends runtime.BaseAPI {
             formParams.append('metaData', requestParameters['metaData'] as any);
         }
 
+
+        let urlPath = `/mongodb/buckets/{bucketName}/files`;
+        urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
+
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -472,8 +495,12 @@ export class FileApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/buckets/{bucketName}/files`;
+        urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
+
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -538,8 +565,13 @@ export class FileApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/buckets/{bucketName}/files/{fileId}`;
+        urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
+        urlPath = urlPath.replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId'])));
+
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/files/{fileId}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))).replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,

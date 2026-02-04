@@ -94,8 +94,13 @@ export class JobsApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/system/jobs/{jobGroup}/{jobName}`;
+        urlPath = urlPath.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup'])));
+        urlPath = urlPath.replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName'])));
+
         const response = await this.request({
-            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup']))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -151,8 +156,13 @@ export class JobsApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/system/jobs/{jobGroup}/{jobName}`;
+        urlPath = urlPath.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup'])));
+        urlPath = urlPath.replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName'])));
+
         const response = await this.request({
-            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup']))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName']))),
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -194,8 +204,11 @@ export class JobsApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/system/jobs`;
+
         const response = await this.request({
-            path: `/system/jobs`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -237,8 +250,11 @@ export class JobsApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/system/jobs/classes`;
+
         const response = await this.request({
-            path: `/system/jobs/classes`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -289,8 +305,11 @@ export class JobsApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/system/jobs`;
+
         const response = await this.request({
-            path: `/system/jobs`,
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -356,8 +375,13 @@ export class JobsApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/system/jobs/{jobGroup}/{jobName}`;
+        urlPath = urlPath.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup'])));
+        urlPath = urlPath.replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName'])));
+
         const response = await this.request({
-            path: `/system/jobs/{jobGroup}/{jobName}`.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup']))).replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,

@@ -142,8 +142,14 @@ export class IndexApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/index/field/{fieldName}/{duration}/expiring`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+        urlPath = urlPath.replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName'])));
+        urlPath = urlPath.replace(`{${"duration"}}`, encodeURIComponent(String(requestParameters['duration'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}/{duration}/expiring`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName']))).replace(`{${"duration"}}`, encodeURIComponent(String(requestParameters['duration']))),
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -201,8 +207,12 @@ export class IndexApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/index`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -265,8 +275,13 @@ export class IndexApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/index/field/{fieldName}`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+        urlPath = urlPath.replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName']))),
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -325,8 +340,13 @@ export class IndexApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/index/field/{fieldName}/text`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+        urlPath = urlPath.replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}/text`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName']))),
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -391,8 +411,13 @@ export class IndexApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/index/field/{fieldName}/unique`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+        urlPath = urlPath.replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/field/{fieldName}/unique`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName']))),
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -448,8 +473,13 @@ export class IndexApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/index/{indexName}`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+        urlPath = urlPath.replace(`{${"indexName"}}`, encodeURIComponent(String(requestParameters['indexName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/{indexName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"indexName"}}`, encodeURIComponent(String(requestParameters['indexName']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -505,8 +535,13 @@ export class IndexApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/index/{indexName}`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+        urlPath = urlPath.replace(`{${"indexName"}}`, encodeURIComponent(String(requestParameters['indexName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index/{indexName}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"indexName"}}`, encodeURIComponent(String(requestParameters['indexName']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -555,8 +590,12 @@ export class IndexApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/index`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/index`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

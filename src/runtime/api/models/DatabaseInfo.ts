@@ -95,7 +95,7 @@ export function DatabaseInfoToJSONTyped(value?: DatabaseInfo | null, ignoreDiscr
         'name': value['name'],
         'sizeOnDisk': value['sizeOnDisk'],
         'empty': value['empty'],
-        'fetched': ((value['fetched']).toISOString()),
+        'fetched': value['fetched'].toISOString(),
         'map': value['map'],
     };
 }

@@ -39,8 +39,11 @@ export class InformationApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/version`;
+
         const response = await this.request({
-            path: `/version`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

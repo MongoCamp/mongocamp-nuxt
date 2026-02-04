@@ -157,7 +157,7 @@ export function MongoIndexToJSONTyped(value?: MongoIndex | null, ignoreDiscrimin
         'expire': value['expire'],
         'expireAfterSeconds': value['expireAfterSeconds'],
         'text': value['text'],
-        'fetched': ((value['fetched']).toISOString()),
+        'fetched': value['fetched'].toISOString(),
         'map': value['map'],
     };
 }

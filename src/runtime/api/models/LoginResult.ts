@@ -86,7 +86,7 @@ export function LoginResultToJSONTyped(value?: LoginResult | null, ignoreDiscrim
         
         'authToken': value['authToken'],
         'userProfile': UserProfileToJSON(value['userProfile']),
-        'expirationDate': ((value['expirationDate']).toISOString()),
+        'expirationDate': value['expirationDate'].toISOString(),
     };
 }
 

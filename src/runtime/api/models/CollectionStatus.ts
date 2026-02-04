@@ -167,7 +167,7 @@ export function CollectionStatusToJSONTyped(value?: CollectionStatus | null, ign
         'indexSizes': value['indexSizes'],
         'totalIndexSize': value['totalIndexSize'],
         'ok': value['ok'],
-        'fetched': ((value['fetched']).toISOString()),
+        'fetched': value['fetched'].toISOString(),
         'map': value['map'],
     };
 }

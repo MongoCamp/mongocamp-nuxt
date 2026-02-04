@@ -127,8 +127,8 @@ export function JobInformationToJSONTyped(value?: JobInformation | null, ignoreD
         'description': value['description'],
         'cronExpression': value['cronExpression'],
         'priority': value['priority'],
-        'lastScheduledFireTime': value['lastScheduledFireTime'] == null ? undefined : ((value['lastScheduledFireTime']).toISOString()),
-        'nextScheduledFireTime': value['nextScheduledFireTime'] == null ? undefined : ((value['nextScheduledFireTime']).toISOString()),
+        'lastScheduledFireTime': value['lastScheduledFireTime'] == null ? value['lastScheduledFireTime'] : value['lastScheduledFireTime'].toISOString(),
+        'nextScheduledFireTime': value['nextScheduledFireTime'] == null ? value['nextScheduledFireTime'] : value['nextScheduledFireTime'].toISOString(),
         'scheduleInformation': value['scheduleInformation'],
     };
 }

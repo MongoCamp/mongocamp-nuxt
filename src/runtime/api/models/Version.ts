@@ -78,7 +78,7 @@ export function VersionToJSONTyped(value?: Version | null, ignoreDiscriminator: 
         
         'name': value['name'],
         'version': value['version'],
-        'builtAt': ((value['builtAt']).toISOString()),
+        'builtAt': value['builtAt'].toISOString(),
     };
 }
 

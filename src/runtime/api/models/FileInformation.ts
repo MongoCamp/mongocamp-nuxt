@@ -104,7 +104,7 @@ export function FileInformationToJSONTyped(value?: FileInformation | null, ignor
         'filename': value['filename'],
         'length': value['length'],
         'chunkSize': value['chunkSize'],
-        'uploadDate': ((value['uploadDate']).toISOString()),
+        'uploadDate': value['uploadDate'].toISOString(),
         'metadata': value['metadata'],
     };
 }

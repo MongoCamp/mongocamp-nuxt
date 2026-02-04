@@ -138,8 +138,13 @@ export class DocumentApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/documents/{documentId}`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+        urlPath = urlPath.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/documents/{documentId}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -197,8 +202,12 @@ export class DocumentApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/documents/many/delete`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/documents/many/delete`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -265,8 +274,12 @@ export class DocumentApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/documents`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/documents`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -323,8 +336,13 @@ export class DocumentApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/documents/{documentId}`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+        urlPath = urlPath.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/documents/{documentId}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -382,8 +400,12 @@ export class DocumentApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/documents`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/documents`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -435,8 +457,12 @@ export class DocumentApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/documents/many/insert`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/documents/many/insert`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -506,8 +532,12 @@ export class DocumentApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/documents`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/documents`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -572,8 +602,13 @@ export class DocumentApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/documents/{documentId}`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+        urlPath = urlPath.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/documents/{documentId}`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -639,8 +674,13 @@ export class DocumentApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/documents/{documentId}/partial`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+        urlPath = urlPath.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/documents/{documentId}/partial`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))).replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -699,8 +739,12 @@ export class DocumentApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/collections/{collectionName}/documents/many/update`;
+        urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
+
         const response = await this.request({
-            path: `/mongodb/collections/{collectionName}/documents/many/update`.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,

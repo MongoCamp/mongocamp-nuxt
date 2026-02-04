@@ -83,8 +83,12 @@ export class ApplicationApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/system/configurations/{configurationKey}`;
+        urlPath = urlPath.replace(`{${"configurationKey"}}`, encodeURIComponent(String(requestParameters['configurationKey'])));
+
         const response = await this.request({
-            path: `/system/configurations/{configurationKey}`.replace(`{${"configurationKey"}}`, encodeURIComponent(String(requestParameters['configurationKey']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -126,8 +130,11 @@ export class ApplicationApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/system/configurations`;
+
         const response = await this.request({
-            path: `/system/configurations`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -169,8 +176,11 @@ export class ApplicationApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/system/settings`;
+
         const response = await this.request({
-            path: `/system/settings`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -216,8 +226,11 @@ export class ApplicationApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/system`;
+
         const response = await this.request({
-            path: `/system`,
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -275,8 +288,12 @@ export class ApplicationApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/system/configurations/{configurationKey}`;
+        urlPath = urlPath.replace(`{${"configurationKey"}}`, encodeURIComponent(String(requestParameters['configurationKey'])));
+
         const response = await this.request({
-            path: `/system/configurations/{configurationKey}`.replace(`{${"configurationKey"}}`, encodeURIComponent(String(requestParameters['configurationKey']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,

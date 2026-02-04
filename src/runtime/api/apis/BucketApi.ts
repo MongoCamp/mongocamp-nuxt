@@ -76,8 +76,12 @@ export class BucketApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/buckets/{bucketName}/clear`;
+        urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
+
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}/clear`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -126,8 +130,12 @@ export class BucketApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/buckets/{bucketName}`;
+        urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
+
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -176,8 +184,12 @@ export class BucketApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/buckets/{bucketName}`;
+        urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
+
         const response = await this.request({
-            path: `/mongodb/buckets/{bucketName}`.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -219,8 +231,11 @@ export class BucketApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/buckets`;
+
         const response = await this.request({
-            path: `/mongodb/buckets`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

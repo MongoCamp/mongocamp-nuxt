@@ -69,8 +69,11 @@ export class DatabaseApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/databases/infos`;
+
         const response = await this.request({
-            path: `/mongodb/databases/infos`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -119,8 +122,12 @@ export class DatabaseApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/databases/{databaseName}`;
+        urlPath = urlPath.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters['databaseName'])));
+
         const response = await this.request({
-            path: `/mongodb/databases/{databaseName}`.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters['databaseName']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -169,8 +176,12 @@ export class DatabaseApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/databases/{databaseName}`;
+        urlPath = urlPath.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters['databaseName'])));
+
         const response = await this.request({
-            path: `/mongodb/databases/{databaseName}`.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters['databaseName']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -219,8 +230,12 @@ export class DatabaseApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/databases/{databaseName}/collections`;
+        urlPath = urlPath.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters['databaseName'])));
+
         const response = await this.request({
-            path: `/mongodb/databases/{databaseName}/collections`.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters['databaseName']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -262,8 +277,11 @@ export class DatabaseApi extends runtime.BaseAPI {
             headerParameters["X-AUTH-APIKEY"] = await this.configuration.apiKey("X-AUTH-APIKEY"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mongodb/databases`;
+
         const response = await this.request({
-            path: `/mongodb/databases`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
