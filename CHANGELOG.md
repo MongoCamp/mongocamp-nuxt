@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.2.9
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.8...v1.2.9)
+
+### 🏡 Chore
+
+- Update API endpoints to use dynamic URL paths and improve documentation ([df8415a](https://github.com/MongoCamp/mongocamp-nuxt/commit/df8415a))
+- Update dependencies for Nuxt and related packages ([e296bb8](https://github.com/MongoCamp/mongocamp-nuxt/commit/e296bb8))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.2.8
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.7...v1.2.8)
