@@ -1,6 +1,21 @@
 # Changelog
 
 
+## v1.3.0
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.9...v1.3.0)
+
+### 🏡 Chore
+
+- Export API models from runtime for improved module structure ([71775a3](https://github.com/MongoCamp/mongocamp-nuxt/commit/71775a3))
+- Update dependencies for Nuxt and related packages ([903b079](https://github.com/MongoCamp/mongocamp-nuxt/commit/903b079))
+- Update package manager version to pnpm@10.30.0 ([470e23c](https://github.com/MongoCamp/mongocamp-nuxt/commit/470e23c))
+- Update release script to use minor versioning for changelogen ([d597edb](https://github.com/MongoCamp/mongocamp-nuxt/commit/d597edb))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.2.9
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.8...v1.2.9)
