@@ -3,6 +3,8 @@ import { defu } from 'defu'
 import { consola } from 'consola'
 import { name, version } from '../package.json'
 
+export * from './runtime/api/models'
+
 export interface ModuleOptions {
   url: string
   paginationSize?: number
