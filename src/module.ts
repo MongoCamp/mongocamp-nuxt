@@ -1,4 +1,4 @@
-import { addImportsDir, createResolver, defineNuxtModule } from '@nuxt/kit'
+import {addImportsDir, addServerImportsDir, createResolver, defineNuxtModule} from '@nuxt/kit'
 import { defu } from 'defu'
 import { consola } from 'consola'
 import { name, version } from '../package.json'
@@ -45,7 +45,10 @@ export default defineNuxtModule<ModuleOptions>({
 
     const { resolve } = createResolver(import.meta.url)
     const runtimeDir = resolve('./runtime')
+
     addImportsDir(resolve(runtimeDir, 'composables'))
+    addServerImportsDir(resolve(runtimeDir, 'server/composables'))
+
 
     consola.success('mongocamp-nuxt available')
   },
