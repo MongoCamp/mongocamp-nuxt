@@ -1,6 +1,20 @@
 # Changelog
 
 
+## v1.4.0
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.3.0...v1.4.0)
+
+### 🏡 Chore
+
+- Update eslint to version 10.0.1 ([f5ac575](https://github.com/MongoCamp/mongocamp-nuxt/commit/f5ac575))
+- Add server imports directory for composables ([091e53a](https://github.com/MongoCamp/mongocamp-nuxt/commit/091e53a))
+- Format import statements in module.ts ([1e1202e](https://github.com/MongoCamp/mongocamp-nuxt/commit/1e1202e))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.3.0
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.2.9...v1.3.0)
