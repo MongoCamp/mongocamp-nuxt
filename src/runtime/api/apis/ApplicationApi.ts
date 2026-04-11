@@ -53,10 +53,9 @@ export interface UpdateConfigurationRequest {
 export class ApplicationApi extends runtime.BaseAPI {
 
     /**
-     * Get Configuration for key
-     * Configuration for configurationKey
+     * Creates request options for getConfig without sending the request
      */
-    async getConfigRaw(requestParameters: GetConfigRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MongoCampConfiguration>> {
+    async getConfigRequestOpts(requestParameters: GetConfigRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['configurationKey'] == null) {
             throw new runtime.RequiredError(
                 'configurationKey',
@@ -87,12 +86,21 @@ export class ApplicationApi extends runtime.BaseAPI {
         let urlPath = `/system/configurations/{configurationKey}`;
         urlPath = urlPath.replace(`{${"configurationKey"}}`, encodeURIComponent(String(requestParameters['configurationKey'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Get Configuration for key
+     * Configuration for configurationKey
+     */
+    async getConfigRaw(requestParameters: GetConfigRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MongoCampConfiguration>> {
+        const requestOptions = await this.getConfigRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => MongoCampConfigurationFromJSON(jsonValue));
     }
@@ -107,10 +115,9 @@ export class ApplicationApi extends runtime.BaseAPI {
     }
 
     /**
-     * List all Configurations or filtered
-     * List Configurations
+     * Creates request options for listConfigurations without sending the request
      */
-    async listConfigurationsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<MongoCampConfiguration>>> {
+    async listConfigurationsRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -133,12 +140,21 @@ export class ApplicationApi extends runtime.BaseAPI {
 
         let urlPath = `/system/configurations`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List all Configurations or filtered
+     * List Configurations
+     */
+    async listConfigurationsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<MongoCampConfiguration>>> {
+        const requestOptions = await this.listConfigurationsRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MongoCampConfigurationFromJSON));
     }
@@ -153,10 +169,9 @@ export class ApplicationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the Settings of the running MongoCamp Application.
-     * System Settings
+     * Creates request options for settings without sending the request
      */
-    async settingsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SettingsResponse>> {
+    async settingsRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -179,12 +194,21 @@ export class ApplicationApi extends runtime.BaseAPI {
 
         let urlPath = `/system/settings`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Returns the Settings of the running MongoCamp Application.
+     * System Settings
+     */
+    async settingsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SettingsResponse>> {
+        const requestOptions = await this.settingsRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SettingsResponseFromJSON(jsonValue));
     }
@@ -199,10 +223,9 @@ export class ApplicationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Shutdown the running MongoCamp Application. CLI Mode will automatically restart the Application.
-     * Shutdown MongoCamp
+     * Creates request options for shutdown without sending the request
      */
-    async shutdownRaw(requestParameters: ShutdownRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async shutdownRequestOpts(requestParameters: ShutdownRequest): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         if (requestParameters['force'] != null) {
@@ -229,12 +252,21 @@ export class ApplicationApi extends runtime.BaseAPI {
 
         let urlPath = `/system`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Shutdown the running MongoCamp Application. CLI Mode will automatically restart the Application.
+     * Shutdown MongoCamp
+     */
+    async shutdownRaw(requestParameters: ShutdownRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.shutdownRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }
@@ -249,10 +281,9 @@ export class ApplicationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update Configuration with the value
-     * Update Configuration
+     * Creates request options for updateConfiguration without sending the request
      */
-    async updateConfigurationRaw(requestParameters: UpdateConfigurationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async updateConfigurationRequestOpts(requestParameters: UpdateConfigurationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['configurationKey'] == null) {
             throw new runtime.RequiredError(
                 'configurationKey',
@@ -292,13 +323,22 @@ export class ApplicationApi extends runtime.BaseAPI {
         let urlPath = `/system/configurations/{configurationKey}`;
         urlPath = urlPath.replace(`{${"configurationKey"}}`, encodeURIComponent(String(requestParameters['configurationKey'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: JsonValueAnyToJSON(requestParameters['jsonValueAny']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Update Configuration with the value
+     * Update Configuration
+     */
+    async updateConfigurationRaw(requestParameters: UpdateConfigurationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.updateConfigurationRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }

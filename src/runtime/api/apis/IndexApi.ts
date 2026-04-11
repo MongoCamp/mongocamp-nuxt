@@ -90,10 +90,9 @@ export interface ListIndicesRequest {
 export class IndexApi extends runtime.BaseAPI {
 
     /**
-     * Create expiring Index by Field for given Collection
-     * Create expiring Index by Field for Collection
+     * Creates request options for createExpiringIndex without sending the request
      */
-    async createExpiringIndexRaw(requestParameters: CreateExpiringIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
+    async createExpiringIndexRequestOpts(requestParameters: CreateExpiringIndexRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -148,12 +147,21 @@ export class IndexApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName'])));
         urlPath = urlPath.replace(`{${"duration"}}`, encodeURIComponent(String(requestParameters['duration'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Create expiring Index by Field for given Collection
+     * Create expiring Index by Field for Collection
+     */
+    async createExpiringIndexRaw(requestParameters: CreateExpiringIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
+        const requestOptions = await this.createExpiringIndexRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IndexCreateResponseFromJSON(jsonValue));
     }
@@ -168,10 +176,9 @@ export class IndexApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create Index for given Collection
-     * Create Index for Collection
+     * Creates request options for createIndex without sending the request
      */
-    async createIndexRaw(requestParameters: CreateIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
+    async createIndexRequestOpts(requestParameters: CreateIndexRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -211,13 +218,22 @@ export class IndexApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/index`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: IndexCreateRequestToJSON(requestParameters['indexCreateRequest']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Create Index for given Collection
+     * Create Index for Collection
+     */
+    async createIndexRaw(requestParameters: CreateIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
+        const requestOptions = await this.createIndexRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IndexCreateResponseFromJSON(jsonValue));
     }
@@ -232,10 +248,9 @@ export class IndexApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create Index by Field for given Collection
-     * Create Index by Field for Collection
+     * Creates request options for createIndexForField without sending the request
      */
-    async createIndexForFieldRaw(requestParameters: CreateIndexForFieldRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
+    async createIndexForFieldRequestOpts(requestParameters: CreateIndexForFieldRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -280,13 +295,22 @@ export class IndexApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
         urlPath = urlPath.replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: IndexOptionsRequestToJSON(requestParameters['indexOptionsRequest']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Create Index by Field for given Collection
+     * Create Index by Field for Collection
+     */
+    async createIndexForFieldRaw(requestParameters: CreateIndexForFieldRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
+        const requestOptions = await this.createIndexForFieldRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IndexCreateResponseFromJSON(jsonValue));
     }
@@ -301,10 +325,9 @@ export class IndexApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create text index by field for given collection
-     * Create text index by field for collection
+     * Creates request options for createTextIndex without sending the request
      */
-    async createTextIndexRaw(requestParameters: CreateTextIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
+    async createTextIndexRequestOpts(requestParameters: CreateTextIndexRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -345,13 +368,22 @@ export class IndexApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
         urlPath = urlPath.replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: IndexOptionsRequestToJSON(requestParameters['indexOptionsRequest']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Create text index by field for given collection
+     * Create text index by field for collection
+     */
+    async createTextIndexRaw(requestParameters: CreateTextIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
+        const requestOptions = await this.createTextIndexRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IndexCreateResponseFromJSON(jsonValue));
     }
@@ -366,10 +398,9 @@ export class IndexApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create Unique Index by Field for given Collection
-     * Create Unique Index
+     * Creates request options for createUniqueIndex without sending the request
      */
-    async createUniqueIndexRaw(requestParameters: CreateUniqueIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
+    async createUniqueIndexRequestOpts(requestParameters: CreateUniqueIndexRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -416,12 +447,21 @@ export class IndexApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
         urlPath = urlPath.replace(`{${"fieldName"}}`, encodeURIComponent(String(requestParameters['fieldName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Create Unique Index by Field for given Collection
+     * Create Unique Index
+     */
+    async createUniqueIndexRaw(requestParameters: CreateUniqueIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexCreateResponse>> {
+        const requestOptions = await this.createUniqueIndexRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IndexCreateResponseFromJSON(jsonValue));
     }
@@ -436,10 +476,9 @@ export class IndexApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Index by Name for given Collection
-     * Delete Index
+     * Creates request options for deleteIndex without sending the request
      */
-    async deleteIndexRaw(requestParameters: DeleteIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexDropResponse>> {
+    async deleteIndexRequestOpts(requestParameters: DeleteIndexRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -478,12 +517,21 @@ export class IndexApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
         urlPath = urlPath.replace(`{${"indexName"}}`, encodeURIComponent(String(requestParameters['indexName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete Index by Name for given Collection
+     * Delete Index
+     */
+    async deleteIndexRaw(requestParameters: DeleteIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<IndexDropResponse>> {
+        const requestOptions = await this.deleteIndexRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IndexDropResponseFromJSON(jsonValue));
     }
@@ -498,10 +546,9 @@ export class IndexApi extends runtime.BaseAPI {
     }
 
     /**
-     * Index by Name for given Collection
-     * Index for Collection
+     * Creates request options for index without sending the request
      */
-    async indexRaw(requestParameters: IndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MongoIndex>> {
+    async indexRequestOpts(requestParameters: IndexRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -540,12 +587,21 @@ export class IndexApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
         urlPath = urlPath.replace(`{${"indexName"}}`, encodeURIComponent(String(requestParameters['indexName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Index by Name for given Collection
+     * Index for Collection
+     */
+    async indexRaw(requestParameters: IndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MongoIndex>> {
+        const requestOptions = await this.indexRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => MongoIndexFromJSON(jsonValue));
     }
@@ -560,10 +616,9 @@ export class IndexApi extends runtime.BaseAPI {
     }
 
     /**
-     * List all Indices for given Collection
-     * List Indices for Collection
+     * Creates request options for listIndices without sending the request
      */
-    async listIndicesRaw(requestParameters: ListIndicesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<MongoIndex>>> {
+    async listIndicesRequestOpts(requestParameters: ListIndicesRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -594,12 +649,21 @@ export class IndexApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/index`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List all Indices for given Collection
+     * List Indices for Collection
+     */
+    async listIndicesRaw(requestParameters: ListIndicesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<MongoIndex>>> {
+        const requestOptions = await this.listIndicesRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MongoIndexFromJSON));
     }

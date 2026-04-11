@@ -46,10 +46,9 @@ export interface ListCollectionsByDatabaseRequest {
 export class DatabaseApi extends runtime.BaseAPI {
 
     /**
-     * List of all Databases Infos
-     * List of Database Infos
+     * Creates request options for databaseInfos without sending the request
      */
-    async databaseInfosRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<DatabaseInfo>>> {
+    async databaseInfosRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -72,12 +71,21 @@ export class DatabaseApi extends runtime.BaseAPI {
 
         let urlPath = `/mongodb/databases/infos`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List of all Databases Infos
+     * List of Database Infos
+     */
+    async databaseInfosRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<DatabaseInfo>>> {
+        const requestOptions = await this.databaseInfosRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DatabaseInfoFromJSON));
     }
@@ -92,10 +100,9 @@ export class DatabaseApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete given Database
-     * Delete Database
+     * Creates request options for deleteDatabase without sending the request
      */
-    async deleteDatabaseRaw(requestParameters: DeleteDatabaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async deleteDatabaseRequestOpts(requestParameters: DeleteDatabaseRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['databaseName'] == null) {
             throw new runtime.RequiredError(
                 'databaseName',
@@ -126,12 +133,21 @@ export class DatabaseApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/databases/{databaseName}`;
         urlPath = urlPath.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters['databaseName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete given Database
+     * Delete Database
+     */
+    async deleteDatabaseRaw(requestParameters: DeleteDatabaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.deleteDatabaseRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }
@@ -146,10 +162,9 @@ export class DatabaseApi extends runtime.BaseAPI {
     }
 
     /**
-     * All Information about given Database
-     * Database Infos of selected Database
+     * Creates request options for getDatabaseInfo without sending the request
      */
-    async getDatabaseInfoRaw(requestParameters: GetDatabaseInfoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DatabaseInfo>> {
+    async getDatabaseInfoRequestOpts(requestParameters: GetDatabaseInfoRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['databaseName'] == null) {
             throw new runtime.RequiredError(
                 'databaseName',
@@ -180,12 +195,21 @@ export class DatabaseApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/databases/{databaseName}`;
         urlPath = urlPath.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters['databaseName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * All Information about given Database
+     * Database Infos of selected Database
+     */
+    async getDatabaseInfoRaw(requestParameters: GetDatabaseInfoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DatabaseInfo>> {
+        const requestOptions = await this.getDatabaseInfoRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => DatabaseInfoFromJSON(jsonValue));
     }
@@ -200,10 +224,9 @@ export class DatabaseApi extends runtime.BaseAPI {
     }
 
     /**
-     * List of all Collections of the given database
-     * List of Collections
+     * Creates request options for listCollectionsByDatabase without sending the request
      */
-    async listCollectionsByDatabaseRaw(requestParameters: ListCollectionsByDatabaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+    async listCollectionsByDatabaseRequestOpts(requestParameters: ListCollectionsByDatabaseRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['databaseName'] == null) {
             throw new runtime.RequiredError(
                 'databaseName',
@@ -234,12 +257,21 @@ export class DatabaseApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/databases/{databaseName}/collections`;
         urlPath = urlPath.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters['databaseName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List of all Collections of the given database
+     * List of Collections
+     */
+    async listCollectionsByDatabaseRaw(requestParameters: ListCollectionsByDatabaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+        const requestOptions = await this.listCollectionsByDatabaseRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }
@@ -254,10 +286,9 @@ export class DatabaseApi extends runtime.BaseAPI {
     }
 
     /**
-     * List of all Databases
-     * List of Databases
+     * Creates request options for listDatabases without sending the request
      */
-    async listDatabasesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+    async listDatabasesRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -280,12 +311,21 @@ export class DatabaseApi extends runtime.BaseAPI {
 
         let urlPath = `/mongodb/databases`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List of all Databases
+     * List of Databases
+     */
+    async listDatabasesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+        const requestOptions = await this.listDatabasesRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }

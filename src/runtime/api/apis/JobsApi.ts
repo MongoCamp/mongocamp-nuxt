@@ -57,10 +57,9 @@ export interface UpdateJobRequest {
 export class JobsApi extends runtime.BaseAPI {
 
     /**
-     * Delete Job and reload all Job Information
-     * Delete Job
+     * Creates request options for deleteJob without sending the request
      */
-    async deleteJobRaw(requestParameters: DeleteJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async deleteJobRequestOpts(requestParameters: DeleteJobRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['jobGroup'] == null) {
             throw new runtime.RequiredError(
                 'jobGroup',
@@ -99,12 +98,21 @@ export class JobsApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup'])));
         urlPath = urlPath.replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete Job and reload all Job Information
+     * Delete Job
+     */
+    async deleteJobRaw(requestParameters: DeleteJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.deleteJobRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }
@@ -119,10 +127,9 @@ export class JobsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Execute scheduled Job manually
-     * Execute Job
+     * Creates request options for executeJob without sending the request
      */
-    async executeJobRaw(requestParameters: ExecuteJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async executeJobRequestOpts(requestParameters: ExecuteJobRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['jobGroup'] == null) {
             throw new runtime.RequiredError(
                 'jobGroup',
@@ -161,12 +168,21 @@ export class JobsApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup'])));
         urlPath = urlPath.replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Execute scheduled Job manually
+     * Execute Job
+     */
+    async executeJobRaw(requestParameters: ExecuteJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.executeJobRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }
@@ -181,10 +197,9 @@ export class JobsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the List of all registered Jobs with full information
-     * Registered Jobs
+     * Creates request options for jobsList without sending the request
      */
-    async jobsListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<JobInformation>>> {
+    async jobsListRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -207,12 +222,21 @@ export class JobsApi extends runtime.BaseAPI {
 
         let urlPath = `/system/jobs`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Returns the List of all registered Jobs with full information
+     * Registered Jobs
+     */
+    async jobsListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<JobInformation>>> {
+        const requestOptions = await this.jobsListRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(JobInformationFromJSON));
     }
@@ -227,10 +251,9 @@ export class JobsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the List of possible job classes
-     * Possible Jobs
+     * Creates request options for possibleJobsList without sending the request
      */
-    async possibleJobsListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+    async possibleJobsListRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -253,12 +276,21 @@ export class JobsApi extends runtime.BaseAPI {
 
         let urlPath = `/system/jobs/classes`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Returns the List of possible job classes
+     * Possible Jobs
+     */
+    async possibleJobsListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+        const requestOptions = await this.possibleJobsListRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }
@@ -273,10 +305,9 @@ export class JobsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Register an Job and return the JobInformation with next schedule information
-     * Register Job
+     * Creates request options for registerJob without sending the request
      */
-    async registerJobRaw(requestParameters: RegisterJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobInformation>> {
+    async registerJobRequestOpts(requestParameters: RegisterJobRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['jobConfig'] == null) {
             throw new runtime.RequiredError(
                 'jobConfig',
@@ -308,13 +339,22 @@ export class JobsApi extends runtime.BaseAPI {
 
         let urlPath = `/system/jobs`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: JobConfigToJSON(requestParameters['jobConfig']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Register an Job and return the JobInformation with next schedule information
+     * Register Job
+     */
+    async registerJobRaw(requestParameters: RegisterJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobInformation>> {
+        const requestOptions = await this.registerJobRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JobInformationFromJSON(jsonValue));
     }
@@ -329,10 +369,9 @@ export class JobsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Add Job and get JobInformation back
-     * Update Job
+     * Creates request options for updateJob without sending the request
      */
-    async updateJobRaw(requestParameters: UpdateJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobInformation>> {
+    async updateJobRequestOpts(requestParameters: UpdateJobRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['jobGroup'] == null) {
             throw new runtime.RequiredError(
                 'jobGroup',
@@ -380,13 +419,22 @@ export class JobsApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"jobGroup"}}`, encodeURIComponent(String(requestParameters['jobGroup'])));
         urlPath = urlPath.replace(`{${"jobName"}}`, encodeURIComponent(String(requestParameters['jobName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: JobConfigToJSON(requestParameters['jobConfig']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Add Job and get JobInformation back
+     * Update Job
+     */
+    async updateJobRaw(requestParameters: UpdateJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobInformation>> {
+        const requestOptions = await this.updateJobRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JobInformationFromJSON(jsonValue));
     }

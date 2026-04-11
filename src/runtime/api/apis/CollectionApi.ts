@@ -91,10 +91,9 @@ export interface ListCollectionsByDatabaseRequest {
 export class CollectionApi extends runtime.BaseAPI {
 
     /**
-     * Aggregate in a given Collection
-     * Aggregate in Collection
+     * Creates request options for aggregate without sending the request
      */
-    async aggregateRaw(requestParameters: AggregateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: string; }>>> {
+    async aggregateRequestOpts(requestParameters: AggregateRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -142,13 +141,22 @@ export class CollectionApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/aggregate`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: MongoAggregateRequestToJSON(requestParameters['mongoAggregateRequest']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Aggregate in a given Collection
+     * Aggregate in Collection
+     */
+    async aggregateRaw(requestParameters: AggregateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: string; }>>> {
+        const requestOptions = await this.aggregateRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }
@@ -163,10 +171,9 @@ export class CollectionApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete all Document in Collection
-     * Clear Collection
+     * Creates request options for clearCollection without sending the request
      */
-    async clearCollectionRaw(requestParameters: ClearCollectionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async clearCollectionRequestOpts(requestParameters: ClearCollectionRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -197,12 +204,21 @@ export class CollectionApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/clear`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete all Document in Collection
+     * Clear Collection
+     */
+    async clearCollectionRaw(requestParameters: ClearCollectionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.clearCollectionRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }
@@ -217,10 +233,9 @@ export class CollectionApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a given Collection
-     * Delete Collection
+     * Creates request options for deleteCollection without sending the request
      */
-    async deleteCollectionRaw(requestParameters: DeleteCollectionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async deleteCollectionRequestOpts(requestParameters: DeleteCollectionRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -251,12 +266,21 @@ export class CollectionApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete a given Collection
+     * Delete Collection
+     */
+    async deleteCollectionRaw(requestParameters: DeleteCollectionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.deleteCollectionRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }
@@ -271,10 +295,9 @@ export class CollectionApi extends runtime.BaseAPI {
     }
 
     /**
-     * Distinct for Field in a given Collection
-     * Distinct in Collection
+     * Creates request options for distinct without sending the request
      */
-    async distinctRaw(requestParameters: DistinctRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+    async distinctRequestOpts(requestParameters: DistinctRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -321,12 +344,21 @@ export class CollectionApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
         urlPath = urlPath.replace(`{${"field"}}`, encodeURIComponent(String(requestParameters['field'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Distinct for Field in a given Collection
+     * Distinct in Collection
+     */
+    async distinctRaw(requestParameters: DistinctRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+        const requestOptions = await this.distinctRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }
@@ -341,10 +373,9 @@ export class CollectionApi extends runtime.BaseAPI {
     }
 
     /**
-     * List the Fields in a given collection
-     * Collection Fields
+     * Creates request options for getCollectionFields without sending the request
      */
-    async getCollectionFieldsRaw(requestParameters: GetCollectionFieldsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+    async getCollectionFieldsRequestOpts(requestParameters: GetCollectionFieldsRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -379,12 +410,21 @@ export class CollectionApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/fields`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List the Fields in a given collection
+     * Collection Fields
+     */
+    async getCollectionFieldsRaw(requestParameters: GetCollectionFieldsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+        const requestOptions = await this.getCollectionFieldsRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }
@@ -399,10 +439,9 @@ export class CollectionApi extends runtime.BaseAPI {
     }
 
     /**
-     * All Information about a single Collection
-     * Collection Information
+     * Creates request options for getCollectionInformation without sending the request
      */
-    async getCollectionInformationRaw(requestParameters: GetCollectionInformationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CollectionStatus>> {
+    async getCollectionInformationRequestOpts(requestParameters: GetCollectionInformationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -437,12 +476,21 @@ export class CollectionApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * All Information about a single Collection
+     * Collection Information
+     */
+    async getCollectionInformationRaw(requestParameters: GetCollectionInformationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CollectionStatus>> {
+        const requestOptions = await this.getCollectionInformationRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CollectionStatusFromJSON(jsonValue));
     }
@@ -457,10 +505,9 @@ export class CollectionApi extends runtime.BaseAPI {
     }
 
     /**
-     * List the Fields in a given collection
-     * Collection Fields
+     * Creates request options for getJsonSchema without sending the request
      */
-    async getJsonSchemaRaw(requestParameters: GetJsonSchemaRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonSchema>> {
+    async getJsonSchemaRequestOpts(requestParameters: GetJsonSchemaRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -499,12 +546,21 @@ export class CollectionApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/schema`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List the Fields in a given collection
+     * Collection Fields
+     */
+    async getJsonSchemaRaw(requestParameters: GetJsonSchemaRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonSchema>> {
+        const requestOptions = await this.getJsonSchemaRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonSchemaFromJSON(jsonValue));
     }
@@ -519,10 +575,9 @@ export class CollectionApi extends runtime.BaseAPI {
     }
 
     /**
-     * List the Fields in a given collection
-     * Collection Fields
+     * Creates request options for getSchemaAnalysis without sending the request
      */
-    async getSchemaAnalysisRaw(requestParameters: GetSchemaAnalysisRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SchemaAnalysis>> {
+    async getSchemaAnalysisRequestOpts(requestParameters: GetSchemaAnalysisRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -561,12 +616,21 @@ export class CollectionApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/schema/analysis`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List the Fields in a given collection
+     * Collection Fields
+     */
+    async getSchemaAnalysisRaw(requestParameters: GetSchemaAnalysisRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SchemaAnalysis>> {
+        const requestOptions = await this.getSchemaAnalysisRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SchemaAnalysisFromJSON(jsonValue));
     }
@@ -581,10 +645,9 @@ export class CollectionApi extends runtime.BaseAPI {
     }
 
     /**
-     * List of all Collections of the default database
-     * List of Collections
+     * Creates request options for listCollections without sending the request
      */
-    async listCollectionsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+    async listCollectionsRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -607,12 +670,21 @@ export class CollectionApi extends runtime.BaseAPI {
 
         let urlPath = `/mongodb/collections`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List of all Collections of the default database
+     * List of Collections
+     */
+    async listCollectionsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+        const requestOptions = await this.listCollectionsRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }
@@ -627,10 +699,9 @@ export class CollectionApi extends runtime.BaseAPI {
     }
 
     /**
-     * List of all Collections of the given database
-     * List of Collections
+     * Creates request options for listCollectionsByDatabase without sending the request
      */
-    async listCollectionsByDatabaseRaw(requestParameters: ListCollectionsByDatabaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+    async listCollectionsByDatabaseRequestOpts(requestParameters: ListCollectionsByDatabaseRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['databaseName'] == null) {
             throw new runtime.RequiredError(
                 'databaseName',
@@ -661,12 +732,21 @@ export class CollectionApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/databases/{databaseName}/collections`;
         urlPath = urlPath.replace(`{${"databaseName"}}`, encodeURIComponent(String(requestParameters['databaseName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List of all Collections of the given database
+     * List of Collections
+     */
+    async listCollectionsByDatabaseRaw(requestParameters: ListCollectionsByDatabaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+        const requestOptions = await this.listCollectionsByDatabaseRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }

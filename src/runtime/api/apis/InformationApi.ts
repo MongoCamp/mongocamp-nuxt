@@ -31,10 +31,9 @@ import {
 export class InformationApi extends runtime.BaseAPI {
 
     /**
-     * Version Info of the MongoCamp API
-     * Version Information
+     * Creates request options for version without sending the request
      */
-    async versionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Version>> {
+    async versionRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -42,12 +41,21 @@ export class InformationApi extends runtime.BaseAPI {
 
         let urlPath = `/version`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Version Info of the MongoCamp API
+     * Version Information
+     */
+    async versionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Version>> {
+        const requestOptions = await this.versionRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VersionFromJSON(jsonValue));
     }

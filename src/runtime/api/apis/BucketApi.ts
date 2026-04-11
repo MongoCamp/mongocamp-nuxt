@@ -46,10 +46,9 @@ export interface GetBucketRequest {
 export class BucketApi extends runtime.BaseAPI {
 
     /**
-     * Delete all Files in Bucket
-     * Clear Bucket
+     * Creates request options for clearBucket without sending the request
      */
-    async clearBucketRaw(requestParameters: ClearBucketRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async clearBucketRequestOpts(requestParameters: ClearBucketRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['bucketName'] == null) {
             throw new runtime.RequiredError(
                 'bucketName',
@@ -80,12 +79,21 @@ export class BucketApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/buckets/{bucketName}/clear`;
         urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete all Files in Bucket
+     * Clear Bucket
+     */
+    async clearBucketRaw(requestParameters: ClearBucketRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.clearBucketRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }
@@ -100,10 +108,9 @@ export class BucketApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a given Bucket
-     * Delete Bucket
+     * Creates request options for deleteBucket without sending the request
      */
-    async deleteBucketRaw(requestParameters: DeleteBucketRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async deleteBucketRequestOpts(requestParameters: DeleteBucketRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['bucketName'] == null) {
             throw new runtime.RequiredError(
                 'bucketName',
@@ -134,12 +141,21 @@ export class BucketApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/buckets/{bucketName}`;
         urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete a given Bucket
+     * Delete Bucket
+     */
+    async deleteBucketRaw(requestParameters: DeleteBucketRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.deleteBucketRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }
@@ -154,10 +170,9 @@ export class BucketApi extends runtime.BaseAPI {
     }
 
     /**
-     * All Information about a single Bucket
-     * Bucket Information
+     * Creates request options for getBucket without sending the request
      */
-    async getBucketRaw(requestParameters: GetBucketRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BucketInformation>> {
+    async getBucketRequestOpts(requestParameters: GetBucketRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['bucketName'] == null) {
             throw new runtime.RequiredError(
                 'bucketName',
@@ -188,12 +203,21 @@ export class BucketApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/buckets/{bucketName}`;
         urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * All Information about a single Bucket
+     * Bucket Information
+     */
+    async getBucketRaw(requestParameters: GetBucketRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BucketInformation>> {
+        const requestOptions = await this.getBucketRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BucketInformationFromJSON(jsonValue));
     }
@@ -208,10 +232,9 @@ export class BucketApi extends runtime.BaseAPI {
     }
 
     /**
-     * List of all Buckets of the default database
-     * List of Buckets
+     * Creates request options for listBuckets without sending the request
      */
-    async listBucketsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+    async listBucketsRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -234,12 +257,21 @@ export class BucketApi extends runtime.BaseAPI {
 
         let urlPath = `/mongodb/buckets`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List of all Buckets of the default database
+     * List of Buckets
+     */
+    async listBucketsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+        const requestOptions = await this.listBucketsRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }

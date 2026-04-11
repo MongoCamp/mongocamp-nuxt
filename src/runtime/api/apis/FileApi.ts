@@ -90,10 +90,9 @@ export interface UpdateFileInformationOperationRequest {
 export class FileApi extends runtime.BaseAPI {
 
     /**
-     * Delete one File from given Bucket
-     * Delete File from Bucket
+     * Creates request options for deleteFile without sending the request
      */
-    async deleteFileRaw(requestParameters: DeleteFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeleteResponse>> {
+    async deleteFileRequestOpts(requestParameters: DeleteFileRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['bucketName'] == null) {
             throw new runtime.RequiredError(
                 'bucketName',
@@ -132,12 +131,21 @@ export class FileApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
         urlPath = urlPath.replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete one File from given Bucket
+     * Delete File from Bucket
+     */
+    async deleteFileRaw(requestParameters: DeleteFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeleteResponse>> {
+        const requestOptions = await this.deleteFileRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => DeleteResponseFromJSON(jsonValue));
     }
@@ -152,10 +160,9 @@ export class FileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Alternative to GET Route for more complex queries and URL max. Length
-     * Files in Bucket
+     * Creates request options for findFiles without sending the request
      */
-    async findFilesRaw(requestParameters: FindFilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<FileInformation>>> {
+    async findFilesRequestOpts(requestParameters: FindFilesRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['bucketName'] == null) {
             throw new runtime.RequiredError(
                 'bucketName',
@@ -203,13 +210,22 @@ export class FileApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/buckets/{bucketName}/files`;
         urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: MongoFindRequestToJSON(requestParameters['mongoFindRequest']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Alternative to GET Route for more complex queries and URL max. Length
+     * Files in Bucket
+     */
+    async findFilesRaw(requestParameters: FindFilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<FileInformation>>> {
+        const requestOptions = await this.findFilesRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FileInformationFromJSON));
     }
@@ -224,10 +240,9 @@ export class FileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get File from given Bucket
-     * File from Bucket
+     * Creates request options for getFile without sending the request
      */
-    async getFileRaw(requestParameters: GetFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
+    async getFileRequestOpts(requestParameters: GetFileRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['bucketName'] == null) {
             throw new runtime.RequiredError(
                 'bucketName',
@@ -266,12 +281,21 @@ export class FileApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
         urlPath = urlPath.replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Get File from given Bucket
+     * File from Bucket
+     */
+    async getFileRaw(requestParameters: GetFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
+        const requestOptions = await this.getFileRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.BlobApiResponse(response);
     }
@@ -286,10 +310,9 @@ export class FileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get one FileInformation from given Bucket
-     * FileInformation from Bucket
+     * Creates request options for getFileInformation without sending the request
      */
-    async getFileInformationRaw(requestParameters: GetFileInformationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileInformation>> {
+    async getFileInformationRequestOpts(requestParameters: GetFileInformationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['bucketName'] == null) {
             throw new runtime.RequiredError(
                 'bucketName',
@@ -328,12 +351,21 @@ export class FileApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
         urlPath = urlPath.replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Get one FileInformation from given Bucket
+     * FileInformation from Bucket
+     */
+    async getFileInformationRaw(requestParameters: GetFileInformationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileInformation>> {
+        const requestOptions = await this.getFileInformationRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FileInformationFromJSON(jsonValue));
     }
@@ -348,10 +380,9 @@ export class FileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Insert one File in given Bucket
-     * Insert File
+     * Creates request options for insertFile without sending the request
      */
-    async insertFileRaw(requestParameters: InsertFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InsertResponse>> {
+    async insertFileRequestOpts(requestParameters: InsertFileRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['bucketName'] == null) {
             throw new runtime.RequiredError(
                 'bucketName',
@@ -424,13 +455,22 @@ export class FileApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/buckets/{bucketName}/files`;
         urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: formParams,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Insert one File in given Bucket
+     * Insert File
+     */
+    async insertFileRaw(requestParameters: InsertFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InsertResponse>> {
+        const requestOptions = await this.insertFileRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => InsertResponseFromJSON(jsonValue));
     }
@@ -445,10 +485,9 @@ export class FileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get Files paginated from given Bucket
-     * Files in Bucket
+     * Creates request options for listFiles without sending the request
      */
-    async listFilesRaw(requestParameters: ListFilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<FileInformation>>> {
+    async listFilesRequestOpts(requestParameters: ListFilesRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['bucketName'] == null) {
             throw new runtime.RequiredError(
                 'bucketName',
@@ -499,12 +538,21 @@ export class FileApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/buckets/{bucketName}/files`;
         urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Get Files paginated from given Bucket
+     * Files in Bucket
+     */
+    async listFilesRaw(requestParameters: ListFilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<FileInformation>>> {
+        const requestOptions = await this.listFilesRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FileInformationFromJSON));
     }
@@ -519,10 +567,9 @@ export class FileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Replace MetaData and potential update FileName
-     * Update FileInformation in Bucket
+     * Creates request options for updateFileInformation without sending the request
      */
-    async updateFileInformationRaw(requestParameters: UpdateFileInformationOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateResponse>> {
+    async updateFileInformationRequestOpts(requestParameters: UpdateFileInformationOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['bucketName'] == null) {
             throw new runtime.RequiredError(
                 'bucketName',
@@ -570,13 +617,22 @@ export class FileApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"bucketName"}}`, encodeURIComponent(String(requestParameters['bucketName'])));
         urlPath = urlPath.replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: UpdateFileInformationRequestToJSON(requestParameters['updateFileInformationRequest']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Replace MetaData and potential update FileName
+     * Update FileInformation in Bucket
+     */
+    async updateFileInformationRaw(requestParameters: UpdateFileInformationOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateResponse>> {
+        const requestOptions = await this.updateFileInformationRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UpdateResponseFromJSON(jsonValue));
     }

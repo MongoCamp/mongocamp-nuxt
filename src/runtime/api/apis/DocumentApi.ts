@@ -101,10 +101,9 @@ export interface UpdateManyRequest {
 export class DocumentApi extends runtime.BaseAPI {
 
     /**
-     * Delete one Document from given Collection
-     * Delete Document from Collection
+     * Creates request options for _delete without sending the request
      */
-    async _deleteRaw(requestParameters: DeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeleteResponse>> {
+    async _deleteRequestOpts(requestParameters: DeleteRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -143,12 +142,21 @@ export class DocumentApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
         urlPath = urlPath.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete one Document from given Collection
+     * Delete Document from Collection
+     */
+    async _deleteRaw(requestParameters: DeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeleteResponse>> {
+        const requestOptions = await this._deleteRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => DeleteResponseFromJSON(jsonValue));
     }
@@ -163,10 +171,9 @@ export class DocumentApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete many Document in given Collection
-     * Delete Many in Collection
+     * Creates request options for deleteMany without sending the request
      */
-    async deleteManyRaw(requestParameters: DeleteManyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeleteResponse>> {
+    async deleteManyRequestOpts(requestParameters: DeleteManyRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -206,13 +213,22 @@ export class DocumentApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/documents/many/delete`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters['requestBody'],
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete many Document in given Collection
+     * Delete Many in Collection
+     */
+    async deleteManyRaw(requestParameters: DeleteManyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeleteResponse>> {
+        const requestOptions = await this.deleteManyRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => DeleteResponseFromJSON(jsonValue));
     }
@@ -227,10 +243,9 @@ export class DocumentApi extends runtime.BaseAPI {
     }
 
     /**
-     * Alternative to GET Route for more complex queries and URL max. Length
-     * Documents in Collection
+     * Creates request options for find without sending the request
      */
-    async findRaw(requestParameters: FindRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: string; }>>> {
+    async findRequestOpts(requestParameters: FindRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -278,13 +293,22 @@ export class DocumentApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/documents`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: MongoFindRequestToJSON(requestParameters['mongoFindRequest']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Alternative to GET Route for more complex queries and URL max. Length
+     * Documents in Collection
+     */
+    async findRaw(requestParameters: FindRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: string; }>>> {
+        const requestOptions = await this.findRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }
@@ -299,10 +323,9 @@ export class DocumentApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get one Document from given Collection
-     * Document from Collection
+     * Creates request options for getDocument without sending the request
      */
-    async getDocumentRaw(requestParameters: GetDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: string; }>> {
+    async getDocumentRequestOpts(requestParameters: GetDocumentRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -341,12 +364,21 @@ export class DocumentApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
         urlPath = urlPath.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Get one Document from given Collection
+     * Document from Collection
+     */
+    async getDocumentRaw(requestParameters: GetDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: string; }>> {
+        const requestOptions = await this.getDocumentRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }
@@ -361,10 +393,9 @@ export class DocumentApi extends runtime.BaseAPI {
     }
 
     /**
-     * Insert one Document in given Collection
-     * Insert Document
+     * Creates request options for insert without sending the request
      */
-    async insertRaw(requestParameters: InsertRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InsertResponse>> {
+    async insertRequestOpts(requestParameters: InsertRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -404,13 +435,22 @@ export class DocumentApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/documents`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters['requestBody'],
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Insert one Document in given Collection
+     * Insert Document
+     */
+    async insertRaw(requestParameters: InsertRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InsertResponse>> {
+        const requestOptions = await this.insertRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => InsertResponseFromJSON(jsonValue));
     }
@@ -425,10 +465,9 @@ export class DocumentApi extends runtime.BaseAPI {
     }
 
     /**
-     * Insert many documents in given Collection
-     * Insert many Documents
+     * Creates request options for insertMany without sending the request
      */
-    async insertManyRaw(requestParameters: InsertManyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InsertResponse>> {
+    async insertManyRequestOpts(requestParameters: InsertManyRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -461,13 +500,22 @@ export class DocumentApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/documents/many/insert`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters['requestBody'],
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Insert many documents in given Collection
+     * Insert many Documents
+     */
+    async insertManyRaw(requestParameters: InsertManyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InsertResponse>> {
+        const requestOptions = await this.insertManyRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => InsertResponseFromJSON(jsonValue));
     }
@@ -482,10 +530,9 @@ export class DocumentApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get Documents paginated from given Collection
-     * Documents in Collection
+     * Creates request options for listDocuments without sending the request
      */
-    async listDocumentsRaw(requestParameters: ListDocumentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: string; }>>> {
+    async listDocumentsRequestOpts(requestParameters: ListDocumentsRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -536,12 +583,21 @@ export class DocumentApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/documents`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Get Documents paginated from given Collection
+     * Documents in Collection
+     */
+    async listDocumentsRaw(requestParameters: ListDocumentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: string; }>>> {
+        const requestOptions = await this.listDocumentsRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }
@@ -556,10 +612,9 @@ export class DocumentApi extends runtime.BaseAPI {
     }
 
     /**
-     * \'Replace\' one Document with the new document from Request in Collection
-     * Update Document in Collection
+     * Creates request options for update without sending the request
      */
-    async updateRaw(requestParameters: UpdateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateResponse>> {
+    async updateRequestOpts(requestParameters: UpdateRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -607,13 +662,22 @@ export class DocumentApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
         urlPath = urlPath.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters['requestBody'],
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * \'Replace\' one Document with the new document from Request in Collection
+     * Update Document in Collection
+     */
+    async updateRaw(requestParameters: UpdateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateResponse>> {
+        const requestOptions = await this.updateRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UpdateResponseFromJSON(jsonValue));
     }
@@ -628,10 +692,9 @@ export class DocumentApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update the document Parts with the values from the Request
-     * Update Document Parts in Collection
+     * Creates request options for updateDocumentPartial without sending the request
      */
-    async updateDocumentPartialRaw(requestParameters: UpdateDocumentPartialRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateResponse>> {
+    async updateDocumentPartialRequestOpts(requestParameters: UpdateDocumentPartialRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -679,13 +742,22 @@ export class DocumentApi extends runtime.BaseAPI {
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
         urlPath = urlPath.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters['documentId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters['requestBody'],
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Update the document Parts with the values from the Request
+     * Update Document Parts in Collection
+     */
+    async updateDocumentPartialRaw(requestParameters: UpdateDocumentPartialRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateResponse>> {
+        const requestOptions = await this.updateDocumentPartialRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UpdateResponseFromJSON(jsonValue));
     }
@@ -700,10 +772,9 @@ export class DocumentApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update many Document in given Collection
-     * Update many in Collection
+     * Creates request options for updateMany without sending the request
      */
-    async updateManyRaw(requestParameters: UpdateManyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateResponse>> {
+    async updateManyRequestOpts(requestParameters: UpdateManyRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['collectionName'] == null) {
             throw new runtime.RequiredError(
                 'collectionName',
@@ -743,13 +814,22 @@ export class DocumentApi extends runtime.BaseAPI {
         let urlPath = `/mongodb/collections/{collectionName}/documents/many/update`;
         urlPath = urlPath.replace(`{${"collectionName"}}`, encodeURIComponent(String(requestParameters['collectionName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: UpdateRequestToJSON(requestParameters['updateRequest']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Update many Document in given Collection
+     * Update many in Collection
+     */
+    async updateManyRaw(requestParameters: UpdateManyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateResponse>> {
+        const requestOptions = await this.updateManyRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UpdateResponseFromJSON(jsonValue));
     }

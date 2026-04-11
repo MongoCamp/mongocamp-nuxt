@@ -104,10 +104,9 @@ export interface UpdateRolesForUserRequest {
 export class AdminApi extends runtime.BaseAPI {
 
     /**
-     * Add a new Role
-     * Add Role
+     * Creates request options for addRole without sending the request
      */
-    async addRoleRaw(requestParameters: AddRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Role>> {
+    async addRoleRequestOpts(requestParameters: AddRoleRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['role'] == null) {
             throw new runtime.RequiredError(
                 'role',
@@ -139,13 +138,22 @@ export class AdminApi extends runtime.BaseAPI {
 
         let urlPath = `/admin/roles`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: RoleToJSON(requestParameters['role']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Add a new Role
+     * Add Role
+     */
+    async addRoleRaw(requestParameters: AddRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Role>> {
+        const requestOptions = await this.addRoleRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RoleFromJSON(jsonValue));
     }
@@ -160,10 +168,9 @@ export class AdminApi extends runtime.BaseAPI {
     }
 
     /**
-     * Add a new User
-     * Add User
+     * Creates request options for addUser without sending the request
      */
-    async addUserRaw(requestParameters: AddUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserProfile>> {
+    async addUserRequestOpts(requestParameters: AddUserRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['userInformation'] == null) {
             throw new runtime.RequiredError(
                 'userInformation',
@@ -195,13 +202,22 @@ export class AdminApi extends runtime.BaseAPI {
 
         let urlPath = `/admin/users`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
             body: UserInformationToJSON(requestParameters['userInformation']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Add a new User
+     * Add User
+     */
+    async addUserRaw(requestParameters: AddUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserProfile>> {
+        const requestOptions = await this.addUserRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserProfileFromJSON(jsonValue));
     }
@@ -216,10 +232,9 @@ export class AdminApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Role
-     * Delete Role
+     * Creates request options for deleteRole without sending the request
      */
-    async deleteRoleRaw(requestParameters: DeleteRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async deleteRoleRequestOpts(requestParameters: DeleteRoleRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['roleName'] == null) {
             throw new runtime.RequiredError(
                 'roleName',
@@ -250,12 +265,21 @@ export class AdminApi extends runtime.BaseAPI {
         let urlPath = `/admin/roles/{roleName}`;
         urlPath = urlPath.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete Role
+     * Delete Role
+     */
+    async deleteRoleRaw(requestParameters: DeleteRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.deleteRoleRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }
@@ -270,10 +294,9 @@ export class AdminApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete User
-     * Delete User
+     * Creates request options for deleteUser without sending the request
      */
-    async deleteUserRaw(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async deleteUserRequestOpts(requestParameters: DeleteUserRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['userId'] == null) {
             throw new runtime.RequiredError(
                 'userId',
@@ -304,12 +327,21 @@ export class AdminApi extends runtime.BaseAPI {
         let urlPath = `/admin/users/{userId}`;
         urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Delete User
+     * Delete User
+     */
+    async deleteUserRaw(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.deleteUserRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }
@@ -324,10 +356,9 @@ export class AdminApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get Role by RoleKey
-     * Get Role
+     * Creates request options for getRole without sending the request
      */
-    async getRoleRaw(requestParameters: GetRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Role>> {
+    async getRoleRequestOpts(requestParameters: GetRoleRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['roleName'] == null) {
             throw new runtime.RequiredError(
                 'roleName',
@@ -358,12 +389,21 @@ export class AdminApi extends runtime.BaseAPI {
         let urlPath = `/admin/roles/{roleName}`;
         urlPath = urlPath.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Get Role by RoleKey
+     * Get Role
+     */
+    async getRoleRaw(requestParameters: GetRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Role>> {
+        const requestOptions = await this.getRoleRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RoleFromJSON(jsonValue));
     }
@@ -378,10 +418,9 @@ export class AdminApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get UserProfile for user
-     * UserProfile for userId
+     * Creates request options for getUser without sending the request
      */
-    async getUserRaw(requestParameters: GetUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserProfile>> {
+    async getUserRequestOpts(requestParameters: GetUserRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['userId'] == null) {
             throw new runtime.RequiredError(
                 'userId',
@@ -412,12 +451,21 @@ export class AdminApi extends runtime.BaseAPI {
         let urlPath = `/admin/users/{userId}`;
         urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Get UserProfile for user
+     * UserProfile for userId
+     */
+    async getUserRaw(requestParameters: GetUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserProfile>> {
+        const requestOptions = await this.getUserRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserProfileFromJSON(jsonValue));
     }
@@ -432,10 +480,9 @@ export class AdminApi extends runtime.BaseAPI {
     }
 
     /**
-     * Generate an new APIkey for the user
-     * Update ApiKey
+     * Creates request options for gnerateNewApiKeyForUser without sending the request
      */
-    async gnerateNewApiKeyForUserRaw(requestParameters: GnerateNewApiKeyForUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueString>> {
+    async gnerateNewApiKeyForUserRequestOpts(requestParameters: GnerateNewApiKeyForUserRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['userId'] == null) {
             throw new runtime.RequiredError(
                 'userId',
@@ -466,12 +513,21 @@ export class AdminApi extends runtime.BaseAPI {
         let urlPath = `/admin/users/{userId}/apikey`;
         urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Generate an new APIkey for the user
+     * Update ApiKey
+     */
+    async gnerateNewApiKeyForUserRaw(requestParameters: GnerateNewApiKeyForUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueString>> {
+        const requestOptions = await this.gnerateNewApiKeyForUserRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueStringFromJSON(jsonValue));
     }
@@ -486,10 +542,9 @@ export class AdminApi extends runtime.BaseAPI {
     }
 
     /**
-     * List all Roles or filtered
-     * List Roles
+     * Creates request options for listRoles without sending the request
      */
-    async listRolesRaw(requestParameters: ListRolesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Role>>> {
+    async listRolesRequestOpts(requestParameters: ListRolesRequest): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         if (requestParameters['filter'] != null) {
@@ -524,12 +579,21 @@ export class AdminApi extends runtime.BaseAPI {
 
         let urlPath = `/admin/roles`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List all Roles or filtered
+     * List Roles
+     */
+    async listRolesRaw(requestParameters: ListRolesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Role>>> {
+        const requestOptions = await this.listRolesRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(RoleFromJSON));
     }
@@ -544,10 +608,9 @@ export class AdminApi extends runtime.BaseAPI {
     }
 
     /**
-     * List all Users or filtered
-     * List Users
+     * Creates request options for listUsers without sending the request
      */
-    async listUsersRaw(requestParameters: ListUsersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<UserProfile>>> {
+    async listUsersRequestOpts(requestParameters: ListUsersRequest): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         if (requestParameters['filter'] != null) {
@@ -582,12 +645,21 @@ export class AdminApi extends runtime.BaseAPI {
 
         let urlPath = `/admin/users`;
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * List all Users or filtered
+     * List Users
+     */
+    async listUsersRaw(requestParameters: ListUsersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<UserProfile>>> {
+        const requestOptions = await this.listUsersRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserProfileFromJSON));
     }
@@ -602,10 +674,9 @@ export class AdminApi extends runtime.BaseAPI {
     }
 
     /**
-     * Change Password of User
-     * Update Password
+     * Creates request options for updatePasswordForUser without sending the request
      */
-    async updatePasswordForUserRaw(requestParameters: UpdatePasswordForUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+    async updatePasswordForUserRequestOpts(requestParameters: UpdatePasswordForUserRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['userId'] == null) {
             throw new runtime.RequiredError(
                 'userId',
@@ -645,13 +716,22 @@ export class AdminApi extends runtime.BaseAPI {
         let urlPath = `/admin/users/{userId}/password`;
         urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: PasswordUpdateRequestToJSON(requestParameters['passwordUpdateRequest']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Change Password of User
+     * Update Password
+     */
+    async updatePasswordForUserRaw(requestParameters: UpdatePasswordForUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JsonValueBoolean>> {
+        const requestOptions = await this.updatePasswordForUserRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JsonValueBooleanFromJSON(jsonValue));
     }
@@ -666,10 +746,9 @@ export class AdminApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update Role
-     * Update Role
+     * Creates request options for updateRole without sending the request
      */
-    async updateRoleRaw(requestParameters: UpdateRoleOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Role>> {
+    async updateRoleRequestOpts(requestParameters: UpdateRoleOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['roleName'] == null) {
             throw new runtime.RequiredError(
                 'roleName',
@@ -709,13 +788,22 @@ export class AdminApi extends runtime.BaseAPI {
         let urlPath = `/admin/roles/{roleName}`;
         urlPath = urlPath.replace(`{${"roleName"}}`, encodeURIComponent(String(requestParameters['roleName'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: UpdateRoleRequestToJSON(requestParameters['updateRoleRequest']),
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Update Role
+     * Update Role
+     */
+    async updateRoleRaw(requestParameters: UpdateRoleOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Role>> {
+        const requestOptions = await this.updateRoleRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RoleFromJSON(jsonValue));
     }
@@ -730,10 +818,9 @@ export class AdminApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update Roles of User
-     * Update User Roles
+     * Creates request options for updateRolesForUser without sending the request
      */
-    async updateRolesForUserRaw(requestParameters: UpdateRolesForUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserProfile>> {
+    async updateRolesForUserRequestOpts(requestParameters: UpdateRolesForUserRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['userId'] == null) {
             throw new runtime.RequiredError(
                 'userId',
@@ -766,13 +853,22 @@ export class AdminApi extends runtime.BaseAPI {
         let urlPath = `/admin/users/{userId}/roles`;
         urlPath = urlPath.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
 
-        const response = await this.request({
+        return {
             path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters['requestBody'],
-        }, initOverrides);
+        };
+    }
+
+    /**
+     * Update Roles of User
+     * Update User Roles
+     */
+    async updateRolesForUserRaw(requestParameters: UpdateRolesForUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserProfile>> {
+        const requestOptions = await this.updateRolesForUserRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserProfileFromJSON(jsonValue));
     }
