@@ -1,6 +1,21 @@
 # Changelog
 
 
+## v1.4.1
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.4.0...v1.4.1)
+
+### 🏡 Chore
+
+- Update release script to use patch versioning ([1251236](https://github.com/MongoCamp/mongocamp-nuxt/commit/1251236))
+- Update dependencies to latest versions ([d3c2289](https://github.com/MongoCamp/mongocamp-nuxt/commit/d3c2289))
+- Update version to 7.21.0 and refactor API request options methods ([e11b222](https://github.com/MongoCamp/mongocamp-nuxt/commit/e11b222))
+- Update release script to remove minor version bump ([9e22e2d](https://github.com/MongoCamp/mongocamp-nuxt/commit/9e22e2d))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.4.0
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.3.0...v1.4.0)
