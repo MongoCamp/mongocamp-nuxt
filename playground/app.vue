@@ -4,7 +4,7 @@ import { consola } from 'consola'
 const url = useMongocampUrl()
 
 const { informationApi } = useMongocampApi()
-const { findAll, findByField } = useMongocampSearch()
+const { findByField } = useMongocampSearch()
 
 const { login, logout, isLoggedIn, userGrants } = useMongocampAuth()
 const state = useMongocampStorage()
@@ -13,9 +13,7 @@ const { data: version, refresh: reloadVersion } = await useLazyAsyncData('versio
 
 const { data: adminRole, refresh: reloadRole } = await useLazyAsyncData('adminRole', () => findByField('mc_roles', 'name1', 'admin*'))
 
-const { data:roles, refresh:reloadRoles } = useFetch('/api/mongocamp/roles')
-
-
+const { data: roles, refresh: reloadRoles } = useFetch('/api/mongocamp/roles')
 
 const config = useRuntimeConfig()
 
