@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.4.2
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.4.1...v1.4.2)
+
+### 🚀 Enhancements
+
+- Implement Mongocamp Server API integration with roles and users endpoints ([7df6ac4](https://github.com/MongoCamp/mongocamp-nuxt/commit/7df6ac4))
+- Export models from runtime/api in module.ts ([66da39b](https://github.com/MongoCamp/mongocamp-nuxt/commit/66da39b))
+
+### 🏡 Chore
+
+- Update eslint to version 10.2.1 ([1cd48e2](https://github.com/MongoCamp/mongocamp-nuxt/commit/1cd48e2))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.4.1
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.4.0...v1.4.1)
