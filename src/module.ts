@@ -12,6 +12,8 @@ export interface ModuleOptions {
   tokenRefreshIntervall: number
 }
 
+export * from './runtime/api/models'
+
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name,
