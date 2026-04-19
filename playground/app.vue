@@ -11,8 +11,11 @@ const state = useMongocampStorage()
 
 const { data: version, refresh: reloadVersion } = await useLazyAsyncData('version', () => informationApi.version())
 
-const { data: roles, refresh: reloadRoles } = await useLazyAsyncData('roles', () => findAll('mc_roles', 1, ['-name'], ['name', '_id']))
 const { data: adminRole, refresh: reloadRole } = await useLazyAsyncData('adminRole', () => findByField('mc_roles', 'name1', 'admin*'))
+
+const { data:roles, refresh:reloadRoles } = useFetch('/api/mongocamp/roles')
+
+
 
 const config = useRuntimeConfig()
 
@@ -74,11 +77,11 @@ function actionLogout() {
     </div>
 
     <h4>User {{ state.profile.user }}</h4>
-    <h4>Grants</h4>
+    <h4>Grants (Client)</h4>
     <pre>
     {{ userGrants }}
   </pre>
-    <h4>Roles</h4>
+    <h4>Roles (Server API)</h4>
     <div>
       <button
         class="btn-blue"
@@ -87,7 +90,7 @@ function actionLogout() {
         Reload Roles
       </button>
     </div>
-    <pre>
+    <pre v-if="roles">
     {{ roles }}
   </pre>
     <h4>Admin Role</h4>

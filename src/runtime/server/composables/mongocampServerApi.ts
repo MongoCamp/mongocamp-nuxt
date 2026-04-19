@@ -21,8 +21,6 @@ export function useMongocampServerApi(url: string, key?: string, token?: string)
   else if (token && token.length > 0)
     configuration = new Configuration({ basePath: url, accessToken: token })
 
-  console.log(configuration)
-
   const adminApi = new AdminApi(configuration)
   const applicationApi = new ApplicationApi(configuration)
   const authApi = new AuthApi(configuration)

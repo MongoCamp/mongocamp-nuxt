@@ -10,6 +10,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     // Private config that is only available on the server
+    mongocampApiKey: "dev_key", // `dev_key` is the default value
 
     // Config within public will be also exposed to the client
     public: {
