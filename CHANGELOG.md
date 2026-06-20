@@ -1,6 +1,30 @@
 # Changelog
 
 
+## v1.4.3
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.4.2...v1.4.3)
+
+### 💅 Refactors
+
+- Remove unused search function and improve code readability ([3b45bbb](https://github.com/MongoCamp/mongocamp-nuxt/commit/3b45bbb))
+
+### 📖 Documentation
+
+- Update README with latest Node.js LTS version and clarify .env setup ([4846555](https://github.com/MongoCamp/mongocamp-nuxt/commit/4846555))
+
+### 🏡 Chore
+
+- Update dependencies to latest versions in pnpm-lock.yaml ([cf6ec2a](https://github.com/MongoCamp/mongocamp-nuxt/commit/cf6ec2a))
+
+### 🎨 Styles
+
+- Format code for consistency and readability ([f3c74ef](https://github.com/MongoCamp/mongocamp-nuxt/commit/f3c74ef))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.4.2
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.4.1...v1.4.2)
