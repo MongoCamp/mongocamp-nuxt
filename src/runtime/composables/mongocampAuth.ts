@@ -43,7 +43,7 @@ export function useMongocampAuth() {
     const login: Login = { userId: loginId, password: loginPassword }
     const result: LoginResult = await authApi.login({ login })
     updateUserState(result)
-    if (refreshToken) {
+    if (refreshToken && import.meta.client) {
       updateTokenInterval = window.setInterval(updateToken, tokenRefreshIntervall)
     }
 
@@ -55,18 +55,20 @@ export function useMongocampAuth() {
     const profile: UserProfile = { user: '', isAdmin: false }
     state.value.profile = profile
     user.value = profile
-    if (refreshToken) {
+    if (refreshToken && import.meta.client) {
       window.clearInterval(updateTokenInterval)
     }
   }
 
   const isLoggedIn = computed(() => {
     const result: boolean = state.value?.token?.length > 0
-    if (result && refreshToken && !updateTokenInterval) {
-      updateTokenInterval = window.setInterval(updateToken, tokenRefreshIntervall)
-    }
-    else if (!result && updateTokenInterval) {
-      window.clearInterval(updateTokenInterval)
+    if (import.meta.client) {
+      if (result && refreshToken && !updateTokenInterval) {
+        updateTokenInterval = window.setInterval(updateToken, tokenRefreshIntervall)
+      }
+      else if (!result && updateTokenInterval) {
+        window.clearInterval(updateTokenInterval)
+      }
     }
     return result
   })
