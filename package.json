@@ -48,7 +48,7 @@
     "@nuxt/module-builder": "^1.0.2",
     "@nuxt/schema": "^4.4.8",
     "@nuxt/test-utils": "^4.0.3",
-    "@openapitools/openapi-generator-cli": "^2.38.0",
+    "@openapitools/openapi-generator-cli": "^2.39.0",
     "@types/node": "^26.0.0",
     "@unocss/nuxt": "66.7.2",
     "changelogen": "^0.6.2",
