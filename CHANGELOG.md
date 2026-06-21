@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.4.4
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.4.3...v1.4.4)
+
+### 🩹 Fixes
+
+- Ensure token refresh logic runs only on the client ([5ef759b](https://github.com/MongoCamp/mongocamp-nuxt/commit/5ef759b))
+
+### 🏡 Chore
+
+- Update dependencies in pnpm-lock.yaml and package.json to latest versions ([012dd0b](https://github.com/MongoCamp/mongocamp-nuxt/commit/012dd0b))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.4.3
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.4.2...v1.4.3)
